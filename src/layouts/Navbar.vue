@@ -113,28 +113,24 @@
                         focus:ring-white
                         focus:ring-offset-2
                         focus:ring-offset-gray-800" type="button">
-                        <i class="fa-solid fa-bars fa-xl"></i>
+                        <i class="fa-solid fa-caret-down fa-2xl"></i>
                     </button>
 
                     <!-- Dropdown menu -->
                     <div id="dropdownDotsHorizontal"
                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 text-center"
                             aria-labelledby="dropdownMenuIconHorizontalButton">
                             <li>
                                 <router-link to=""
                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</router-link>
                             </li>
                             <li>
-                                <router-link to=""
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</router-link>
-                            </li>
-                            <li>
-                                <router-link to=""
+                                <router-link to="/profile"
                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</router-link>
                             </li>
                         </ul>
-                        <div class="py-2">
+                        <div class="py-2 text-center">
                             <router-link to="/login"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</router-link>
                         </div>
@@ -173,6 +169,7 @@ const navigation = [
     { name: 'Home', route: '/', current: true },
     { name: 'Products', route: '/products', current: false },
     { name: 'Categories', route: '/categories', current: false },
+    { name: 'Contact', route: '/contact', current: false },
 ];
 
 onMounted(() => {

@@ -132,7 +132,7 @@
                                                             <div class="flex justify-end mt-4">
                                                                 <button type="button" class="
                                       font-medium
-                                      text-indigo-600
+                                      text-red-600
                                       hover:text-indigo-500
                                     ">
                                                                     Remove

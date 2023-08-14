@@ -27,3 +27,8 @@ npm run dev
 ```sh
 npm run build
 ```
+
+
+github repo
+
+https://github.com/AMRWERY/ship-it-cus-tailwind

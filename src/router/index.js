@@ -40,6 +40,26 @@ const router = createRouter({
       component: () => import("../components/Categories.vue"),
     },
     {
+      path: "/profile",
+      name: "Profile",
+      component: () => import("../components/profile/Profile.vue"),
+    },
+    {
+      path: "/order-summary",
+      name: "OrderSummary",
+      component: () => import("../components/OrderSummary.vue"),
+    },
+    {
+      path: "/checkout",
+      name: "Checkout",
+      component: () => import("../components/checkout/Checkout.vue"),
+    },
+    {
+      path: "/contact",
+      name: "Contact",
+      component: () => import("../components/Contact.vue"),
+    },
+    {
       path: "/:catchAl(.*)",
       name: "Error404",
       component: () => import("../views/Error404.vue"),

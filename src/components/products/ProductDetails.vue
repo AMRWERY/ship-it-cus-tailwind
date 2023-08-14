@@ -95,15 +95,17 @@
             </div>
         </div>
     </section>
+    <MightLike />
 </template>
   
 <script>
 import Rating from '../../reusable/Rating.vue';
+import MightLike from '../MightLike.vue';
 
 export default {
     name: 'ProductDetails',
 
-    components: { Rating },
+    components: { Rating, MightLike },
 
     data() {
         return {
