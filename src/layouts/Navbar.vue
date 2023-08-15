@@ -130,7 +130,7 @@
                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</router-link>
                             </li>
                         </ul>
-                        <div class="py-2 text-center">
+                        <div class="py-2 text-center" @click="logout">
                             <router-link to="/login"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</router-link>
                         </div>
@@ -154,8 +154,10 @@
     </Disclosure>
 </template>
 
+
 <script setup>
 import { onMounted } from 'vue';
+import { useStore } from 'vuex';
 import { initFlowbite } from 'flowbite';
 import {
     Disclosure,
@@ -171,6 +173,17 @@ const navigation = [
     { name: 'Categories', route: '/categories', current: false },
     { name: 'Contact', route: '/contact', current: false },
 ];
+
+const store = useStore();
+
+const logout = async () => {
+    try {
+        await store.dispatch('logout');
+        store.commit('setIsAuthenticated', false);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 onMounted(() => {
     initFlowbite();

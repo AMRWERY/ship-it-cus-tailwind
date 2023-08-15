@@ -76,7 +76,7 @@ const actions = {
         if (user) {
           commit("setIsAuthenticated", true);
           commit("setUsername", user.displayName);
-          router.replace("/home");
+          router.replace("/");
           sessionStorage.setItem("username", user.displayName);
           sessionStorage.setItem(
             "userCredential",
