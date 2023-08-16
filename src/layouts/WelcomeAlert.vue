@@ -1,21 +1,9 @@
 <template>
-  <aside class="
-        fixed
-        bottom-4
-        end-4
-        z-50
-        flex
-        items-center
-        justify-center
-        gap-4
-        rounded-lg
-        bg-black
-        px-5
-        py-3
-        text-white
-      " v-if="showAlert">
+  <aside
+    class="fixed bottom-4 end-4 z-50 flex items-center justify-center gap-4 rounded-lg bg-black px-5 py-3 text-white animate__animated animate__backInLeft"
+    v-if="showAlert">
     <p class="text-sm font-medium hover:opacity-75">
-      Hey! Amr 👋
+      Hey! {{ getUsername }} 👋
     </p>
 
     <button class="rounded bg-white/20 p-1 hover:bg-white/10" @click="hideAlert">
@@ -24,26 +12,27 @@
   </aside>
 </template>
 
-<script>
-export default {
-  name: 'WelcomeAlert',
+<script setup>
+import { ref, onMounted, computed } from 'vue';
+import { useStore } from 'vuex';
 
-  data() {
-    return {
-      showAlert: true,
-    };
-  },
+const showAlert = ref(true);
+const store = useStore();
 
-  methods: {
-    hideAlert() {
-      this.showAlert = false;
-    },
-  },
-
-  mounted() {
-    setTimeout(() => {
-      this.showAlert = false;
-    }, 3000);
-  },
+const hideAlert = () => {
+  showAlert.value = false;
 };
+
+const getUsername = computed(() => store.getters.getUsername);
+
+onMounted(() => {
+  setTimeout(() => {
+    showAlert.value = false;
+  }, 3000);
+});
+
+onMounted(() => {
+  const username = sessionStorage.getItem("username");
+  store.commit("setUsername", username);
+});
 </script>

@@ -38,33 +38,21 @@
 </template>
 
 
-<script>
-import { mapActions } from 'vuex'
+<script setup>
+import { ref } from 'vue';
+import { useStore } from 'vuex';
 import snackbar from '@/reusable/Snackbar.vue';
 
-export default {
-    name: 'ResetPassword',
+const email = ref('')
+const showSnackbar = ref(false)
+const successMessage = ref("Reset Password sent. check your inbox")
 
-    components: { snackbar },
+const store = useStore();
 
-    data() {
-        return {
-            email: '',
-            showSnackbar: false,
-            successMessage: "Reset Password sent. check your inbox",
-        }
-    },
-
-    methods: {
-        ...mapActions(["resetUserPassword"]),
-        async resetPassword(email) {
-            try {
-                await this.resetUserPassword({ email });
-                this.showSnackbar = true;
-            } catch (error) {
-                console.log(error);
-            }
-        }
-    },
+const resetPassword = () => {
+    store.dispatch('resetUserPassword', {
+        email: email.value,
+    });
+    showSnackbar.value = true;
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="items-center pt-24 space-y-4">
     <div
-      class="mx-2 sm:mx-auto max-w-sm flex flex-row items-center justify-between bg-green-200 p-3 text-sm leading-none font-medium rounded-xl whitespace-no-wrap"
+      class="mx-2 sm:mx-auto max-w-sm flex flex-row items-center justify-between bg-green-200 p-3 text-sm leading-none font-medium rounded-xl whitespace-no-wrap animate__animated animate__backInDown"
       v-if="showAlert">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
         <path fill-rule="evenodd"
@@ -26,30 +26,22 @@
 </template>
 
 
-<script>
-export default {
-  name: 'Snackbar',
+<script setup>
+import { ref, onMounted, defineProps } from 'vue';
 
-  props: {
-    message: String,
-  },
+const showAlert = ref(true);
 
-  data() {
-    return {
-      showAlert: true,
-    };
-  },
-
-  methods: {
-    hideAlert() {
-      this.showAlert = false;
-    },
-  },
-
-  mounted() {
-    setTimeout(() => {
-      this.showAlert = false;
-    }, 3000);
-  },
+const hideAlert = () => {
+  showAlert.value = false;
 };
+
+onMounted(() => {
+  setTimeout(() => {
+    showAlert.value = false;
+  }, 3000);
+});
+
+const props = defineProps({
+  message: String,
+});
 </script>

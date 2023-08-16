@@ -10,6 +10,9 @@ import store from './stores/index'
 //formkit
 import { plugin, defaultConfig } from '@formkit/vue'
 
+//animate
+import 'animate.css';
+
 const app = createApp(App)
 
 app.use(router)
