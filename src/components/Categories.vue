@@ -38,6 +38,6 @@ export default {
                 { id: 8, title: "Decor", route: "", img: "https://justfields.com/storage/projects/7M5rV059/Screenshot-2021-10-10-at-11.04.00-a.m..png" },
             ]
         }
-    }
+    },
 }
 </script>

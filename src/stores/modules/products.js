@@ -22,10 +22,8 @@ const mutations = {
 const actions = {
   async fetchProducts({ commit }) {
     const querySnap = await getDocs(query(collection(db, "products")));
-    debugger
     let products = [];
     querySnap.forEach((doc) => {
-      debugger
       let pro = {
         id: doc.id,
         ...doc.data(doc.id),

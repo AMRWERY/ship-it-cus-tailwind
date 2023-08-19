@@ -1,7 +1,9 @@
 <template>
     <div class="relative">
         <span
-            class="absolute top-0 right-0 -mt-2 -mr-2 inline-flex items-center justify-center rounded-full bg-red-500 h-4 w-4 text-white text-xs">4</span>
+            class="absolute top-0 right-0 -mt-2 -mr-2 inline-flex items-center justify-center rounded-full bg-red-500 h-4 w-4 text-white text-xs">
+            {{ totalItems }}
+        </span>
         <button type="button"
             class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
             @click="cartOpen = !cartOpen">
@@ -40,10 +42,10 @@
                                         <div class="mt-8">
                                             <div class="flow-root">
                                                 <ul role="list" class="-my-6 divide-y divide-gray-200">
-                                                    <li v-for="product in products" :key="product.id" class="flex py-6">
+                                                    <li v-for="item in cart" :key="item" class="flex py-6">
                                                         <div
                                                             class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                                            <img :src="product.imageSrc"
+                                                            <img :src="item.imgFront"
                                                                 class="h-full w-full object-cover object-center" />
                                                         </div>
 
@@ -52,32 +54,32 @@
                                                                 <div
                                                                     class="flex justify-between text-base font-medium text-gray-900">
                                                                     <h3>
-                                                                        <router-link :to="product.route">{{
-                                                                            product.name
-                                                                        }}</router-link>
+                                                                        {{ item.title }}
                                                                     </h3>
-                                                                    <p class="ml-4">{{ product.price }}</p>
+                                                                    <p class="ml-4">${{ item.price }}</p>
                                                                 </div>
                                                                 <p class="mt-1 text-sm text-gray-500">
-                                                                    {{ product.color }}
+                                                                    {{ item.categories }}
                                                                 </p>
                                                             </div>
                                                             <div class="flex flex-1 items-end justify-between text-sm">
                                                                 <p class="text-gray-500">
-                                                                    Qty {{ product.quantity }}
+                                                                    Qty {{ item.cartQty }}
                                                                 </p>
 
                                                                 <div>
                                                                     <div class="flex items-center gap-1">
-                                                                        <button type="button"
-                                                                            class=" w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75">
+                                                                        <button type="button" @click="decrement(item)"
+                                                                            class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75">
                                                                             &minus;
                                                                         </button>
 
-                                                                        <input type="number" id="Quantity" value="1"
-                                                                            class="h-10 w-10 rounded border-gray-200text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none" />
+                                                                        <input type="number" id="Quantity"
+                                                                            :value="item.cartQty"
+                                                                            class="h-10 w-10 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none" />
 
-                                                                        <button type="button"
+
+                                                                        <button type="button" @click="increment(item)"
                                                                             class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75">
                                                                             &plus;
                                                                         </button>
@@ -85,7 +87,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="flex justify-end mt-4">
-                                                                <button type="button"
+                                                                <button type="button" @click="removeCartItem(item)"
                                                                     class="font-medium text-red-600 hover:text-indigo-500 mr-6">
                                                                     Remove
                                                                 </button>
@@ -100,7 +102,7 @@
                                     <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
                                         <div class="flex justify-between text-base font-medium text-gray-900">
                                             <p>Subtotal</p>
-                                            <p>$262.00</p>
+                                            <p>${{ totalAmount }}</p>
                                         </div>
                                         <p class="mt-0.5 text-sm text-gray-500">
                                             Shipping and taxes calculated at checkout.
@@ -114,11 +116,11 @@
                                                 or
                                                 <router-link to="/products">
                                                     <button type="button"
-                                                    class="font-medium text-indigo-600 hover:text-indigo-500"
-                                                    @click="open = false">
-                                                    Continue Shopping
-                                                    <span aria-hidden="true"> &rarr;</span>
-                                                </button>
+                                                        class="font-medium text-indigo-600 hover:text-indigo-500"
+                                                        @click="open = false">
+                                                        Continue Shopping
+                                                        <span aria-hidden="true"> &rarr;</span>
+                                                    </button>
                                                 </router-link>
                                             </p>
                                         </div>
@@ -134,7 +136,7 @@
 </template>
   
 <script setup>
-import { ref } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import {
     Dialog,
     DialogPanel,
@@ -142,29 +144,97 @@ import {
     TransitionChild,
     TransitionRoot,
 } from '@headlessui/vue';
+import { useStore } from 'vuex';
 
-const products = [
-    {
-        id: 1,
-        name: 'Throwback Hip Bag',
-        route: '',
-        color: 'Salmon',
-        price: '$90.00',
-        quantity: 1,
-        imageSrc:
-            'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-    },
-    {
-        id: 2,
-        name: 'Medium Stuff Satchel',
-        route: '',
-        color: 'Blue',
-        price: '$32.00',
-        quantity: 1,
-        imageSrc:
-            'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-    },
-];
+const cart = ref([]);
+const totalItems = ref(0);
+const total = ref(0);
+
+const increment = (item) => {
+    item.cartQty++;
+    calculateTotal();
+    sessionStorage.setItem('cartData', JSON.stringify(cart.value));
+};
+
+const decrement = (item) => {
+    if (item.cartQty > 0) {
+        item.cartQty--;
+        if (item.cartQty === 0) {
+            removeCartItem(item);
+        } else {
+            calculateTotal();
+        }
+        sessionStorage.setItem('cartData', JSON.stringify(cart.value));
+    }
+};
+
+const calculateTotal = () => {
+    let totalValue = 0;
+    cart.value.forEach((item) => {
+        totalValue += item.price * item.cartQty;
+    });
+    total.value = totalValue.toFixed(2);
+};
+
+const store = useStore();
+
+const removeCartItem = (item) => {
+    const index = cart.value.indexOf(item);
+    if (index !== -1) {
+        cart.value.splice(index, 1);
+        calculateTotal();
+        store.commit('cartItemsCount', cart.value.length);
+        sessionStorage.setItem('cartData', JSON.stringify(cart.value));
+    }
+};
+
+const totalItemsCount = computed(() => cart.value.length);
+
+const totalAmount = computed(() => {
+    let total = 0;
+    cart.value.forEach((item) => {
+        total += item.price * item.cartQty;
+    });
+    return total.toFixed(2);
+});
+
+const totalItemsInCart = computed(() => {
+    return store.state.totalItemsInCart;
+});
+
+watch(totalItemsInCart, (newVal, oldVal) => {
+    totalItems.value = newVal;
+});
+
+watch(store.state.totalItemsAmount, (newVal, oldVal) => {
+    cart.value = newVal;
+    calculateTotal();
+});
+
+onMounted(() => {
+    if (sessionStorage.getItem('cartData')) {
+        cart.value = JSON.parse(sessionStorage.getItem('cartData'));
+        const cartData = JSON.parse(sessionStorage.getItem('cartData'));
+        if (cartData) {
+            totalItems.value = cartData.length;
+            store.commit('cartItems', cart.value);
+            store.commit('cartItemsCount', cartData.length);
+            calculateTotal();
+        }
+    }
+});
+
+onMounted(() => {
+    if (sessionStorage.getItem("cartData")) {
+        cart.value = JSON.parse(sessionStorage.getItem("cartData"));
+
+        let cartData = JSON.parse(sessionStorage.getItem("cartData"));
+        if (cartData) {
+            totalItems.value = cartData.length;
+            store.commit("cartItemsCount", cartData.length);
+        }
+    }
+});
 
 const open = ref(true);
 const cartOpen = ref(false);
