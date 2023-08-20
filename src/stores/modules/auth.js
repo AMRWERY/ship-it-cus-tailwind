@@ -14,7 +14,8 @@ const state = {
   isAuthenticated: false,
   isLoading: false,
   username: "",
-  email: "",
+  email: '',
+  password: ''
 };
 
 const mutations = {
@@ -32,6 +33,12 @@ const mutations = {
   },
   setUsername(state, payload) {
     state.username = payload;
+  },
+  setUserEmail(state, payload) {
+    state.email = payload;
+  },
+  setUserPassword(state, payload) {
+    state.password = payload;
   },
 };
 
@@ -66,6 +73,34 @@ const actions = {
         console.log(error);
       });
   },
+  // userSignIn({ commit, dispatch }, payload) {
+  //   commit("setLoading", true);
+  //   const { email, password, router } = payload;
+  //   signInWithEmailAndPassword(auth, email, password)
+  //     .then((userCredential) => {
+  //       commit("setLoading", false);
+  //       const user = userCredential.user;
+  //       if (user) {
+  //         commit("setIsAuthenticated", true);
+  //         commit("setUsername", user.displayName);
+  //         router.replace("/");
+  //         sessionStorage.setItem("username", user.displayName);
+  //         sessionStorage.setItem(
+  //           "userCredential",
+  //           JSON.stringify(userCredential)
+  //         );
+  //         dispatch("updateUserProfile", { username: user.displayName });
+  //       } else {
+  //         commit("setIsAuthenticated", false);
+  //         router.replace("/login");
+  //         commit("setLoading", false);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       commit("setLoading", false);
+  //       console.log(error);
+  //     });
+  // },
   userSignIn({ commit, dispatch }, payload) {
     commit("setLoading", true);
     const { email, password, router } = payload;
@@ -78,10 +113,8 @@ const actions = {
           commit("setUsername", user.displayName);
           router.replace("/");
           sessionStorage.setItem("username", user.displayName);
-          sessionStorage.setItem(
-            "userCredential",
-            JSON.stringify(userCredential)
-          );
+          sessionStorage.setItem("email", user.email);
+          sessionStorage.setItem("password", user.password);
           dispatch("updateUserProfile", { username: user.displayName });
         } else {
           commit("setIsAuthenticated", false);
@@ -153,6 +186,12 @@ const getters = {
   },
   getUsername(state) {
     return state.username;
+  },
+  getUserEmail(state) {
+    return state.email;
+  },
+  getUserPassword(state) {
+    return state.password;
   },
 };
 

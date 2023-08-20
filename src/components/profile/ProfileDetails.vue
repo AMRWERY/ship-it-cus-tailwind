@@ -7,7 +7,7 @@
                     <div class="sm:col-span-3">
                         <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First name</label>
                         <div class="mt-2">
-                            <input type="text" name="first-name" id="first-name" autocomplete="given-name"
+                            <input v-model="getUsername" type="text" name="first-name" id="first-name" autocomplete="given-name"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
                     </div>
@@ -21,7 +21,7 @@
                     <div class="sm:col-span-4">
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
                         <div class="mt-2">
-                            <input id="email" name="email" type="email" autocomplete="email"
+                            <input v-model="getUserEmail" id="email" name="email" type="email" autocomplete="email"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
                     </div>
@@ -41,10 +41,11 @@
                         <label for="current-password" class="block text-sm font-medium leading-6 text-gray-900">Current
                             Password</label>
                         <div class="mt-2">
-                            <input id="current-password" name="current-password" type="password"
+                            <input v-model="getUserPassword" id="current-password" name="current-password" type="password"
                                 autocomplete="current-password"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
+                          
                     </div>
                     <div class="sm:col-span-3">
                         <label for="new-password" class="block text-sm font-medium leading-6 text-gray-900">New
@@ -184,7 +185,25 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { ref } from 'vue'
+
 export default {
-    name: 'ProfileDetails'
+    name: 'ProfileDetails',
+
+    computed: {
+    ...mapGetters(["getUsername", 'getUserEmail', 'getUserPassword']),
+  },
+
+  mounted() {
+    const username = sessionStorage.getItem("username");
+    this.$store.commit("setUsername", username);
+
+    const email = sessionStorage.getItem("email");
+    this.$store.commit("setUserEmail", email);
+
+    const password = sessionStorage.getItem("password");
+    this.$store.commit("setUserPassword", password);
+  },
 }
 </script>

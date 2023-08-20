@@ -35,7 +35,7 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" v-for="item in orders" :key="item.title">
                                     <td class="p-4 w-4">
                                         <div class="flex items-center">
                                             <input id="checkbox-table-1" type="checkbox"
@@ -45,83 +45,19 @@
                                     </td>
                                     <td
                                         class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Apple Imac 27"</td>
+                                        {{ item.title }}</td>
                                     <td
                                         class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
-                                        Desktop PC</td>
+                                        {{ new Date(item.date).toLocaleDateString() }}</td>
                                     <td
                                         class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        $1999</td>
+                                        ${{ item.price }}</td>
                                     <td
                                         class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        $1999</td>
+                                        <span class="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10">Status</span></td>
                                     <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
                                         <router-link to="/order-summary" class="text-blue-600 dark:text-blue-500 hover:underline">
-                                            <i class="fa-solid fa-eye" data-tooltip-target="tooltip-right"
-                                                data-tooltip-placement="right"></i>
-                                            <div id="tooltip-right" role="tooltip"
-                                                class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                                                Order Summary
-                                                <div class="tooltip-arrow" data-popper-arrow></div>
-                                            </div>
-                                        </router-link>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <td class="p-4 w-4">
-                                        <div class="flex items-center">
-                                            <input id="checkbox-table-2" type="checkbox"
-                                                class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                            <label for="checkbox-table-2" class="sr-only">checkbox</label>
-                                        </div>
-                                    </td>
-                                    <td
-                                        class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Apple MacBook Pro 17"</td>
-                                    <td
-                                        class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
-                                        Laptop</td>
-                                    <td
-                                        class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        $2999</td>
-                                    <td
-                                        class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        $2999</td>
-                                    <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                                        <router-link to="/order-summary" class="text-blue-600 dark:text-blue-500 hover:underline">
-                                            <i class="fa-solid fa-eye" data-tooltip-target="tooltip-right"
-                                                data-tooltip-placement="right"></i>
-                                            <div id="tooltip-right" role="tooltip"
-                                                class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                                                Order Summary
-                                                <div class="tooltip-arrow" data-popper-arrow></div>
-                                            </div>
-                                        </router-link>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <td class="p-4 w-4">
-                                        <div class="flex items-center">
-                                            <input id="checkbox-table-5" type="checkbox"
-                                                class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                            <label for="checkbox-table-5" class="sr-only">checkbox</label>
-                                        </div>
-                                    </td>
-                                    <td
-                                        class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Apple Watch Series 7</td>
-                                    <td
-                                        class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
-                                        Accessories</td>
-                                    <td
-                                        class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        $599</td>
-                                    <td
-                                        class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        $599</td>
-                                    <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                                        <router-link to="/order-summary" class="text-blue-600 dark:text-blue-500 hover:underline">
-                                            <i class="fa-solid fa-eye" data-tooltip-target="tooltip-right"
+                                            <i class="fa-solid fa-eye fa-lg" data-tooltip-target="tooltip-right"
                                                 data-tooltip-placement="right"></i>
                                             <div id="tooltip-right" role="tooltip"
                                                 class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
@@ -143,5 +79,39 @@
 <script>
 export default {
     name: 'Orders',
+
+    data() {
+    return {
+      date: Date.now(),
+      orders: [],
+      price: 0,
+      ordersQty: 0,
+      total: 0,
+    }
+  },
+
+  methods: {
+    calculateTotal() {
+      let total = 0;
+      this.orders.forEach((item) => {
+        total += item.price * item.ordersQty;
+      });
+      this.total = total.toFixed(2);
+    },
+  },
+
+  mounted() {
+    if (sessionStorage.getItem("cartData")) {
+      this.orders = JSON.parse(sessionStorage.getItem("cartData"));
+
+      let cart = JSON.parse(sessionStorage.getItem("cartData"));
+      if (cart) {
+        this.totalItems = this.orders.length;
+        this.$store.commit("cartItems", this.orders);
+        this.$store.commit("cartItemsCount", this.orders.length);
+        this.calculateTotal();
+      }
+    }
+  }
 }
 </script>

@@ -7,7 +7,7 @@
                 <p class="text-base font-medium text-green-500 absolute m-3">
                     <span
                         class="inline-flex items-center rounded-md bg-red-400 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red-600/10"
-                        v-if="productData?.discount != null">-{{ productData?.discount }}%</span>
+                        v-if="productData?.discount != null">{{ productData?.discount }}%</span>
                 </p>
                 <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
                     <div class="flex items-start">
@@ -41,20 +41,19 @@
                     <div class="flex items-center my-8">
                         <h2 class="text-md title-font text-gray-500 tracking-widest inline">Availability:</h2>
                         <h4 class="text-md title-font text-green-500 tracking-widest inline ml-1"
-                            :class="{ 'text-green-500': productData?.availability !== 'Out of Stock', 'text-red-500': productData?.availability === 'Out of Stock' }">
-                            {{
-                                productData?.availability }}</h4>
+                            :class="{ 'text-green-500': productData?.availability !== 'out of stock', 'text-red-500': productData?.availability === 'out of stock' }">
+                            {{ productData?.availability }}</h4>
                     </div>
                     <div class="flex mb-4">
                         <Rating :rating="productData?.rating" />
                     </div>
 
-                    <div class="mb-5">
+                    <div class="mb-5" v-if="productData?.size != null">
                         <h4 class="text-sm font-medium text-gray-900 mb-4">Size</h4>
                         <fieldset class="grid grid-cols-5 gap-4">
                             <div v-for="size in productData?.size" :key="size">
                                 <input type="radio" name="size" :value="size" class="peer hidden" v-model="selectedSize"
-                                    v-if="productData?.size != null" />
+                                     />
                                 <label :for="size"
                                     class="block cursor-pointer rounded-lg border bg-white p-2 text-sm font-medium shadow-sm hover:border-gray-700 text-center"
                                     :class="{ 'border-blue-500': selectedSize === size }">
