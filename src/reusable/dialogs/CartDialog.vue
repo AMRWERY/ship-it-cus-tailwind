@@ -136,7 +136,7 @@
 </template>
   
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted, watchEffect } from 'vue';
 import {
     Dialog,
     DialogPanel,
@@ -149,6 +149,10 @@ import { useStore } from 'vuex';
 const cart = ref([]);
 const totalItems = ref(0);
 const total = ref(0);
+const category = ref('');
+      const cartQty = ref(0);
+      const price = (0);
+
 
 const increment = (item) => {
     item.cartQty++;
@@ -199,10 +203,14 @@ const totalAmount = computed(() => {
 });
 
 const totalItemsInCart = computed(() => {
-    return store.state.totalItemsInCart;
+    debugger
+    return store.getters.totalItemsInCart;
 });
 
+const watch = watchEffect()
+
 watch(totalItemsInCart, (newVal, oldVal) => {
+    debugger
     totalItems.value = newVal;
 });
 
@@ -214,7 +222,7 @@ watch(store.state.totalItemsAmount, (newVal, oldVal) => {
 onMounted(() => {
     if (sessionStorage.getItem('cartData')) {
         cart.value = JSON.parse(sessionStorage.getItem('cartData'));
-        const cartData = JSON.parse(sessionStorage.getItem('cartData'));
+        let cartData = JSON.parse(sessionStorage.getItem('cartData'));
         if (cartData) {
             totalItems.value = cartData.length;
             store.commit('cartItems', cart.value);
@@ -224,17 +232,17 @@ onMounted(() => {
     }
 });
 
-onMounted(() => {
-    if (sessionStorage.getItem("cartData")) {
-        cart.value = JSON.parse(sessionStorage.getItem("cartData"));
+// onMounted(() => {
+//     if (sessionStorage.getItem("cartData")) {
+//         cart.value = JSON.parse(sessionStorage.getItem("cartData"));
 
-        let cartData = JSON.parse(sessionStorage.getItem("cartData"));
-        if (cartData) {
-            totalItems.value = cartData.length;
-            store.commit("cartItemsCount", cartData.length);
-        }
-    }
-});
+//         let cartData = JSON.parse(sessionStorage.getItem("cartData"));
+//         if (cartData) {
+//             totalItems.value = cartData.length;
+//             store.commit("cartItemsCount", cartData.length);
+//         }
+//     }
+// });
 
 const open = ref(true);
 const cartOpen = ref(false);

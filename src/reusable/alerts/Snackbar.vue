@@ -9,7 +9,6 @@
           clip-rule="evenodd" />
       </svg>
       {{ message }}
-
       <div class="text-blue-700 cursor-pointer hover:text-blue-800">
         <span
           class="flex-shrink-0 inline-flex item-center justify-center border-l-2 border-t-2 border-blue-700 p-1 leading-none rounded-full"

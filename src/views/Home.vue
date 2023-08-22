@@ -12,7 +12,7 @@
 
 <script>
 import Banner from '../layouts/Banner.vue';
-import WelcomeAlert from '../layouts/WelcomeAlert.vue';
+import WelcomeAlert from '../reusable/alerts/WelcomeAlert.vue';
 import Logo from '../layouts/Logo.vue';
 import ShopCategory from '../components/ShopCategory.vue'
 import FeaturedProducts from '../components/FeaturedProducts.vue'

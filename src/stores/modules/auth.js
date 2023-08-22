@@ -6,6 +6,7 @@ import {
   updateProfile,
   getAuth,
   updatePassword,
+  getIdToken,
 } from "firebase/auth";
 import { auth } from "@/firebase/config";
 import router from "@/router";
@@ -14,8 +15,9 @@ const state = {
   isAuthenticated: false,
   isLoading: false,
   username: "",
-  email: '',
-  password: ''
+  email: "",
+  password: "",
+  userToken: null,
 };
 
 const mutations = {
@@ -24,6 +26,9 @@ const mutations = {
   },
   userLogIn(state, payload) {
     state.isAuthenticated = payload;
+  },
+  setUserToken(state, payload) {
+    state.userToken = payload;
   },
   userLogout(state, payload) {
     state.isAuthenticated = payload;
@@ -62,6 +67,14 @@ const actions = {
           dispatch("updateUserProfile", {
             username: payload.username,
           });
+          getIdToken(user)
+            .then((token) => {
+              commit("setUserToken", token);
+              sessionStorage.setItem("userToken", token);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         } else {
           commit("setIsAuthenticated", false);
           router.replace("/sign-up");
@@ -73,34 +86,6 @@ const actions = {
         console.log(error);
       });
   },
-  // userSignIn({ commit, dispatch }, payload) {
-  //   commit("setLoading", true);
-  //   const { email, password, router } = payload;
-  //   signInWithEmailAndPassword(auth, email, password)
-  //     .then((userCredential) => {
-  //       commit("setLoading", false);
-  //       const user = userCredential.user;
-  //       if (user) {
-  //         commit("setIsAuthenticated", true);
-  //         commit("setUsername", user.displayName);
-  //         router.replace("/");
-  //         sessionStorage.setItem("username", user.displayName);
-  //         sessionStorage.setItem(
-  //           "userCredential",
-  //           JSON.stringify(userCredential)
-  //         );
-  //         dispatch("updateUserProfile", { username: user.displayName });
-  //       } else {
-  //         commit("setIsAuthenticated", false);
-  //         router.replace("/login");
-  //         commit("setLoading", false);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       commit("setLoading", false);
-  //       console.log(error);
-  //     });
-  // },
   userSignIn({ commit, dispatch }, payload) {
     commit("setLoading", true);
     const { email, password, router } = payload;
@@ -114,8 +99,16 @@ const actions = {
           router.replace("/");
           sessionStorage.setItem("username", user.displayName);
           sessionStorage.setItem("email", user.email);
-          sessionStorage.setItem("password", user.password);
+          sessionStorage.setItem("password", password);
           dispatch("updateUserProfile", { username: user.displayName });
+          getIdToken(user)
+            .then((token) => {
+              commit("setUserToken", token);
+              sessionStorage.setItem("userToken", token);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         } else {
           commit("setIsAuthenticated", false);
           router.replace("/login");
@@ -132,6 +125,7 @@ const actions = {
     signOut(auth)
       .then(() => {
         commit("userLogout", false);
+        commit("setUserToken", null);
         sessionStorage.clear();
         router.replace("/login");
       })

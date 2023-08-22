@@ -29,7 +29,7 @@
                     <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                         <div v-for="product in men" :key="product.id" class="group relative">
                             <button type="button" class="absolute top-2 right-2 mx-3 mt-3 z-10">
-                                <i class="fa-regular fa-heart"></i>
+                                <i class="fa-regular fa-heart" style="color: #D71313"></i>
                             </button>
                             <div
                                 class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -48,10 +48,12 @@
                                         <p class="text-sm font-medium text-gray-900">${{ product.price }}</p>
                                     </div>
                                     <div class="mt-12">
-                                        <button type="button" id="hs-as-table-table-export-dropdown"
-                                            class="absolute bottom-2 right-2 float-right">
-                                            <i class="fa-solid fa-bag-shopping"></i>
-                                        </button>
+                                        <router-link :to="product.route">
+                                            <button type="button" id="hs-as-table-table-export-dropdown"
+                                                class="absolute bottom-2 right-2 float-right">
+                                                <i class="fa-solid fa-bag-shopping" style="color: #614BC3"></i>
+                                            </button>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +66,7 @@
                     <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                         <div v-for="product in women" :key="product.id" class="group relative">
                             <button type="button" class="absolute top-2 right-2 mx-3 mt-3 z-10">
-                                <i class="fa-regular fa-heart"></i>
+                                <i class="fa-regular fa-heart" style="color: #D71313"></i>
                             </button>
                             <div
                                 class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -83,10 +85,12 @@
                                         <p class="text-sm font-medium text-gray-900">${{ product.price }}</p>
                                     </div>
                                     <div class="mt-12">
-                                        <button type="button" id="hs-as-table-table-export-dropdown"
-                                            class="absolute bottom-2 right-2 float-right">
-                                            <i class="fa-solid fa-bag-shopping"></i>
-                                        </button>
+                                        <router-link :to="product.route">
+                                            <button type="button" id="hs-as-table-table-export-dropdown"
+                                                class="absolute bottom-2 right-2 float-right">
+                                                <i class="fa-solid fa-bag-shopping" style="color: #614BC3"></i>
+                                            </button>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +103,7 @@
                     <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                         <div v-for="product in gadgets" :key="product.id" class="group relative">
                             <button type="button" class="absolute top-2 right-2 mx-3 mt-3 z-10">
-                                <i class="fa-regular fa-heart"></i>
+                                <i class="fa-regular fa-heart" style="color: #D71313"></i>
                             </button>
                             <div
                                 class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -118,10 +122,12 @@
                                         <p class="text-sm font-medium text-gray-900">${{ product.price }}</p>
                                     </div>
                                     <div class="mt-12">
-                                        <button type="button" id="hs-as-table-table-export-dropdown"
-                                            class="absolute bottom-2 right-2 float-right">
-                                            <i class="fa-solid fa-bag-shopping"></i>
-                                        </button>
+                                        <router-link :to="product.route">
+                                            <button type="button" id="hs-as-table-table-export-dropdown"
+                                                class="absolute bottom-2 right-2 float-right">
+                                                <i class="fa-solid fa-bag-shopping" style="color: #614BC3"></i>
+                                            </button>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +141,7 @@
                     <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                         <div v-for="product in accessories" :key="product.id" class="group relative">
                             <button type="button" class="absolute top-2 right-2 mx-3 mt-3 z-10">
-                                <i class="fa-regular fa-heart"></i>
+                                <i class="fa-regular fa-heart" style="color: #D71313"></i>
                             </button>
                             <div
                                 class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -154,10 +160,12 @@
                                         <p class="text-sm font-medium text-gray-900">${{ product.price }}</p>
                                     </div>
                                     <div class="mt-12">
-                                        <button type="button" id="hs-as-table-table-export-dropdown"
-                                            class="absolute bottom-2 right-2 float-right">
-                                            <i class="fa-solid fa-bag-shopping"></i>
-                                        </button>
+                                        <router-link :to="product.route">
+                                            <button type="button" id="hs-as-table-table-export-dropdown"
+                                                class="absolute bottom-2 right-2 float-right">
+                                                <i class="fa-solid fa-bag-shopping" style="color: #614BC3"></i>
+                                            </button>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -179,34 +187,34 @@ export default {
     data() {
         return {
             men: [
-                { title: 'Super Jacket', price: '82.75', img: "https://justfields.com/storage/projects/7M5rV059/2-item-a.jpg", route: '' },
-                { title: 'Vintage Jean', price: '18.75', img: "https://justfields.com/storage/projects/7M5rV059/3-item-a.jpg", route: '' },
-                { title: 'Blue Jean', price: '40.82', img: "https://justfields.com/storage/projects/7M5rV059/4-item-a.jpg", route: '' },
-                { title: 'Denim Pullover', price: '42.75', img: "https://justfields.com/storage/projects/7M5rV059/1-item-a.jpg", route: '' },
-                { title: 'Black T-Shirt', price: '22.75', img: "https://justfields.com/storage/projects/7M5rV059/5-item-a.jpg", route: '' },
-                { title: 'Black Jacket', price: '92.75', img: "https://justfields.com/storage/projects/7M5rV059/jacket01.jpg", route: '' },
+                { title: 'Super Jacket', price: '82.75', img: "https://justfields.com/storage/projects/7M5rV059/2-item-a.jpg", route: '/products' },
+                { title: 'Vintage Jean', price: '18.75', img: "https://justfields.com/storage/projects/7M5rV059/3-item-a.jpg", route: '/products' },
+                { title: 'Blue Jean', price: '40.82', img: "https://justfields.com/storage/projects/7M5rV059/4-item-a.jpg", route: '/products' },
+                { title: 'Denim Pullover', price: '42.75', img: "https://justfields.com/storage/projects/7M5rV059/1-item-a.jpg", route: '/products' },
+                { title: 'Black T-Shirt', price: '22.75', img: "https://justfields.com/storage/projects/7M5rV059/5-item-a.jpg", route: '/products' },
+                { title: 'Black Jacket', price: '92.75', img: "https://justfields.com/storage/projects/7M5rV059/jacket01.jpg", route: '/products' },
             ],
             women: [
-                { title: 'Red Strip Dress', price: '97.75', img: "https://justfields.com/storage/projects/7M5rV059/6-item-a.jpg", route: '' },
-                { title: 'Blue Denim', price: '49.75', img: "https://justfields.com/storage/projects/7M5rV059/7-item-a.jpg", route: '' },
-                { title: 'Black Dress', price: '40.82', img: "https://justfields.com/storage/projects/7M5rV059/8-item-a.jpg", route: '' },
-                { title: 'White T-Shirt', price: '22.45', img: "https://justfields.com/storage/projects/7M5rV059/9-item-a.jpg", route: '' },
-                { title: 'White Jacket', price: '92.75', img: "https://justfields.com/storage/projects/7M5rV059/jacket02.jpg", route: '' },
-                { title: 'Hand Bag', price: '32.75', img: "https://justfields.com/storage/projects/7M5rV059/bags01.jpg", route: '' },
+                { title: 'Red Strip Dress', price: '97.75', img: "https://justfields.com/storage/projects/7M5rV059/6-item-a.jpg", route: '/products' },
+                { title: 'Blue Denim', price: '49.75', img: "https://justfields.com/storage/projects/7M5rV059/7-item-a.jpg", route: '/products' },
+                { title: 'Black Dress', price: '40.82', img: "https://justfields.com/storage/projects/7M5rV059/8-item-a.jpg", route: '/products' },
+                { title: 'White T-Shirt', price: '22.45', img: "https://justfields.com/storage/projects/7M5rV059/9-item-a.jpg", route: '/products' },
+                { title: 'White Jacket', price: '92.75', img: "https://justfields.com/storage/projects/7M5rV059/jacket02.jpg", route: '/products' },
+                { title: 'Hand Bag', price: '32.75', img: "https://justfields.com/storage/projects/7M5rV059/bags01.jpg", route: '/products' },
             ],
             gadgets: [
-                { title: 'Wired Headphone', price: '125.75', img: "https://justfields.com/storage/projects/7M5rV059/g-1-a.jpg", route: '' },
-                { title: 'Black Smartphone', price: '875.55', img: "https://justfields.com/storage/projects/7M5rV059/g-2-a.jpg", route: '' },
-                { title: 'Analog Watch', price: '375.82', img: "https://justfields.com/storage/projects/7M5rV059/g-3-a.jpg", route: '' },
-                { title: 'Digital Watch', price: '567.45', img: "https://justfields.com/storage/projects/7M5rV059/g-4-a.jpg", route: '' },
-                { title: 'Circular Speaker', price: '985.22', img: "https://justfields.com/storage/projects/7M5rV059/g-7-a.jpg", route: '' },
+                { title: 'Wired Headphone', price: '125.75', img: "https://justfields.com/storage/projects/7M5rV059/g-1-a.jpg", route: '/products' },
+                { title: 'Black Smartphone', price: '875.55', img: "https://justfields.com/storage/projects/7M5rV059/g-2-a.jpg", route: '/products' },
+                { title: 'Analog Watch', price: '375.82', img: "https://justfields.com/storage/projects/7M5rV059/g-3-a.jpg", route: '/products' },
+                { title: 'Digital Watch', price: '567.45', img: "https://justfields.com/storage/projects/7M5rV059/g-4-a.jpg", route: '/products' },
+                { title: 'Circular Speaker', price: '985.22', img: "https://justfields.com/storage/projects/7M5rV059/g-7-a.jpg", route: '/products' },
             ],
             accessories: [
-                { title: 'Men Belts', price: '38.31', img: "https://justfields.com/storage/projects/7M5rV059/a-2-a.jpg", route: '' },
-                { title: 'Steal Chain', price: '52.55', img: "https://justfields.com/storage/projects/7M5rV059/a-3-a.jpg", route: '' },
-                { title: 'Circular Speaker', price: '985.22', img: "https://justfields.com/storage/projects/7M5rV059/g-7-a.jpg", route: '' },
-                { title: 'Men Purse', price: '19.45', img: "https://justfields.com/storage/projects/7M5rV059/a-4-a.jpg", route: '' },
-                { title: 'Summer Goggles ', price: '35.22', img: "https://justfields.com/storage/projects/7M5rV059/a-5-a.jpg", route: '' },
+                { title: 'Men Belts', price: '38.31', img: "https://justfields.com/storage/projects/7M5rV059/a-2-a.jpg", route: '/products' },
+                { title: 'Steal Chain', price: '52.55', img: "https://justfields.com/storage/projects/7M5rV059/a-3-a.jpg", route: '/products' },
+                { title: 'Circular Speaker', price: '985.22', img: "https://justfields.com/storage/projects/7M5rV059/g-7-a.jpg", route: '/products' },
+                { title: 'Men Purse', price: '19.45', img: "https://justfields.com/storage/projects/7M5rV059/a-4-a.jpg", route: '/products' },
+                { title: 'Summer Goggles ', price: '35.22', img: "https://justfields.com/storage/projects/7M5rV059/a-5-a.jpg", route: '/products' },
             ],
         }
     },

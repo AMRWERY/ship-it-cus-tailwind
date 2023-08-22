@@ -41,7 +41,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useStore } from 'vuex';
-import snackbar from '@/reusable/Snackbar.vue';
+import snackbar from '@/reusable/alerts/Snackbar.vue';
 
 const email = ref('')
 const showSnackbar = ref(false)

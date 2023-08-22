@@ -1,57 +1,57 @@
 <template>
-    <Filters @apply-filters="updateFilters" />
-    <div class="lg:col-span-3">
+  <Filters @apply-filters="updateFilters" />
+  <div class="lg:col-span-3">
 
-        <!-- search bar -->
-        <div class="px-6 py-4 md:flex md:justify-center md:items-center dark:border-gray-700">
-            <div class="w-full md:w-3/4 lg:w-2/3">
-                <label for="hs-as-table-product-review-search" class="sr-only">Search</label>
-                <div class="relative">
-                    <input type="text" id="hs-as-table-product-review-search" name="hs-as-table-product-review-search"
-                        class="py-2 px-3 pl-11 w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                        placeholder="What are you looking for?" v-model="searchQuery" />
-                    <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none pl-4">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
-                </div>
-            </div>
+    <!-- search bar -->
+    <div class="px-6 py-4 md:flex md:justify-center md:items-center dark:border-gray-700">
+      <div class="w-full md:w-1/2 lg:w-1/3">
+        <label for="hs-as-table-product-review-search" class="sr-only">Search</label>
+        <div class="relative">
+          <input type="text" id="hs-as-table-product-review-search" name="hs-as-table-product-review-search"
+            class="py-2 px-3 pl-11 w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+            placeholder="What are you looking for?" v-model="searchQuery" />
+          <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none pl-4">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
         </div>
-        <!-- end of search bar -->
-
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-7xl py-10 sm:py-8 lg:max-w-none lg:py-10">
-                <div class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-                    <router-link v-for="prod in filterProducts" :key="prod" :to="'/product/' + prod.id" class="group">
-                        <div
-                            class="mx-auto mt-11 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg mb-4">
-                            <img class="h-48 w-full object-cover object-center" :src="prod.productImg" />
-                            <div class="p-4">
-                                <h2 class="mb-2 text-lg font-medium dark:text-white text-gray-900">{{
-                                    prod.title }}</h2>
-                                <p class="mb-2 text-base dark:text-gray-300 text-gray-700">
-                                    <Rating :rating="prod.rating" />
-                                </p>
-                                <div class="flex items-center">
-                                    <p class="mr-2 text-lg font-semibold text-gray-900 dark:text-white">
-                                        ${{ prod.price }}</p>
-                                    <p class="text-base  font-medium text-gray-500 line-through dark:text-gray-300"
-                                        v-if="prod.originalPrice != null">${{
-                                            prod.originalPrice }}</p>
-                                    <p class="ml-auto text-base font-medium text-green-500"
-                                        v-if="prod.discount !== null && prod.discount > 0">
-                                        {{ prod.discount }}% off
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </router-link>
-                </div>
-            </div>
-            <div class="flex justify-center mt-4">
-                <Pagination />
-            </div>
-        </div>
+      </div>
     </div>
+    <!-- end of search bar -->
+
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl py-10 sm:py-8 lg:max-w-none lg:py-10">
+        <div class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
+          <router-link v-for="prod in filterProducts" :key="prod" :to="'/product/' + prod.id" class="group">
+            <div
+              class="mx-auto mt-11 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg mb-4">
+              <img class="h-48 w-full object-cover object-center" :src="prod.productImg" />
+              <div class="p-4">
+                <h2 class="mb-2 text-lg font-medium dark:text-white text-gray-900">{{
+                  prod.title }}</h2>
+                <p class="mb-2 text-base dark:text-gray-300 text-gray-700">
+                  <Rating :rating="prod.rating" />
+                </p>
+                <div class="flex items-center">
+                  <p class="mr-2 text-lg font-semibold text-gray-900 dark:text-white">
+                    ${{ prod.price }}</p>
+                  <p class="text-base  font-medium text-gray-500 line-through dark:text-gray-300"
+                    v-if="prod.originalPrice != null">${{
+                      prod.originalPrice }}</p>
+                  <p class="ml-auto text-base font-medium text-green-500"
+                    v-if="prod.discount !== null && prod.discount > 0">
+                    {{ prod.discount }}% off
+                  </p>
+                </div>
+              </div>
+            </div>
+          </router-link>
+        </div>
+      </div>
+      <div class="flex justify-center mt-4">
+        <Pagination />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -61,19 +61,19 @@ import Pagination from '../../reusable/Pagination.vue';
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-    components: {
-        Filters,
-        Rating,
-        Pagination
-    },
+  components: {
+    Filters,
+    Rating,
+    Pagination
+  },
 
-    data() {
+  data() {
     return {
       discount: null,
       searchQuery: '',
       products: [],
       filterOptions: {
-        category: [],
+        categories: [],
         size: [],
         availability: [],
         rating: null,
@@ -81,14 +81,14 @@ export default {
     }
   },
 
-    computed: {
+  computed: {
     ...mapGetters(['getAllProducts']),
     filteredCategoryProducts() {
       if (this.$route.params.category) {
         debugger
         return this.getAllProducts.filter(
-        product => product.categories === this.routeParams.category
-      );
+          product => product.categories === this.routeParams.category
+        );
       } else {
         return this.getAllProducts;
       }
@@ -100,9 +100,9 @@ export default {
           product.title.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       }
-      if (this.filterOptions.category.length > 0) {
+      if (this.filterOptions.categories.length > 0) {
         filteredProducts = filteredProducts.filter((product) =>
-          this.filterOptions.category.includes(product.category)
+          this.filterOptions.categories.includes(product.categories)
         );
       }
       if (this.filterOptions.size.length > 0) {
