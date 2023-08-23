@@ -28,7 +28,8 @@
                                     <p class="text-sm dark:text-white leading-none text-gray-800"><span
                                             class="dark:text-gray-400 text-gray-400">Status: </span>Processing</p>
                                     <p class="text-sm dark:text-white leading-none text-gray-800"><span
-                                            class="dark:text-gray-400 text-gray-400">Payment Method: </span>Cash on delivery
+                                            class="dark:text-gray-400 text-gray-400">Payment Method: </span>{{ selectedCard
+                                            }}
                                     </p>
                                 </div>
                             </div>
@@ -36,6 +37,7 @@
                                 <p class="text-base dark:text-white xl:text-lg leading-6">${{ item.price }} <span
                                         class="text-red-300 line-through"> ${{ item.originalPrice }}</span></p>
                                 <p class="text-base dark:text-white xl:text-lg leading-6 text-gray-800">{{ item.cartQty }}
+                                    <span class="text-red-300">Pieces</span>
                                 </p>
                                 <p class="text-base dark:text-white xl:text-lg font-semibold leading-6 text-gray-800">
                                     ${{ item.price }}</p>
@@ -61,7 +63,7 @@
                             </div>
                             <div class="flex justify-between items-center w-full">
                                 <p class="text-base dark:text-white leading-4 text-gray-800">Shipping</p>
-                                <p class="text-base dark:text-gray-300 leading-4 text-gray-600">$8.00</p>
+                                <p class="text-base dark:text-gray-300 leading-4 text-gray-600">{{ shipping }}</p>
                             </div>
                         </div>
                         <div class="flex justify-between items-center w-full">
@@ -141,10 +143,20 @@ export default {
             cart: [],
             cartQty: 0,
             price: 0,
+            total: 0,
             totalItems: 0,
-            shipping: 8,
+            shipping: '$10.00',
+            STANDARD: '$10.00',
+            EXPRESS: '$25.00',
+            selectedCard: null,
             date: Date.now(),
         }
+    },
+
+    methods: {
+        selectCard(card) {
+            this.$store.commit('setSelectedCard', card);
+        },
     },
 
     computed: {
@@ -164,10 +176,11 @@ export default {
         total() {
             const subtotal = parseFloat(this.subtotal);
             const tax = parseFloat(this.tax);
-            const totalWithShipping = subtotal + tax + this.shipping;
+            const shippingCost = parseFloat(this.shipping.replace('$', ''));
+            const totalWithShipping = subtotal + tax + shippingCost;
             return totalWithShipping.toFixed(2);
-            //   return (subtotal + tax).toFixed(2);
-        },
+        }
+
     },
 
     mounted() {
@@ -179,6 +192,11 @@ export default {
 
         if (sessionStorage.getItem('cartData')) {
             this.cart = JSON.parse(sessionStorage.getItem('cartData'));
+        }
+
+        const selectedCard = JSON.parse(sessionStorage.getItem('selectedCard'));
+        if (selectedCard) {
+            this.selectedCard = selectedCard;
         }
     },
 }
