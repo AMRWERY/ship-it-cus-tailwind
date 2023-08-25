@@ -37,7 +37,11 @@
                                             </div>
                                         </div>
 
-                                        <div class="mt-8">
+                                        <div class="mt-8 flex items-center justify-center" v-if="wishlist.length === 0">
+                                            <p class="text-center text-gray-500">Your wishlist is empty.</p>
+                                        </div>
+
+                                        <div class="mt-8" v-else>
                                             <div class="flow-root">
                                                 <ul role="list" class="-my-6 divide-y divide-gray-200">
                                                     <li v-for="item in wishlist" :key="item" class="flex py-6">

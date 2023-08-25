@@ -71,13 +71,15 @@
               <div class="flex items-center my-10">
                 <input type="number" id="Quantity" value="1"
                   class="h-10 w-10 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none" />
+
                 <button @click="addToCart" :class="{
-                  'bg-green-500': isAddingToCart,
+                  'bg-green-500 hover:bg-green-600': isAddingToCart,
                   'bg-red-500': !isAddingToCart,
                 }"
-                  class="ml-3 flex items-center justify-center text-white bg-red-500 border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded">
+                  class="ml-3 flex items-center justify-center text-white border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded">
                   {{ buttonLabel }}
                 </button>
+
                 <AuthAlert :open="open" :message="message" />
               </div>
 

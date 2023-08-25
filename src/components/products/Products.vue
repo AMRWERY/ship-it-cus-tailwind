@@ -85,9 +85,8 @@ export default {
     ...mapGetters(['getAllProducts']),
     filteredCategoryProducts() {
       if (this.$route.params.category) {
-        debugger
         return this.getAllProducts.filter(
-          product => product.categories === this.routeParams.category
+          product => product.categories === this.$route.params.category
         );
       } else {
         return this.getAllProducts;

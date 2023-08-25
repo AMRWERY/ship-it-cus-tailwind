@@ -105,8 +105,8 @@
             <i class="fa-solid fa-moon fa-xl"></i>
             </button> -->
 
-            <div v-if="isUserLoggedIn">
-                    <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal" class="rounded-full
+                    <div v-if="isUserLoggedIn">
+                        <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal" class="rounded-full
                         p-1
                         text-gray-400
                         focus:outline-none
@@ -114,29 +114,29 @@
                         focus:ring-white
                         focus:ring-offset-2
                         focus:ring-offset-gray-800" type="button">
-                        <i class="fa-solid fa-caret-down fa-2xl"></i>
-                    </button>
+                            <i class="fa-solid fa-caret-down fa-2xl"></i>
+                        </button>
 
-                    <!-- Dropdown menu -->
+                        <!-- Dropdown menu -->
                         <div id="dropdownDotsHorizontal"
-                             class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 text-center"
-                              aria-labelledby="dropdownMenuIconHorizontalButton">
-                            <li>
-                              <router-link to=""
-                                           class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</router-link>
-                            </li>
-                            <li>
-                              <router-link to="/profile"
-                                           class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</router-link>
-                            </li>
-                          </ul>
-                          <div class="py-2 text-center" @click="logout">
-                            <router-link to="/login"
-                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</router-link>
-                          </div>
+                            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 text-center"
+                                aria-labelledby="dropdownMenuIconHorizontalButton">
+                                <li>
+                                    <router-link to=""
+                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/profile"
+                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</router-link>
+                                </li>
+                            </ul>
+                            <div class="py-2 text-center" @click="logout">
+                                <router-link to="/login"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</router-link>
+                            </div>
                         </div>
-                      </div>
+                    </div>
                     <!-- <div id="dropdownDotsHorizontal"
                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 text-center"

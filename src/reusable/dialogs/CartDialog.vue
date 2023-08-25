@@ -39,7 +39,11 @@
                                             </div>
                                         </div>
 
-                                        <div class="mt-8">
+                                        <div class="mt-8 flex items-center justify-center" v-if="cart.length === 0">
+                                            <p class="text-center text-gray-500">Your cart is empty.</p>
+                                        </div>
+
+                                        <div class="mt-8" v-else>
                                             <div class="flow-root">
                                                 <ul role="list" class="-my-6 divide-y divide-gray-200">
                                                     <li v-for="item in cart" :key="item" class="flex py-6">
@@ -100,29 +104,49 @@
                                     </div>
 
                                     <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
-                                        <div class="flex justify-between text-base font-medium text-gray-900">
-                                            <p>Subtotal</p>
-                                            <p>${{ totalAmount }}</p>
+                                        <div class="mt-8" v-if="cart.length === 0" />
+
+                                        <div v-else>
+                                            <div class="flex justify-between text-base font-medium text-gray-900">
+                                                <p>Subtotal</p>
+                                                <p>${{ totalAmount }}</p>
+                                            </div>
+                                            <p class="mt-0.5 text-sm text-gray-500">
+                                                Shipping and taxes calculated at checkout.
+                                            </p>
                                         </div>
-                                        <p class="mt-0.5 text-sm text-gray-500">
-                                            Shipping and taxes calculated at checkout.
-                                        </p>
-                                        <div class="mt-6">
-                                            <router-link to="/checkout"
-                                                class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</router-link>
-                                        </div>
-                                        <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
-                                            <p>
-                                                or
+
+                                        <div class="mt-8" v-if="cart.length === 0">
+                                            <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
                                                 <router-link to="/products">
                                                     <button type="button"
                                                         class="font-medium text-indigo-600 hover:text-indigo-500"
-                                                        @click="open = false">
-                                                        Continue Shopping
+                                                        @click="cartOpen = false">
+                                                        Start Shopping
                                                         <span aria-hidden="true"> &rarr;</span>
                                                     </button>
                                                 </router-link>
-                                            </p>
+                                            </div>
+                                        </div>
+
+                                        <div v-else>
+                                            <div class="mt-6">
+                                                <router-link to="/checkout"
+                                                    class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</router-link>
+                                            </div>
+                                            <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
+                                                <p>
+                                                    or
+                                                    <router-link to="/products">
+                                                        <button type="button"
+                                                            class="font-medium text-indigo-600 hover:text-indigo-500"
+                                                            @click="cartOpen = false">
+                                                            Continue Shopping
+                                                            <span aria-hidden="true"> &rarr;</span>
+                                                        </button>
+                                                    </router-link>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -134,30 +158,64 @@
         </Dialog>
     </TransitionRoot>
 </template>
-  
+
+
 <script setup>
-import { ref, computed, onMounted, watchEffect } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
+import { useStore } from 'vuex';
 import {
     Dialog,
     DialogPanel,
     DialogTitle,
     TransitionChild,
-    TransitionRoot,
+    TransitionRoot
 } from '@headlessui/vue';
-import { useStore } from 'vuex';
 
+const open = ref(true);
+const cartOpen = ref(false);
 const cart = ref([]);
-const totalItems = ref(0);
 const total = ref(0);
-const category = ref('');
-      const cartQty = ref(0);
-      const price = (0);
+const totalItems = ref(0);
 
+const store = useStore();
+
+const totalAmount = computed(() => {
+    let totalValue = 0;
+    cart.value.forEach((item) => {
+        totalValue += item.price * item.cartQty;
+    });
+    return totalValue.toFixed(2);
+});
+
+const totalItemsInCart = computed(() => {
+    return store.getters.totalItemsInCart;
+});
+
+watch(totalItemsInCart, (newVal, oldVal) => {
+    totalItems.value = newVal;
+});
+
+watch(store.state.totalItemsAmount, (newVal, oldVal) => {
+    cart.value = newVal;
+    totalAmount.value = calculateTotal();
+});
+
+onMounted(() => {
+    if (sessionStorage.getItem("cartData")) {
+        cart.value = JSON.parse(sessionStorage.getItem("cartData"));
+
+        let cartData = JSON.parse(sessionStorage.getItem("cartData"));
+        if (cartData) {
+            totalItems.value = cartData.length;
+            store.commit("cartItemsCount", cartData.length);
+        }
+    }
+});
 
 const increment = (item) => {
     item.cartQty++;
     calculateTotal();
-    sessionStorage.setItem('cartData', JSON.stringify(cart.value));
+    sessionStorage.setItem("cartData", JSON.stringify(cart.value));
 };
 
 const decrement = (item) => {
@@ -168,7 +226,7 @@ const decrement = (item) => {
         } else {
             calculateTotal();
         }
-        sessionStorage.setItem('cartData', JSON.stringify(cart.value));
+        sessionStorage.setItem("cartData", JSON.stringify(cart.value));
     }
 };
 
@@ -180,70 +238,15 @@ const calculateTotal = () => {
     total.value = totalValue.toFixed(2);
 };
 
-const store = useStore();
-
 const removeCartItem = (item) => {
     const index = cart.value.indexOf(item);
     if (index !== -1) {
         cart.value.splice(index, 1);
         calculateTotal();
-        store.commit('cartItemsCount', cart.value.length);
-        sessionStorage.setItem('cartData', JSON.stringify(cart.value));
+        store.commit("cartItemsCount", cart.value.length);
+        sessionStorage.setItem("cartData", JSON.stringify(cart.value));
     }
 };
 
-const totalItemsCount = computed(() => cart.value.length);
-
-const totalAmount = computed(() => {
-    let total = 0;
-    cart.value.forEach((item) => {
-        total += item.price * item.cartQty;
-    });
-    return total.toFixed(2);
-});
-
-const totalItemsInCart = computed(() => {
-    debugger
-    return store.getters.totalItemsInCart;
-});
-
-const watch = watchEffect()
-
-watch(totalItemsInCart, (newVal, oldVal) => {
-    debugger
-    totalItems.value = newVal;
-});
-
-watch(store.state.totalItemsAmount, (newVal, oldVal) => {
-    cart.value = newVal;
-    calculateTotal();
-});
-
-onMounted(() => {
-    if (sessionStorage.getItem('cartData')) {
-        cart.value = JSON.parse(sessionStorage.getItem('cartData'));
-        let cartData = JSON.parse(sessionStorage.getItem('cartData'));
-        if (cartData) {
-            totalItems.value = cartData.length;
-            store.commit('cartItems', cart.value);
-            store.commit('cartItemsCount', cartData.length);
-            calculateTotal();
-        }
-    }
-});
-
-// onMounted(() => {
-//     if (sessionStorage.getItem("cartData")) {
-//         cart.value = JSON.parse(sessionStorage.getItem("cartData"));
-
-//         let cartData = JSON.parse(sessionStorage.getItem("cartData"));
-//         if (cartData) {
-//             totalItems.value = cartData.length;
-//             store.commit("cartItemsCount", cartData.length);
-//         }
-//     }
-// });
-
-const open = ref(true);
-const cartOpen = ref(false);
+// const totalItemsCount = computed(() => cart.value.length);
 </script>
