@@ -7,6 +7,7 @@ import {
   getAuth,
   updatePassword,
   getIdToken,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "@/firebase/config";
 import router from "@/router";
@@ -18,6 +19,7 @@ const state = {
   email: "",
   password: "",
   userToken: null,
+  isUserLoggedIn: false,
 };
 
 const mutations = {
@@ -29,6 +31,9 @@ const mutations = {
   },
   setUserToken(state, payload) {
     state.userToken = payload;
+  },
+  setIsUserLoggedIn(state, value) {
+    state.isUserLoggedIn = value;
   },
   userLogout(state, payload) {
     state.isAuthenticated = payload;
@@ -119,6 +124,19 @@ const actions = {
         commit("setLoading", false);
         console.log(error);
       });
+  },
+  initAuthentication({ commit }) {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        user.getIdToken().then((token) => {
+          commit("setUserToken", token);
+          commit("setIsUserLoggedIn", true);
+        });
+      } else {
+        commit("setUserToken", null);
+        commit("setIsUserLoggedIn", false);
+      }
+    });
   },
   logout({ commit }) {
     commit("setLoading", true);

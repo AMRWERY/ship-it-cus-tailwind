@@ -14,7 +14,6 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    require("tailwindcss-rtl"),
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
     require("flowbite/plugin"),

@@ -7,7 +7,7 @@
         <p class="text-base font-medium text-green-500 absolute m-3">
           <span
             class="inline-flex items-center rounded-md bg-red-400 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red-600/10"
-            v-if="productData?.discount != null">{{ productData?.discount }}%</span>
+            v-if="productData?.discount !== null && productData?.discount  !== '' && productData?.discount  !== 0">{{ productData?.discount }}%</span>
         </p>
         <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
           <div class="flex items-start">
@@ -23,7 +23,7 @@
         </div>
         <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
           <div class="flex items-center">
-            <h2 class="text-md title-font text-gray-500 tracking-widest inline" v-if="productData?.sku != null">
+            <h2 class="text-md title-font text-gray-500 tracking-widest inline" v-if="productData?.sku !== null && productData?.sku  !== ''">
               SKU:</h2>
             <h4 class="text-md title-font text-gray-500 tracking-widest inline ml-1">{{ productData?.sku }}</h4>
           </div>
@@ -34,7 +34,7 @@
               <p class="mr-2 text-lg font-semibold text-gray-900 dark:text-white">${{ productData?.price }}
               </p>
               <p class="text-lg font-medium text-gray-400 line-through dark:text-gray-300"
-                v-if="productData?.originalPrice != null">${{
+              v-if="productData?.originalPrice !== null && productData?.originalPrice !== '' && productData?.originalPrice !== 0">${{
                   productData?.originalPrice }}</p>
             </div>
           </div>
@@ -120,12 +120,14 @@
       </div>
     </div>
   </section>
+  <DescriptionAndReviews />
   <MightLike />
 </template>
   
 <script>
 import Rating from '../../reusable/Rating.vue';
 import MightLike from '../MightLike.vue';
+import DescriptionAndReviews from '../DescriptionAndReviews.vue';
 import AuthAlert from '../../reusable/alerts/AuthAlert.vue';
 import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { auth } from "@/firebase/config";
@@ -133,7 +135,7 @@ import { auth } from "@/firebase/config";
 export default {
   name: 'ProductDetails',
 
-  components: { Rating, MightLike, AuthAlert },
+  components: { Rating, MightLike, DescriptionAndReviews, AuthAlert },
 
   data() {
     return {

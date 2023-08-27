@@ -15,7 +15,7 @@ import 'animate.css';
 
 const app = createApp(App)
 
-app.use(router)
-app.use(store)
+// app.use(router)
+// app.use(store)
 
-app.use(plugin, defaultConfig).mount('#app')
+app.use(router).use(store).use(plugin, defaultConfig).mount('#app')

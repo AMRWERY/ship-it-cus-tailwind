@@ -251,8 +251,8 @@ export default {
             const dataObj = {
                 cartItems: this.cart,
                 total: this.totalAmount,
-                userId: JSON.parse(sessionStorage.getItem("cartData"))?.user?.uid,
-                // userId: JSON.parse(sessionStorage.getItem("userCredential"))?.user?.uid,
+                // userId: JSON.parse(sessionStorage.getItem("cartData"))?.user?.uid,
+                userId: JSON.parse(sessionStorage.getItem("userCredential"))?.user?.uid,
                 orderDate: new Date(),
             };
             const docRef = await addDoc(colRef, dataObj);

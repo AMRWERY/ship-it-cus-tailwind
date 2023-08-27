@@ -71,19 +71,6 @@
                 focus:ring-offset-2
                 focus:ring-offset-gray-800
               ">
-                        <i class="fa-solid fa-earth-africa fa-xl"></i>
-                    </button>
-
-                    <button type="button" class="
-                rounded-full
-                p-1
-                text-gray-400
-                focus:outline-none
-                focus:ring-2
-                focus:ring-white
-                focus:ring-offset-2
-                focus:ring-offset-gray-800
-              ">
                         <i class="fa-solid fa-sun fa-xl"></i>
                     </button>
 
@@ -104,6 +91,7 @@
             >
             <i class="fa-solid fa-moon fa-xl"></i>
             </button> -->
+
 
                     <div v-if="isUserLoggedIn">
                         <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal" class="rounded-full
@@ -137,26 +125,13 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div id="dropdownDotsHorizontal"
-                        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 text-center"
-                            aria-labelledby="dropdownMenuIconHorizontalButton">
-                            <li>
-                                <router-link to=""
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</router-link>
-                            </li>
-                            <li>
-                                <router-link to="/profile"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</router-link>
-                            </li>
-                        </ul>
-                        <div>
-                            <div class="py-2 text-center" v-if="isUserLoggedIn" @click="logout">
-                                <router-link to="/login"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</router-link>
-                            </div>
-                        </div>
-                    </div> -->
+
+                    <div v-if="!isUserLoggedIn">
+                        <router-link to="/login">
+                            <button type="submit"
+                        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Login</button>
+                        </router-link>
+                    </div>
 
                 </div>
             </div>
@@ -178,13 +153,14 @@
 
 
 <script setup>
-import { onMounted, watchEffect, ref } from 'vue';
+import { onMounted, watchEffect, ref, computed } from 'vue';
 import { useStore } from 'vuex';
-import { initFlowbite } from 'flowbite';
+// import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { initDropdowns } from 'flowbite';
 import {
     Disclosure,
     DisclosureButton,
-    DisclosurePanel,
+    DisclosurePanel
 } from '@headlessui/vue';
 import WishlistDialog from '../reusable/dialogs/WishlistDialog.vue';
 import CartDialog from '../reusable/dialogs/CartDialog.vue';
@@ -209,11 +185,13 @@ const logout = async () => {
     }
 }
 
-onMounted(() => {
-    initFlowbite();
-});
+const isUserLoggedIn = computed(() => store.state.auth.isUserLoggedIn);
 
-const isUserLoggedIn = ref(false)
+store.dispatch('initAuthentication');
+
+onMounted(() => {
+    initDropdowns();
+});
 
 onMounted(() => {
     const userToken = sessionStorage.getItem("userToken");

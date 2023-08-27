@@ -27,9 +27,10 @@
             <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="men" role="tabpanel" aria-labelledby="men-tab">
                 <div class="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
                     <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                        <div v-for="product in men" :key="product.id" class="group relative">
-                            <button type="button" class="absolute top-2 right-2 mx-3 mt-3 z-10">
-                                <i class="fa-regular fa-heart" style="color: #D71313"></i>
+                        <div v-for="(product, index) in men" :key="product.id" class="group relative">
+                            <button type="button" class="absolute top-2 right-2 mx-3 mt-3 z-10"
+                                @click="toggleHeartColor(index)">
+                                <i class="fa-regular fa-heart" :style="{ color: product.heartColor }"></i>
                             </button>
                             <div
                                 class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -64,9 +65,10 @@
             <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="women" role="tabpanel" aria-labelledby="women-tab">
                 <div class="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
                     <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                        <div v-for="product in women" :key="product.id" class="group relative">
-                            <button type="button" class="absolute top-2 right-2 mx-3 mt-3 z-10">
-                                <i class="fa-regular fa-heart" style="color: #D71313"></i>
+                        <div v-for="(product, index) in women" :key="product.id" class="group relative">
+                            <button type="button" class="absolute top-2 right-2 mx-3 mt-3 z-10"
+                                @click="toggleHeartColor(index)">
+                                <i class="fa-regular fa-heart" :style="{ color: product.heartColor }"></i>
                             </button>
                             <div
                                 class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -101,9 +103,10 @@
             <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="gadgets" role="tabpanel" aria-labelledby="gadgets-tab">
                 <div class="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
                     <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                        <div v-for="product in gadgets" :key="product.id" class="group relative">
-                            <button type="button" class="absolute top-2 right-2 mx-3 mt-3 z-10">
-                                <i class="fa-regular fa-heart" style="color: #D71313"></i>
+                        <div v-for="(product, index) in gadgets" :key="product.id" class="group relative">
+                            <button type="button" class="absolute top-2 right-2 mx-3 mt-3 z-10"
+                                @click="toggleHeartColor(index)">
+                                <i class="fa-regular fa-heart" :style="{ color: product.heartColor }"></i>
                             </button>
                             <div
                                 class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -139,9 +142,10 @@
                 aria-labelledby="accessories-tab">
                 <div class="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
                     <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                        <div v-for="product in accessories" :key="product.id" class="group relative">
-                            <button type="button" class="absolute top-2 right-2 mx-3 mt-3 z-10">
-                                <i class="fa-regular fa-heart" style="color: #D71313"></i>
+                        <div v-for="(product, index) in accessories" :key="index" class="group relative">
+                            <button type="button" class="absolute top-2 right-2 mx-3 mt-3 z-10"
+                                @click="toggleHeartColor(index)">
+                                <i class="fa-regular fa-heart" :style="{ color: product.heartColor }"></i>
                             </button>
                             <div
                                 class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -187,36 +191,45 @@ export default {
     data() {
         return {
             men: [
-                { title: 'Super Jacket', price: '82.75', img: "https://justfields.com/storage/projects/7M5rV059/2-item-a.jpg", route: '/products' },
-                { title: 'Vintage Jean', price: '18.75', img: "https://justfields.com/storage/projects/7M5rV059/3-item-a.jpg", route: '/products' },
-                { title: 'Blue Jean', price: '40.82', img: "https://justfields.com/storage/projects/7M5rV059/4-item-a.jpg", route: '/products' },
-                { title: 'Denim Pullover', price: '42.75', img: "https://justfields.com/storage/projects/7M5rV059/1-item-a.jpg", route: '/products' },
-                { title: 'Black T-Shirt', price: '22.75', img: "https://justfields.com/storage/projects/7M5rV059/5-item-a.jpg", route: '/products' },
-                { title: 'Black Jacket', price: '92.75', img: "https://justfields.com/storage/projects/7M5rV059/jacket01.jpg", route: '/products' },
+                { title: 'Super Jacket', price: '82.75', img: "https://justfields.com/storage/projects/7M5rV059/2-item-a.jpg", heartColor: "white", route: '/products' },
+                { title: 'Vintage Jean', price: '18.75', img: "https://justfields.com/storage/projects/7M5rV059/3-item-a.jpg", heartColor: "white", route: '/products' },
+                { title: 'Blue Jean', price: '40.82', img: "https://justfields.com/storage/projects/7M5rV059/4-item-a.jpg", heartColor: "white", route: '/products' },
+                { title: 'Denim Pullover', price: '42.75', img: "https://justfields.com/storage/projects/7M5rV059/1-item-a.jpg", heartColor: "white", route: '/products' },
+                { title: 'Black T-Shirt', price: '22.75', img: "https://justfields.com/storage/projects/7M5rV059/5-item-a.jpg", heartColor: "white", route: '/products' },
+                { title: 'Black Jacket', price: '92.75', img: "https://justfields.com/storage/projects/7M5rV059/jacket01.jpg", heartColor: "white", route: '/products' },
             ],
             women: [
-                { title: 'Red Strip Dress', price: '97.75', img: "https://justfields.com/storage/projects/7M5rV059/6-item-a.jpg", route: '/products' },
-                { title: 'Blue Denim', price: '49.75', img: "https://justfields.com/storage/projects/7M5rV059/7-item-a.jpg", route: '/products' },
-                { title: 'Black Dress', price: '40.82', img: "https://justfields.com/storage/projects/7M5rV059/8-item-a.jpg", route: '/products' },
-                { title: 'White T-Shirt', price: '22.45', img: "https://justfields.com/storage/projects/7M5rV059/9-item-a.jpg", route: '/products' },
-                { title: 'White Jacket', price: '92.75', img: "https://justfields.com/storage/projects/7M5rV059/jacket02.jpg", route: '/products' },
-                { title: 'Hand Bag', price: '32.75', img: "https://justfields.com/storage/projects/7M5rV059/bags01.jpg", route: '/products' },
+                { title: 'Red Strip Dress', price: '97.75', img: "https://justfields.com/storage/projects/7M5rV059/6-item-a.jpg", heartColor: "white", route: '/products' },
+                { title: 'Blue Denim', price: '49.75', img: "https://justfields.com/storage/projects/7M5rV059/7-item-a.jpg", heartColor: "white", route: '/products' },
+                { title: 'Black Dress', price: '40.82', img: "https://justfields.com/storage/projects/7M5rV059/8-item-a.jpg", heartColor: "white", route: '/products' },
+                { title: 'White T-Shirt', price: '22.45', img: "https://justfields.com/storage/projects/7M5rV059/9-item-a.jpg", heartColor: "white", route: '/products' },
+                { title: 'White Jacket', price: '92.75', img: "https://justfields.com/storage/projects/7M5rV059/jacket02.jpg", heartColor: "white", route: '/products' },
+                { title: 'Hand Bag', price: '32.75', img: "https://justfields.com/storage/projects/7M5rV059/bags01.jpg", heartColor: "white", route: '/products' },
             ],
             gadgets: [
-                { title: 'Wired Headphone', price: '125.75', img: "https://justfields.com/storage/projects/7M5rV059/g-1-a.jpg", route: '/products' },
-                { title: 'Black Smartphone', price: '875.55', img: "https://justfields.com/storage/projects/7M5rV059/g-2-a.jpg", route: '/products' },
-                { title: 'Analog Watch', price: '375.82', img: "https://justfields.com/storage/projects/7M5rV059/g-3-a.jpg", route: '/products' },
-                { title: 'Digital Watch', price: '567.45', img: "https://justfields.com/storage/projects/7M5rV059/g-4-a.jpg", route: '/products' },
-                { title: 'Circular Speaker', price: '985.22', img: "https://justfields.com/storage/projects/7M5rV059/g-7-a.jpg", route: '/products' },
+                { title: 'Wired Headphone', price: '125.75', img: "https://justfields.com/storage/projects/7M5rV059/g-1-a.jpg", heartColor: "white", route: '/products' },
+                { title: 'Black Smartphone', price: '875.55', img: "https://justfields.com/storage/projects/7M5rV059/g-2-a.jpg", heartColor: "white", route: '/products' },
+                { title: 'Analog Watch', price: '375.82', img: "https://justfields.com/storage/projects/7M5rV059/g-3-a.jpg", heartColor: "white", route: '/products' },
+                { title: 'Digital Watch', price: '567.45', img: "https://justfields.com/storage/projects/7M5rV059/g-4-a.jpg", heartColor: "white", route: '/products' },
+                { title: 'Circular Speaker', price: '985.22', img: "https://justfields.com/storage/projects/7M5rV059/g-7-a.jpg", heartColor: "white", route: '/products' },
             ],
             accessories: [
-                { title: 'Men Belts', price: '38.31', img: "https://justfields.com/storage/projects/7M5rV059/a-2-a.jpg", route: '/products' },
-                { title: 'Steal Chain', price: '52.55', img: "https://justfields.com/storage/projects/7M5rV059/a-3-a.jpg", route: '/products' },
-                { title: 'Circular Speaker', price: '985.22', img: "https://justfields.com/storage/projects/7M5rV059/g-7-a.jpg", route: '/products' },
-                { title: 'Men Purse', price: '19.45', img: "https://justfields.com/storage/projects/7M5rV059/a-4-a.jpg", route: '/products' },
-                { title: 'Summer Goggles ', price: '35.22', img: "https://justfields.com/storage/projects/7M5rV059/a-5-a.jpg", route: '/products' },
+                { title: 'Men Belts', price: '38.31', img: "https://justfields.com/storage/projects/7M5rV059/a-2-a.jpg", heartColor: "white", route: '/products' },
+                { title: 'Steal Chain', price: '52.55', img: "https://justfields.com/storage/projects/7M5rV059/a-3-a.jpg", heartColor: "white", route: '/products' },
+                { title: 'Circular Speaker', price: '985.22', img: "https://justfields.com/storage/projects/7M5rV059/g-7-a.jpg", heartColor: "white", route: '/products' },
+                { title: 'Men Purse', price: '19.45', img: "https://justfields.com/storage/projects/7M5rV059/a-4-a.jpg", heartColor: "white", route: '/products' },
+                { title: 'Summer Goggles ', price: '35.22', img: "https://justfields.com/storage/projects/7M5rV059/a-5-a.jpg", heartColor: "white", route: '/products' },
             ],
         }
+    },
+
+    methods: {
+        toggleHeartColor(index) {
+            this.men[index].heartColor = this.men[index].heartColor === "white" ? "#D71313" : "white";
+            this.women[index].heartColor = this.women[index].heartColor === "white" ? "#D71313" : "white";
+            this.gadgets[index].heartColor = this.gadgets[index].heartColor === "white" ? "#D71313" : "white";
+            this.accessories[index].heartColor = this.accessories[index].heartColor === "white" ? "#D71313" : "white";
+        },
     },
 
     setup() {
