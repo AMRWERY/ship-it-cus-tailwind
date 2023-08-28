@@ -21,7 +21,7 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-7xl py-10 sm:py-8 lg:max-w-none lg:py-10">
         <div class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-          <router-link v-for="prod in filterProducts" :key="prod" :to="'/product/' + prod.id" class="group">
+          <router-link v-for="prod in displayedProducts" :key="prod" :to="'/product/' + prod.id" class="group">
             <div
               class="mx-auto mt-11 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg mb-4">
               <img class="h-48 w-full object-cover object-center" :src="prod.productImg" />
@@ -48,7 +48,9 @@
         </div>
       </div>
       <div class="flex justify-center mt-4">
-        <Pagination />
+        <vue-awesome-paginate :total-items="filterProducts.length" v-model="currentPage" :items-per-page="perPage"
+          :max-pages-shown="5" paginate-buttons-class="btn" active-page-class="btn-active" back-button-class="back-btn"
+          next-button-class="next-btn" />
       </div>
     </div>
   </div>
@@ -57,18 +59,18 @@
 <script>
 import Filters from './Filters.vue'
 import Rating from '../../reusable/Rating.vue';
-import Pagination from '../../reusable/Pagination.vue';
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
     Filters,
     Rating,
-    Pagination
   },
 
   data() {
     return {
+      currentPage: 1,
+      perPage: 10,
       discount: null,
       searchQuery: '',
       products: [],
@@ -115,6 +117,15 @@ export default {
         );
       }
       return filteredProducts;
+    },
+    startIndex() {
+      return (this.currentPage - 1) * this.perPage;
+    },
+    endIndex() {
+      return this.currentPage * this.perPage;
+    },
+    displayedProducts() {
+      return this.filterProducts.slice(this.startIndex, this.endIndex);
     },
   },
 

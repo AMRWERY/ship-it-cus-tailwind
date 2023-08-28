@@ -13,9 +13,10 @@ import { plugin, defaultConfig } from '@formkit/vue'
 //animate
 import 'animate.css';
 
+// vue-awesome-paginate
+import VueAwesomePaginate from "vue-awesome-paginate";
+import "vue-awesome-paginate/dist/style.css";
+
 const app = createApp(App)
 
-// app.use(router)
-// app.use(store)
-
-app.use(router).use(store).use(plugin, defaultConfig).mount('#app')
+app.use(router).use(store).use(plugin, defaultConfig).use(VueAwesomePaginate).mount('#app')
