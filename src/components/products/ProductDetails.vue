@@ -112,7 +112,7 @@
               </button>
               <button
                 class="rounded-full w-7 h-7 bg-blue-400 text-white p-0 border-0 inline-flex items-center justify-center ml-4">
-                <i class="fa-brands fa-x-twitter"></i>
+                <i class="fa-brands fa-twitter"></i>
               </button>
             </div>
           </div>

@@ -60,9 +60,29 @@ const router = createRouter({
       component: () => import("../components/checkout/Checkout.vue"),
     },
     {
+      path: "/f-a-q",
+      name: "FAQ",
+      component: () => import("../components/FAQ.vue"),
+    },
+    {
+      path: "/privacy-policy",
+      name: "PrivacyPolicy",
+      component: () => import("../components/PrivacyPolicy.vue"),
+    },
+    {
+      path: "/terms-and-conditions",
+      name: "TermsAndConditions",
+      component: () => import("../components/TermsAndConditions.vue"),
+    },
+    {
       path: "/contact",
       name: "Contact",
       component: () => import("../components/Contact.vue"),
+    },
+    {
+      path: "/hire-me",
+      name: "HireMe",
+      component: () => import("../components/HireMe.vue"),
     },
     {
       path: "/:catchAl(.*)",
