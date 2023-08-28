@@ -3,8 +3,7 @@
     <div class="grid gap-10 row-gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">
       <div class="sm:col-span-2">
         <router-link to="/" aria-label="Go home" title="Ship-IT" class="inline-flex items-center">
-          <img src="/shopping-bags-svgrepo-com.svg" class="w-8 text-deep-purple-accent-400"
-            viewBox="0 0 24 24">
+          <img src="/shopping-bags-svgrepo-com.svg" class="w-8 text-deep-purple-accent-400" viewBox="0 0 24 24">
           <span class="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">Ship-IT</span>
         </router-link>
         <div class="mt-6 lg:max-w-sm">

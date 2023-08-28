@@ -35,7 +35,7 @@
                   <p class="mr-2 text-lg font-semibold text-gray-900 dark:text-white">
                     ${{ prod.price }}</p>
                   <p class="text-base  font-medium text-gray-500 line-through dark:text-gray-300"
-                  v-if="prod?.originalPrice !== null && prod?.originalPrice !== '' && prod?.originalPrice !== 0">${{
+                    v-if="prod?.originalPrice !== null && prod?.originalPrice !== '' && prod?.originalPrice !== 0">${{
                       prod.originalPrice }}</p>
                   <p class="ml-auto text-base font-medium text-green-500"
                     v-if="prod.discount !== null && prod.discount > 0">

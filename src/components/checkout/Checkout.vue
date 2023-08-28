@@ -160,17 +160,11 @@
                 <div class="flex flex-col sm:flex-row">
                     <div class="relative flex-shrink-0 sm:w-7/12">
                         <input type="text" id="billing-address" name="billing-address"
-                            class="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                            class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                             placeholder="Street Address" />
-                        <div class="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
-                            <img class="h-4 w-4 object-contain"
-                                src="https://flagpack.xyz/_nuxt/4c829b6c0131de7162790d2f897a90fd.svg" alt="" />
-                        </div>
                     </div>
-                    <select type="text" name="billing-state"
-                        class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500">
-                        <option value="State">State</option>
-                    </select>
+                    <input type="text" id="billing-address" name="billing-address" placeholder="City"
+                        class="w-full rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" />
                     <input type="text" name="billing-zip"
                         class="flex-shrink-0 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none sm:w-1/6 focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                         placeholder="ZIP" />
@@ -221,7 +215,6 @@ export default {
 
     data() {
         return {
-            country: "United States",
             show: false,
             selectedCard: null,
             selectedShipping: null,

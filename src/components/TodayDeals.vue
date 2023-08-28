@@ -48,7 +48,7 @@
                                     <i class="fa-brands fa-facebook-f"></i>
                                 </a>
                                 <a class="text-gray-500 mr-2">
-                                    <i class="fa-brands fa-x-twitter"></i>
+                                    <i class="fa-brands fa-twitter"></i>
                                 </a>
                                 <a class="text-gray-500">
                                     <i class="fa-regular fa-comment"></i>

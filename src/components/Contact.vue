@@ -44,20 +44,31 @@
                     <label for="phone-number" class="block text-sm font-semibold leading-6 text-gray-900">Phone
                         number</label>
                     <div class="relative mt-2.5">
-                        <div class="absolute inset-y-0 left-0 flex items-center">
-                            <label for="country" class="sr-only">Country</label>
-                            <select id="country" name="country"
-                                class="h-full rounded-md border-0 bg-transparent bg-none py-0 pl-4 pr-9 text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
-                                <option>US</option>
-                                <option>CA</option>
-                                <option>EU</option>
-                            </select>
-                            <font-awesome-icon icon="fa-solid fa-chevron-down"
-                                class="pointer-events-none absolute right-3 top-0 h-full w-5 text-gray-400"
-                                aria-hidden="true" />
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <div class="relative flex-shrink-0 w-1/2">
+                                <select id="country" name="select-country" v-model="selectedCountry"
+                                    class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500">
+                                    <option v-for="country in countriesData" :key="country.code" :value="country.code">{{
+                                        country.name }}</option>
+                                </select>
+                            </div>
+
+                            <div class="relative sm:w-5/12 mt-4 sm:mt-0">
+                                <input type="text" :value="selectedCountryDialCode" readonly
+                                    class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500  cursor-pointer" />
+                            </div>
+
+                            <input type="text" :value="selectedCountryCode" readonly
+                                class="flex-shrink-0 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none sm:w-1/6 focus:z-10 focus:border-blue-500 focus:ring-blue-500  cursor-pointer" />
+
+                            <input type="text" name="billing-zip"
+                                class="flex-shrink-0 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none sm:w-1/6 focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                                placeholder="ZIP" />
                         </div>
+
                         <input type="tel" name="phone-number" id="phone-number" autocomplete="tel"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 pl-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                            placeholder="Your phone number"
+                            class="block w-full rounded-md border-0 px-3.5 py-2 mt-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                     </div>
                 </div>
                 <div class="sm:col-span-2">
@@ -118,9 +129,26 @@
     </section>
 </template>
   
+
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
+import db from '../assets/CountryCodes.json';
 
 const agreed = ref(false)
+
+const countriesData = ref(db);
+const selectedCountry = ref(null);
+
+const selectedCountryData = computed(() => {
+    return countriesData.value.find((country) => country.code === selectedCountry.value) || {};
+});
+
+const selectedCountryDialCode = computed(() => {
+    return selectedCountryData.value.dial_code || '';
+});
+
+const selectedCountryCode = computed(() => {
+    return selectedCountryData.value.code || [];
+});
 </script>
