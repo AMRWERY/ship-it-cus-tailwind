@@ -9,7 +9,8 @@ import {
   getIdToken,
   onAuthStateChanged,
 } from "firebase/auth";
-import { auth } from "@/firebase/config";
+import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
+import { auth, db } from "@/firebase/config";
 import router from "@/router";
 
 const state = {
@@ -55,31 +56,35 @@ const mutations = {
 const actions = {
   userSignUp({ commit, dispatch }, payload) {
     commit("setLoading", true);
-    const { email, password, router } = payload;
+    const { email, password, username, displayName, router } = payload;
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         commit("setLoading", false);
         const user = userCredential.user;
         if (user) {
           commit("setIsAuthenticated", true);
           commit("setUsername", payload.username);
           router.replace("/");
-          sessionStorage.setItem("username", payload.username);
-          sessionStorage.setItem(
-            "userCredential",
-            JSON.stringify(userCredential)
-          );
-          dispatch("updateUserProfile", {
-            username: payload.username,
-          });
-          getIdToken(user)
-            .then((token) => {
+          try {
+            await updateProfile(user, {
+              displayName: payload.displayName,
+            });
+            getIdToken(user).then((token) => {
               commit("setUserToken", token);
               sessionStorage.setItem("userToken", token);
-            })
-            .catch((error) => {
-              console.log(error);
             });
+            await addDoc(collection(db, "users"), {
+              username: payload.username,
+              email: payload.email,
+              password: payload.password,
+            });
+            commit("setUsername", payload.username);
+            sessionStorage.setItem("username", payload.username);
+            commit("setUserToken", token);
+            sessionStorage.setItem("userToken", token);
+          } catch (error) {
+            console.log("Error:", error);
+          }
         } else {
           commit("setIsAuthenticated", false);
           router.replace("/sign-up");
@@ -88,24 +93,36 @@ const actions = {
       })
       .catch((error) => {
         commit("setLoading", false);
-        console.log(error);
+        console.log("Authentication Error:", error);
       });
   },
   userSignIn({ commit, dispatch }, payload) {
     commit("setLoading", true);
     const { email, password, router } = payload;
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         commit("setLoading", false);
         const user = userCredential.user;
         if (user) {
           commit("setIsAuthenticated", true);
           commit("setUsername", user.displayName);
-          router.replace("/");
           sessionStorage.setItem("username", user.displayName);
-          sessionStorage.setItem("email", user.email);
-          sessionStorage.setItem("password", password);
-          dispatch("updateUserProfile", { username: user.displayName });
+          router.replace("/");
+          try {
+            const usersCollection = collection(db, "users");
+            const q = query(usersCollection, where("email", "==", user.email));
+            const querySnapshot = await getDocs(q);
+
+            if (!querySnapshot.empty) {
+              const userData = querySnapshot.docs[0].data();
+              commit("setUsername", userData.username);
+              sessionStorage.setItem("username", userData.username);
+            } else {
+              console.log("User data not found in Firestore");
+            }
+          } catch (error) {
+            console.log("Error fetching user data from Firestore:", error);
+          }
           getIdToken(user)
             .then((token) => {
               commit("setUserToken", token);
