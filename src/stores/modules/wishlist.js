@@ -10,6 +10,15 @@ const mutations = {
   wishlistItemsCount(state, payload) {
     state.totalItemsWishlist = payload;
   },
+  addToWishlist(state, product) {
+    state.wishlist.push(product);
+  },
+  updateWishlistItem(state, { id, qty }) {
+    const productIndex = state.wishlist.findIndex((item) => item.id === id);
+    if (productIndex !== -1) {
+      state.wishlist[productIndex].wishlistQty += qty;
+    }
+  },
 };
 
 const actions = {};

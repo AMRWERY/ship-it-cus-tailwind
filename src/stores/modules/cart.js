@@ -13,6 +13,15 @@ const mutations = {
   setTotalItemsInCart(state, totalItems) {
     state.totalItemsInCart = totalItems;
   },
+  addToCart(state, product) {
+    state.cart.push(product);
+  },
+  updateCartItem(state, { id, qty }) {
+    const productIndex = state.cart.findIndex((item) => item.id === id);
+    if (productIndex !== -1) {
+      state.cart[productIndex].cartQty += qty;
+    }
+  },
 };
 
 const actions = {};

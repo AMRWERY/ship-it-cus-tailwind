@@ -69,7 +69,7 @@
                     <label
                         class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                         for="radio_3">
-                        <img src="../../../public/cridetcard.svg">
+                        <img src="/cridetcard.svg">
                         <div class="ml-5">
                             <span class="mt-2 font-semibold">Credit Card</span>
                         </div>
@@ -82,7 +82,7 @@
                     <label
                         class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                         for="radio_4">
-                        <img src="../../../public/paypal-svgrepo-com.svg">
+                        <img src="/paypal-svgrepo-com.svg">
                         <div class="ml-5">
                             <span class="mt-2 font-semibold">Paypal</span>
                         </div>
@@ -95,7 +95,7 @@
                     <label
                         class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                         for="radio_5">
-                        <img src="../../../public/cash.svg">
+                        <img src="/cash.svg">
                         <div class="ml-5">
                             <span class="mt-2 font-semibold">Cash on Delivery</span>
                         </div>
@@ -244,8 +244,7 @@ export default {
             const dataObj = {
                 cartItems: this.cart,
                 total: this.totalAmount,
-                // userId: JSON.parse(sessionStorage.getItem("cartData"))?.user?.uid,
-                userId: JSON.parse(sessionStorage.getItem("userCredential"))?.user?.uid,
+                userId: JSON.parse(sessionStorage.getItem("cartData")).userId,
                 orderDate: new Date(),
             };
             const docRef = await addDoc(colRef, dataObj);
@@ -292,7 +291,7 @@ export default {
 
     mounted() {
         if (sessionStorage.getItem("cartData")) {
-            this.cart = JSON.parse(sessionStorage.getItem("cartData"));
+            this.cart = JSON.parse(sessionStorage.getItem("cartData"))?.cartData;
 
             let cart = JSON.parse(sessionStorage.getItem("cartData"));
             if (cart) {

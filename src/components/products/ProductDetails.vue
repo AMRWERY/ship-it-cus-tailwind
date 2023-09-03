@@ -7,7 +7,8 @@
         <p class="text-base font-medium text-green-500 absolute m-3">
           <span
             class="inline-flex items-center rounded-md bg-red-400 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red-600/10"
-            v-if="productData?.discount !== null && productData?.discount  !== '' && productData?.discount  !== 0">{{ productData?.discount }}%</span>
+            v-if="productData?.discount !== null && productData?.discount !== '' && productData?.discount !== 0">{{
+              productData?.discount }}%</span>
         </p>
         <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
           <div class="flex items-start">
@@ -23,7 +24,8 @@
         </div>
         <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
           <div class="flex items-center">
-            <h2 class="text-md title-font text-gray-500 tracking-widest inline" v-if="productData?.sku !== null && productData?.sku  !== ''">
+            <h2 class="text-md title-font text-gray-500 tracking-widest inline"
+              v-if="productData?.sku !== null && productData?.sku !== ''">
               SKU:</h2>
             <h4 class="text-md title-font text-gray-500 tracking-widest inline ml-1">{{ productData?.sku }}</h4>
           </div>
@@ -34,7 +36,8 @@
               <p class="mr-2 text-lg font-semibold text-gray-900 dark:text-white">${{ productData?.price }}
               </p>
               <p class="text-lg font-medium text-gray-400 line-through dark:text-gray-300"
-              v-if="productData?.originalPrice !== null && productData?.originalPrice !== '' && productData?.originalPrice !== 0">${{
+                v-if="productData?.originalPrice !== null && productData?.originalPrice !== '' && productData?.originalPrice !== 0">
+                ${{
                   productData?.originalPrice }}</p>
             </div>
           </div>
@@ -125,11 +128,13 @@
 </template>
   
 <script>
+import { ref, watch, onMounted } from 'vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 import Rating from '../../reusable/Rating.vue';
 import MightLike from '../MightLike.vue';
 import DescriptionAndReviews from '../DescriptionAndReviews.vue';
 import AuthAlert from '../../reusable/alerts/AuthAlert.vue';
-import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { auth } from "@/firebase/config";
 
 export default {
@@ -137,112 +142,148 @@ export default {
 
   components: { Rating, MightLike, DescriptionAndReviews, AuthAlert },
 
-  data() {
+  setup() {
+    const tab = ref(null);
+    const showShareButtons = ref(false);
+    const selectedCardIndex = ref(0);
+    const selectedImg = ref(null);
+    const selectedSize = ref(null);
+    const productData = ref(null);
+    const cart = ref([]);
+    const totalItems = ref(null);
+    const chosenItems = ref(1);
+    const wishlist = ref([]);
+    const open = ref(false);
+    const message = ref("");
+    const iconColor = ref('black');
+    const isAddingToCart = ref(false);
+    const buttonLabel = ref('Buy Now');
+    const productId = ref('');
+
+    const store = useStore();
+    const router = useRouter();
+
+    const shareBtn = () => {
+      showShareButtons.value = !showShareButtons.value;
+    };
+
+    const selectCard = (imgProperty) => {
+      selectedImg.value = productData.value[imgProperty];
+    };
+
+    const addToCart = () => {
+      if (!auth.currentUser) {
+        open.value = true;
+        router.push('/login');
+      } else {
+        const cartData = JSON.parse(sessionStorage.getItem("cartData"))?.cartData || [];
+
+        // if (cartData.length === 0) {
+        //   productData.value["userId"] = auth.currentUser.uid;
+        // }
+        let isItem = cartData.find((item) => item.id == productData.value.id)
+        let index = cartData.indexOf(isItem);
+
+        if (isItem) {
+          cart.value[index]["totalPrice"] =
+            Number(cart.value[index].cartQty) * Number(cart.value[index].price);
+          cart.value[index].cartQty =
+            Number(chosenItems.value) + Number(cart.value[index].cartQty);
+          Number(cart.value[index]["cart"]) * Number(cart.value[index]["price"]);
+        } else {
+          productData.value["cartQty"] = Number(chosenItems.value);
+          productData.value["totalPrice"] =
+            Number(productData.value.cartQty) *
+            Number(productData.value.price);
+          productData.value["date"] = new Date().toISOString();
+          productData.value.id = productId.value
+          cart.value.push(productData.value);
+        }
+        let obj = {
+          userId: auth.currentUser.uid,
+          cartData: cart.value
+        }
+        sessionStorage.setItem("cartData", JSON.stringify(obj));
+        // sessionStorage.setItem("cartData", JSON.stringify(cart.value));
+        store.commit("cartItems", cart.value);
+        store.commit("cartItemsCount", cart.value.length);
+        isAddingToCart.value = true;
+        buttonLabel.value = 'Adding...';
+        setTimeout(() => {
+          isAddingToCart.value = false;
+          buttonLabel.value = 'Buy Now';
+        }, 3000);
+      }
+    };
+
+    const addToWishList = () => {
+      if (!auth.currentUser) {
+        open.value = true;
+        router.push('/login');
+      } else {
+        let index = store.getters.getWishlistItems.findIndex(item => item.id === productData.value.id);
+
+
+        if (index == -1) {
+          // store.commit('updateWishlistItem', { id: productData.value.id, qty: 1 });
+          store.commit('addToWishlist', productData.value);
+          wishlist.value.push(productData.value);
+          sessionStorage.setItem('wishListData', JSON.stringify(store.getters.getWishlistItems));
+        }
+        store.commit('wishlistItemsCount', store.getters.getWishlistItems.length);
+        iconColor.value = 'red';
+        setTimeout(() => {
+          iconColor.value = 'black';
+        }, 3000);
+      }
+    };
+
+    const resetIconColor = () => {
+      iconColor.value = 'black';
+    };
+
+    watch(
+      () => store.getters.getSelectedProduct,
+      (data) => {
+        if (data) {
+          productData.value = data;
+          selectedImg.value = productData.value['productImg'];
+        }
+      }
+    );
+
+    onMounted(() => {
+      productId.value = router.currentRoute.value.params.id;
+
+      store.dispatch("getProductById", productId.value);
+
+      if (sessionStorage.getItem("cartData")) {
+        cart.value = JSON.parse(sessionStorage.getItem("cartData"))['cartData'];
+      }
+    });
+
     return {
-      tab: null,
-      showShareButtons: false,
-      selectedCardIndex: 0,
-      selectedImg: null,
-      selectedSize: null,
-      productData: null,
-      cart: [],
-      totalItems: null,
-      chosenItems: 1,
-      wishList: [],
-      open: false,
-      message: "",
-      iconColor: 'black',
-      isAddingToCart: false,
-      buttonLabel: 'Buy Now',
-    }
-  },
-
-  computed: {
-    ...mapGetters(['getSelectedProduct']),
-    ...mapMutations(['wishlistItems'])
-  },
-
-  methods: {
-    shareBtn() {
-      this.showShareButtons = !this.showShareButtons
-    },
-    selectCard(imgProperty) {
-      this.selectedImg = this.productData[imgProperty];
-    },
-    addToCart() {
-      if (!auth.currentUser) {
-        this.open = true;
-        this.$route.push('/login');
-      } else {
-        let index = this.cart.indexOf(this.productData);
-
-        if (index != -1) {
-          this.cart[index]["totalPrice"] =
-            Number(this.cart[index].cartQty) * Number(this.cart[index].price);
-          this.cart[index].cartQty =
-            Number(this.chosenItems) + Number(this.cart[index].cartQty);
-          Number(this.cart[index]["cart"]) * Number(this.cart[index]["price"]);
-        } else {
-          this.productData["cartQty"] = Number(this.chosenItems);
-          this.productData["totalPrice"] =
-            Number(this.productData.cartQty) *
-            Number(this.productData.price);
-          this.productData["date"] = new Date().toISOString();
-          this.cart.push(this.productData);
-        }
-        sessionStorage.setItem("cartData", JSON.stringify(this.cart));
-        this.$store.commit("cartItems", this.cart);
-        this.$store.commit("cartItemsCount", this.cart.length);
-        this.isAddingToCart = true;
-        this.buttonLabel = 'Adding...';
-        setTimeout(() => {
-          this.isAddingToCart = false;
-          this.buttonLabel = 'Buy Now';
-        }, 3000);
-      }
-    },
-    addToWishList() {
-      if (!auth.currentUser) {
-        this.open = true;
-        this.$route.push('/login');
-      } else {
-        let index = this.$store.getters.getWishlistItems.findIndex(item => item.id === this.productData.id);
-
-        if (index !== -1) {
-          this.$store.getters.getWishlistItems[index].wishlistQty += 1;
-        } else {
-          this.$store.commit('wishlistItems', [...this.$store.getters.getWishlistItems, this.productData]);
-        }
-        this.$store.commit('wishlistItemsCount', this.$store.getters.getWishlistItems.length);
-        sessionStorage.setItem('wishListData', JSON.stringify(this.$store.getters.getWishlistItems));
-        this.iconColor = 'red';
-        setTimeout(() => {
-          this.iconColor = 'black';
-        }, 3000);
-      }
-    },
-    resetIconColor() {
-      this.iconColor = 'black';
-    },
-    ...mapActions(['getProductById']),
-  },
-
-  watch: {
-    getSelectedProduct(data) {
-      if (data) {
-        this.productData = data
-        this.selectedImg = this.productData['productImg']
-      }
-    },
-  },
-
-  mounted() {
-    const productId = this.$route.params.id;
-    this.getProductById(productId);
-
-    if (sessionStorage.getItem("cartData")) {
-      this.cart = JSON.parse(sessionStorage.getItem("cartData"));
-    }
+      tab,
+      showShareButtons,
+      selectedCardIndex,
+      selectedImg,
+      selectedSize,
+      productData,
+      cart,
+      totalItems,
+      chosenItems,
+      wishlist,
+      open,
+      message,
+      iconColor,
+      isAddingToCart,
+      buttonLabel,
+      shareBtn,
+      selectCard,
+      addToCart,
+      addToWishList,
+      resetIconColor,
+    };
   },
 };
 </script>

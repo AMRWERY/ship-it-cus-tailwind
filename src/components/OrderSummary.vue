@@ -13,34 +13,53 @@
                     class="flex flex-col justify-start items-start dark:bg-gray-800 bg-gray-50 px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full">
                     <p class="text-lg md:text-xl dark:text-white font-semibold leading-6 xl:leading-5 text-gray-800">
                         Customer’s Cart</p>
-                    <div v-for="item in cart" :key="item"
-                        class="mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
-                        <div class="pb-4 md:pb-8 w-full md:w-40">
-                            <img class="w-full hidden md:block" :src="item.imgFront" />
-                            <img class="w-full md:hidden" :src="item.imgFront" />
-                        </div>
-                        <div
-                            class="border-b border-gray-200 md:flex-row flex-col flex justify-between items-start w-full pb-8 space-y-4 md:space-y-0">
-                            <div class="w-full flex flex-col justify-start items-start space-y-8">
-                                <h3 class="text-xl dark:text-white xl:text-2xl font-semibold leading-6 text-gray-800">
-                                    {{ item.title }}</h3>
-                                <div class="flex justify-start items-start flex-col space-y-2">
-                                    <p class="text-sm dark:text-white leading-none text-gray-800"><span
-                                            class="dark:text-gray-400 text-gray-400">Status: </span>Processing</p>
-                                    <p class="text-sm dark:text-white leading-none text-gray-800"><span
-                                            class="dark:text-gray-400 text-gray-400">Payment Method: </span>{{ selectedCard
-                                            }}
-                                    </p>
+                    <div v-for="item in userOrders" :key="item">
+                        <div v-for="prod in item.cartItems" :key="prod"
+                            class="mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
+                            <div class="flex">
+                                <!-- Product Images -->
+                                <div class="pb-4 md:pb-8 w-full md:w-40">
+                                    <img class="w-full hidden md:block" :src="prod?.imgFront" />
+                                    <img class="w-full md:hidden" :src="prod?.imgFront" />
                                 </div>
-                            </div>
-                            <div class="flex justify-between space-x-8 items-start w-full">
-                                <p class="text-base dark:text-white xl:text-lg leading-6">${{ item.price }} <span
-                                        class="text-red-300 line-through"> ${{ item.originalPrice }}</span></p>
-                                <p class="text-base dark:text-white xl:text-lg leading-6 text-gray-800">{{ item.cartQty }}
-                                    <span class="text-red-300">Pieces</span>
-                                </p>
-                                <p class="text-base dark:text-white xl:text-lg font-semibold leading-6 text-gray-800">
-                                    ${{ item.price }}</p>
+
+                                <!-- Product Details -->
+                                <div
+                                    class="border-b border-gray-200 md:flex-row flex-col flex justify-between items-start w-full pb-8 space-y-4 md:space-y-0 ml-10">
+                                    <div class="w-full flex flex-col justify-start items-start space-y-8">
+                                        <h3
+                                            class="text-xl dark:text-white xl:text-2xl font-semibold leading-6 text-gray-800">
+                                            {{ prod?.title }}
+                                        </h3>
+                                        <div class="flex justify-start items-start flex-col space-y-2">
+                                            <p class="text-sm dark:text-white leading-none text-gray-800">
+                                                <span class="dark:text-gray-400 text-gray-400">Status: </span>Processing
+                                            </p>
+                                            <p class="text-sm dark:text-white leading-none text-gray-800">
+                                                <span class="dark:text-gray-400 text-gray-400">Payment Method: </span>
+                                                {{ selectedCard }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between space-x-14 items-start w-full ml-20">
+                                        <div class="flex justify-start items-center">
+                                            <p class="text-base dark:text-white xl:text-lg leading-6">${{ prod?.price }}</p>
+                                            <p
+                                                class="text-red-300 line-through text-base dark:text-white xl:text-lg leading-6 ml-2">
+                                                ${{ prod?.originalPrice }}</p>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <p class="text-base dark:text-white xl:text-lg leading-6 text-gray-800">{{
+                                                prod?.cartQty }}</p>
+                                            <p class="text-red-300 text-base dark:text-white xl:text-lg leading-6 ml-2">
+                                                Pieces</p>
+                                        </div>
+                                        <p
+                                            class="text-base dark:text-white xl:text-lg font-semibold leading-6 text-gray-800">
+                                            ${{ prod?.price }}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -134,6 +153,8 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { getDocs, query, collection } from "firebase/firestore";
+import { db } from "../firebase/config";
 
 export default {
     name: 'OrderSummary',
@@ -150,12 +171,29 @@ export default {
             EXPRESS: '$25.00',
             selectedCard: null,
             date: Date.now(),
+            userOrders: [],
+            allOrders: [],
+            userId: sessionStorage.getItem('userId')
         }
     },
 
     methods: {
         selectCard(card) {
             this.$store.commit('setSelectedCard', card);
+        },
+        async getOrders() {
+            const querySnap = await getDocs(query(collection(db, "orders")));
+
+            querySnap.forEach((doc) => {
+                let pro = {
+                    id: doc.id,
+                    ...doc.data(),
+                };
+                console.log(pro)
+                this.allOrders.push(pro);
+            });
+            this.userOrders = this.allOrders.filter((order) => order.userId == this.userId);
+            console.log(this.userOrders)
         },
     },
 
@@ -180,7 +218,6 @@ export default {
             const totalWithShipping = subtotal + tax + shippingCost;
             return totalWithShipping.toFixed(2);
         }
-
     },
 
     mounted() {
@@ -190,9 +227,7 @@ export default {
         const email = sessionStorage.getItem("email");
         this.$store.commit("setUserEmail", email);
 
-        if (sessionStorage.getItem('cartData')) {
-            this.cart = JSON.parse(sessionStorage.getItem('cartData'));
-        }
+        this.getOrders()
 
         const selectedCard = JSON.parse(sessionStorage.getItem('selectedCard'));
         if (selectedCard) {

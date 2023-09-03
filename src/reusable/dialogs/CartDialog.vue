@@ -176,7 +176,7 @@ const cartOpen = ref(false);
 const cart = ref([]);
 const total = ref(0);
 const totalItems = ref(0);
-
+const userId = ref('');
 const store = useStore();
 
 const totalAmount = computed(() => {
@@ -195,27 +195,19 @@ watch(totalItemsInCart, (newVal, oldVal) => {
     totalItems.value = newVal;
 });
 
-watch(store.state.totalItemsAmount, (newVal, oldVal) => {
-    cart.value = newVal;
-    totalAmount.value = calculateTotal();
-});
-
 onMounted(() => {
-    if (sessionStorage.getItem("cartData")) {
-        cart.value = JSON.parse(sessionStorage.getItem("cartData"));
-
-        let cartData = JSON.parse(sessionStorage.getItem("cartData"));
-        if (cartData) {
-            totalItems.value = cartData.length;
-            store.commit("cartItemsCount", cartData.length);
-        }
+    const storedCartData = JSON.parse(sessionStorage.getItem("cartData"));
+    if (storedCartData) {
+        cart.value = storedCartData.cartData;
+        userId.value = storedCartData.userId;
+        store.commit("cartItemsCount", cart.value.length);
+        totalAmount.value = calculateTotal();
     }
 });
 
 const increment = (item) => {
     item.cartQty++;
     calculateTotal();
-    sessionStorage.setItem("cartData", JSON.stringify(cart.value));
 };
 
 const decrement = (item) => {
@@ -226,27 +218,33 @@ const decrement = (item) => {
         } else {
             calculateTotal();
         }
-        sessionStorage.setItem("cartData", JSON.stringify(cart.value));
     }
 };
 
+watch(() => store.getters.totalItemsAmount, (newVal) => {
+    cart.value = newVal;
+    totalItems.value = calculateTotal();
+});
+
 const calculateTotal = () => {
-    let totalValue = 0;
+    let total = 0;
     cart.value.forEach((item) => {
-        totalValue += item.price * item.cartQty;
+        total += item.cartQty;
     });
-    total.value = totalValue.toFixed(2);
+    return total;
 };
 
 const removeCartItem = (item) => {
     const index = cart.value.indexOf(item);
     if (index !== -1) {
         cart.value.splice(index, 1);
+        let obj = {
+            userId: userId.value,
+            cartData: cart.value
+        }
         calculateTotal();
         store.commit("cartItemsCount", cart.value.length);
-        sessionStorage.setItem("cartData", JSON.stringify(cart.value));
+        sessionStorage.setItem("cartData", JSON.stringify(obj));
     }
 };
-
-// const totalItemsCount = computed(() => cart.value.length);
 </script>

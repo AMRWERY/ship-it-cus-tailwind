@@ -58,7 +58,7 @@ export default {
             userOrders: [],
             allOrders: [],
             userId:
-                JSON.parse(sessionStorage.getItem("userCredential"))?.user?.uid || null,
+                JSON.parse(sessionStorage.getItem("cartData"))?.user?.uid || null,
         }
     },
 
@@ -67,13 +67,11 @@ export default {
             const querySnap = await getDocs(query(collection(db, "orders")));
 
             querySnap.forEach((doc) => {
-                debugger
                 let pro = {
                     id: doc.id,
                     ...doc.data(),
                 };
                 console.log(pro)
-                debugger
                 this.allOrders.push(pro);
             });
 
@@ -83,7 +81,6 @@ export default {
     },
 
     mounted() {
-        debugger
         this.getOrders();
     },
 }

@@ -82,6 +82,7 @@ const actions = {
             sessionStorage.setItem("username", payload.username);
             commit("setUserToken", token);
             sessionStorage.setItem("userToken", token);
+            sessionStorage.setItem("userId", user.uid);
           } catch (error) {
             console.log("Error:", error);
           }
@@ -117,6 +118,7 @@ const actions = {
               const userData = querySnapshot.docs[0].data();
               commit("setUsername", userData.username);
               sessionStorage.setItem("username", userData.username);
+              sessionStorage.setItem("userId", user.uid);
             } else {
               console.log("User data not found in Firestore");
             }

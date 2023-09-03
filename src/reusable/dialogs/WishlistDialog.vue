@@ -2,15 +2,15 @@
     <div class="relative">
         <span
             class="absolute top-0 right-0 -mt-2 -mr-2 inline-flex items-center justify-center rounded-full bg-red-500 h-4 w-4 text-white text-xs">{{
-                totalItems }}</span>
+                        totalItems }}</span>
         <button type="button"
             class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-            @click="cartOpen = !cartOpen">
+            @click="OpenDialog(true)">
             <i class="fa-solid fa-heart fa-xl"></i>
         </button>
     </div>
 
-    <TransitionRoot as="template" :show="cartOpen">
+    <TransitionRoot as="template" id="wishlistDialog" :show="cartOpen" v-if="cartOpen === true">
         <Dialog as="div" class="relative z-10" @close="open = false">
             <TransitionChild as="template" enter="ease-in-out duration-500" enter-from="opacity-0" enter-to="opacity-100"
                 leave="ease-in-out duration-500" leave-from="opacity-100" leave-to="opacity-0">
@@ -102,7 +102,7 @@
 <script setup>
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue';
 import { useStore } from 'vuex';
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
 
 const wishlist = ref([]);
 const img = ref("");
@@ -125,7 +125,7 @@ const addToCart = () => {
         }
     }
     wishlist.value = [];
-    sessionStorage.setItem("cartData", JSON.stringify(cart.value));
+    // sessionStorage.setItem("cartData", JSON.stringify(cart.value));
     sessionStorage.setItem("wishListData", JSON.stringify(wishlist.value));
     store.commit("cartItemsCount", cart.value.length);
     store.commit("wishlistItems", wishlist.value);
@@ -143,30 +143,39 @@ const removeItemFromWishlist = (item) => {
     }
 };
 
-const totalItemsInWishlist = store.getters.totalItemsInWishlist;
+const totalItemsInWishlist = computed(() => {
+    return store.getters.totalItemsInWishlist;
+});
 
 watch(totalItemsInWishlist, (newVal, oldVal) => {
     totalItems.value = newVal;
 });
 
 watch(wishlist, (newVal, oldVal) => {
-    totalItems.value = newVal.length;
+    wishlist.value = newVal
+    totalItems.value = wishlist.value.length
 });
 
-
 onMounted(() => {
-    if (sessionStorage.getItem("wishListData")) {
-        wishlist.value = JSON.parse(sessionStorage.getItem("wishListData"));
-
-        let wishlistData = JSON.parse(sessionStorage.getItem("wishListData"));
-        if (wishlistData) {
-            totalItems.value = wishlistData.length;
-            store.commit("wishlistItems", wishlist.value);
-            store.commit("wishlistItemsCount", wishlist.value.length);
-        }
-    }
+    OpenDialog()
 });
 
 const open = ref(true);
 const cartOpen = ref(false);
+
+const OpenDialog = (isClicked = false) => {
+    if (isClicked) {
+        cartOpen.value = true
+    }
+
+    if (sessionStorage.getItem("wishListData")) {
+        wishlist.value = JSON.parse(sessionStorage.getItem("wishListData"));
+
+        if (wishlist.value.length) {
+            totalItems.value = wishlist.value.length;
+            store.commit("wishlistItems", wishlist.value);
+            store.commit("wishlistItemsCount", wishlist.value.length);
+        }
+    }
+}
 </script>

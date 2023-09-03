@@ -36,7 +36,10 @@ const actions = {
   async getProductById({ commit }, id) {
     const docSnap = await getDoc(doc(db, "products", id));
     if (docSnap.exists()) {
-      commit("setSelectedProduct", docSnap.data());
+      let product = { ...docSnap.data(), id: id };
+
+      // docSnap.data()["id"] = id;
+      commit("setSelectedProduct", product);
     }
   },
 };
