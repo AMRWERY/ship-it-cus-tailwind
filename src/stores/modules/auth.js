@@ -73,16 +73,17 @@ const actions = {
               commit("setUserToken", token);
               sessionStorage.setItem("userToken", token);
             });
+            sessionStorage.setItem("userId", user.uid);
             await addDoc(collection(db, "users"), {
               username: payload.username,
               email: payload.email,
               password: payload.password,
+              id: user.uid,
             });
             commit("setUsername", payload.username);
             sessionStorage.setItem("username", payload.username);
             commit("setUserToken", token);
             sessionStorage.setItem("userToken", token);
-            sessionStorage.setItem("userId", user.uid);
           } catch (error) {
             console.log("Error:", error);
           }

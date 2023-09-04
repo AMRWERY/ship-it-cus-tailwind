@@ -91,91 +91,42 @@
     </div>
 </template>
 
-<!-- <script>
-export default {
-    name: "Filters",
-
-    data() {
-        return {
-            categories: ['Hoodies', 'T-shirts', 'Music', 'Accessories', 'Posters', 'Decor', 'Clothing'],
-            selectedCategories: [],
-            size: ['XXL', 'XL', 'Large', 'Medium', 'Small'],
-            selectedSize: [],
-            availability: ['in stock', 'out of stock'],
-            selectedAvailability: [],
-        }
-    },
-
-    methods: {
-        updateFilter() {
-            const filterOptions = {
-                categories: this.selectedCategories,
-                size: this.selectedSize,
-                availability: this.selectedAvailability,
-            };
-            this.$emit('apply-filters', filterOptions);
-        },
-    },
-
-    watch: {
-        selectedCategories: {
-            handler: 'updateFilter',
-            deep: true,
-        },
-        selectedSize: {
-            handler: 'updateFilter',
-            deep: true,
-        },
-        selectedAvailability: {
-            handler: 'updateFilter',
-            deep: true,
-        },
-    },
-};
-</script>
-
-<style scoped>
-.checkbox:checked+.check-icon {
-    display: flex;
-}
-</style> -->
-
 <script>
 import { ref, watch } from 'vue';
 
 export default {
-  name: 'Filters',
+    name: 'Filters',
 
-  setup(props, { emit }) {
-    const categories = ['Hoodies', 'T-shirts', 'Music', 'Accessories', 'Posters', 'Decor', 'Clothing'];
-    const selectedCategories = ref([]);
-    const size = ['XXL', 'XL', 'Large', 'Medium', 'Small'];
-    const selectedSize = ref([]);
-    const availability = ['in stock', 'out of stock'];
-    const selectedAvailability = ref([]);
+    setup(props, { emit }) {
+        const categories = ['Hoodies', 'T-shirts', 'Music', 'Accessories', 'Posters', 'Decor', 'Clothing'];
+        const selectedCategories = ref([]);
+        const size = ['XXL', 'XL', 'Large', 'Medium', 'Small'];
+        const selectedSize = ref([]);
+        const availability = ['in stock', 'out of stock'];
+        const selectedAvailability = ref([]);
 
-    const updateFilter = () => {
-      const filterOptions = {
-        categories: selectedCategories.value,
-        size: selectedSize.value,
-        availability: selectedAvailability.value,
-      };
-      emit('apply-filters', filterOptions);
-    };
+        const updateFilter = () => {
+            const filterOptions = {
+                categories: selectedCategories.value,
+                size: selectedSize.value,
+                availability: selectedAvailability.value,
+            };
+            emit('apply-filters', filterOptions);
+        };
 
-    watch(selectedCategories, updateFilter);
-    watch(selectedSize, updateFilter);
-    watch(selectedAvailability, updateFilter);
+        watch(selectedCategories, updateFilter);
+        watch(selectedSize, updateFilter);
+        watch(selectedAvailability, updateFilter);
 
-    return {
-      categories,
-      selectedCategories,
-      size,
-      selectedSize,
-      availability,
-      selectedAvailability,
-      updateFilter,
-    };
-  },
+        return {
+            categories,
+            selectedCategories,
+            size,
+            selectedSize,
+            availability,
+            selectedAvailability,
+            updateFilter,
+        };
+    },
 };
 </script>

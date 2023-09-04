@@ -84,6 +84,7 @@
                 </button>
 
                 <AuthAlert :open="open" :message="message" />
+
               </div>
 
               <div class="flex items-center mt-2">
@@ -178,9 +179,6 @@ export default {
       } else {
         const cartData = JSON.parse(sessionStorage.getItem("cartData"))?.cartData || [];
 
-        // if (cartData.length === 0) {
-        //   productData.value["userId"] = auth.currentUser.uid;
-        // }
         let isItem = cartData.find((item) => item.id == productData.value.id)
         let index = cartData.indexOf(isItem);
 
@@ -204,7 +202,6 @@ export default {
           cartData: cart.value
         }
         sessionStorage.setItem("cartData", JSON.stringify(obj));
-        // sessionStorage.setItem("cartData", JSON.stringify(cart.value));
         store.commit("cartItems", cart.value);
         store.commit("cartItemsCount", cart.value.length);
         isAddingToCart.value = true;
@@ -223,9 +220,7 @@ export default {
       } else {
         let index = store.getters.getWishlistItems.findIndex(item => item.id === productData.value.id);
 
-
         if (index == -1) {
-          // store.commit('updateWishlistItem', { id: productData.value.id, qty: 1 });
           store.commit('addToWishlist', productData.value);
           wishlist.value.push(productData.value);
           sessionStorage.setItem('wishListData', JSON.stringify(store.getters.getWishlistItems));

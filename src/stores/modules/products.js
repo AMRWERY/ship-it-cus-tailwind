@@ -37,8 +37,6 @@ const actions = {
     const docSnap = await getDoc(doc(db, "products", id));
     if (docSnap.exists()) {
       let product = { ...docSnap.data(), id: id };
-
-      // docSnap.data()["id"] = id;
       commit("setSelectedProduct", product);
     }
   },

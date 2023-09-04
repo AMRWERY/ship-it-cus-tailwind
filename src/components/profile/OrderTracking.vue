@@ -58,7 +58,7 @@ export default {
             userOrders: [],
             allOrders: [],
             userId:
-                JSON.parse(sessionStorage.getItem("cartData"))?.user?.uid || null,
+                JSON.parse(sessionStorage.getItem("cartData"))?.userId || null,
         }
     },
 
@@ -76,7 +76,7 @@ export default {
             });
 
             this.userOrders = this.allOrders.filter((order) => order.userId == this.userId);
-            console.log(this.userOrders)
+            console.log(this.userOrders, this.userId)
         },
     },
 

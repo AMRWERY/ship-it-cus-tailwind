@@ -2,7 +2,7 @@
     <div class="relative">
         <span
             class="absolute top-0 right-0 -mt-2 -mr-2 inline-flex items-center justify-center rounded-full bg-red-500 h-4 w-4 text-white text-xs">{{
-                        totalItems }}</span>
+                totalItems }}</span>
         <button type="button"
             class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
             @click="OpenDialog(true)">
@@ -125,7 +125,6 @@ const addToCart = () => {
         }
     }
     wishlist.value = [];
-    // sessionStorage.setItem("cartData", JSON.stringify(cart.value));
     sessionStorage.setItem("wishListData", JSON.stringify(wishlist.value));
     store.commit("cartItemsCount", cart.value.length);
     store.commit("wishlistItems", wishlist.value);
