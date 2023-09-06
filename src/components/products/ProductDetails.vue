@@ -8,7 +8,7 @@
           <span
             class="inline-flex items-center rounded-md bg-red-400 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red-600/10"
             v-if="productData?.discount !== null && productData?.discount !== '' && productData?.discount !== 0">{{
-              productData?.discount }}%</span>
+                        productData?.discount }}%</span>
         </p>
         <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
           <div class="flex items-start">
@@ -38,7 +38,7 @@
               <p class="text-lg font-medium text-gray-400 line-through dark:text-gray-300"
                 v-if="productData?.originalPrice !== null && productData?.originalPrice !== '' && productData?.originalPrice !== 0">
                 ${{
-                  productData?.originalPrice }}</p>
+                                productData?.originalPrice }}</p>
             </div>
           </div>
           <div class="flex items-center my-8">
@@ -76,9 +76,9 @@
                   class="h-10 w-10 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none" />
 
                 <button @click="addToCart" :class="{
-                  'bg-green-500 hover:bg-green-600': isAddingToCart,
-                  'bg-red-500': !isAddingToCart,
-                }"
+                                  'bg-green-500 hover:bg-green-600': isAddingToCart,
+                                  'bg-red-500': !isAddingToCart,
+                                }"
                   class="ml-3 flex items-center justify-center text-white border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded">
                   {{ buttonLabel }}
                 </button>
@@ -90,7 +90,7 @@
               <div class="flex items-center mt-2">
                 <h2 class="text-md title-font text-gray-500 tracking-widest">Categories:</h2>
                 <h4 class="text-md title-font text-gray-500 tracking-widest ml-1">{{ productData?.categories
-                }}</h4>
+                                  }}</h4>
               </div>
             </div>
 
@@ -175,7 +175,7 @@ export default {
     const addToCart = () => {
       if (!auth.currentUser) {
         open.value = true;
-        router.push('/login');
+        // router.push('/login');
       } else {
         const cartData = JSON.parse(sessionStorage.getItem("cartData"))?.cartData || [];
 
@@ -216,7 +216,7 @@ export default {
     const addToWishList = () => {
       if (!auth.currentUser) {
         open.value = true;
-        router.push('/login');
+        // router.push('/login');
       } else {
         let index = store.getters.getWishlistItems.findIndex(item => item.id === productData.value.id);
 
