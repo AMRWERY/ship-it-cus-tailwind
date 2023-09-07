@@ -64,6 +64,10 @@ const actions = {
         if (user) {
           commit("setIsAuthenticated", true);
           commit("setUsername", payload.username);
+          commit("setUserEmail", payload.email);
+          sessionStorage.setItem("email", payload.email);
+          commit("setUserPassword", payload.password);
+          sessionStorage.setItem("password", payload.password);
           router.replace("/");
           try {
             await updateProfile(user, {
@@ -109,6 +113,10 @@ const actions = {
           commit("setIsAuthenticated", true);
           commit("setUsername", user.displayName);
           sessionStorage.setItem("username", user.displayName);
+          commit("setUserEmail", payload.email);
+          sessionStorage.setItem("email", payload.email);
+          commit("setUserPassword", payload.password);
+          sessionStorage.setItem("password", payload.password);
           router.replace("/");
           try {
             const usersCollection = collection(db, "users");

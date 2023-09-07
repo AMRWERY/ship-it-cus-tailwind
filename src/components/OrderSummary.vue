@@ -34,15 +34,15 @@
                                             </p>
                                             <p class="text-sm dark:text-white leading-none text-gray-800">
                                                 <span class="dark:text-gray-400 text-gray-400">Payment Method: </span>
-                                                {{ selectedCard }}
+                                                {{ prod.paymentMethod }}
                                             </p>
                                         </div>
                                     </div>
                                     <div class="flex justify-between space-x-14 items-start w-full ml-20">
                                         <div class="flex justify-start items-center">
                                             <p class="text-base dark:text-white xl:text-lg leading-6">${{ prod?.price }}</p>
-                                            <p
-                                                class="text-red-300 line-through text-base dark:text-white xl:text-lg leading-6 ml-2">
+                                            <p class="text-red-300 line-through text-base dark:text-white xl:text-lg leading-6 ml-2"
+                                                v-if="prod?.originalPrice !== null && prod?.originalPrice !== '' && prod?.originalPrice !== 0">
                                                 ${{ prod?.originalPrice }}</p>
                                         </div>
 
@@ -186,11 +186,9 @@ export default {
                     id: doc.id,
                     ...doc.data(),
                 };
-                console.log(pro)
                 this.allOrders.push(pro);
             });
             this.userOrders = this.allOrders.filter((order) => order.userId == this.userId);
-            console.log(this.userOrders)
         },
     },
 

@@ -15,11 +15,19 @@
                                     </th>
                                     <th scope="col"
                                         class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400">
-                                        Brand
+                                        Image
+                                    </th>
+                                    <th scope="col"
+                                        class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400">
+                                        Product
                                     </th>
                                     <th scope="col"
                                         class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400">
                                         Date
+                                    </th>
+                                    <th scope="col"
+                                        class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400">
+                                        Payment Method
                                     </th>
                                     <th scope="col"
                                         class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400">
@@ -34,8 +42,10 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" v-for="item in orders" :key="item.title">
+                            <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700"
+                                v-for="item in userOrders" :key="item">
+                                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" v-for="prod in item.cartItems"
+                                    :key="prod">
                                     <td class="p-4 w-4">
                                         <div class="flex items-center">
                                             <input id="checkbox-table-1" type="checkbox"
@@ -45,18 +55,28 @@
                                     </td>
                                     <td
                                         class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ item.title }}</td>
+                                        <img :src="prod.imgFront" class="h-12 w-12">
+                                    </td>
+                                    <td
+                                        class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ prod.title }}</td>
                                     <td
                                         class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
-                                        {{ new Date(item.date).toLocaleDateString() }}</td>
+                                        {{ new Date(prod.date).toLocaleDateString() }}</td>
                                     <td
                                         class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        ${{ item.price }}</td>
+                                        {{ prod.paymentMethod }}</td>
                                     <td
                                         class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        <span class="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10">Status</span></td>
+                                        ${{ prod.price }}</td>
+                                    <td
+                                        class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <span
+                                            class="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10">Processing</span>
+                                    </td>
                                     <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                                        <router-link to="/order-summary" class="text-blue-600 dark:text-blue-500 hover:underline">
+                                        <router-link to="/order-summary"
+                                            class="text-blue-600 dark:text-blue-500 hover:underline">
                                             <i class="fa-solid fa-eye fa-lg" data-tooltip-target="tooltip-right"
                                                 data-tooltip-placement="right"></i>
                                             <div id="tooltip-right" role="tooltip"
@@ -77,41 +97,63 @@
 </template>
 
 <script>
+import { getDocs, query, collection } from "firebase/firestore";
+import { db } from "@/firebase/config";
+
 export default {
     name: 'Orders',
 
     data() {
-    return {
-      date: Date.now(),
-      orders: [],
-      price: 0,
-      ordersQty: 0,
-      total: 0,
-    }
-  },
-
-  methods: {
-    calculateTotal() {
-      let total = 0;
-      this.orders.forEach((item) => {
-        total += item.price * item.ordersQty;
-      });
-      this.total = total.toFixed(2);
+        return {
+            date: Date.now(),
+            orders: [],
+            price: 0,
+            ordersQty: 0,
+            total: 0,
+            userOrders: [],
+            allOrders: [],
+            userId: sessionStorage.getItem('userId')
+        }
     },
-  },
 
-  mounted() {
-    if (sessionStorage.getItem("cartData")) {
-      this.orders = JSON.parse(sessionStorage.getItem("cartData"));
+    methods: {
+        calculateTotal() {
+            let total = 0;
+            this.orders.forEach((item) => {
+                total += item.price * item.ordersQty;
+            });
+            this.total = total.toFixed(2);
+        },
+        async getOrders() {
+            const querySnap = await getDocs(query(collection(db, "orders")));
 
-      let cart = JSON.parse(sessionStorage.getItem("cartData"));
-      if (cart) {
-        this.totalItems = this.orders.length;
-        this.$store.commit("cartItems", this.orders);
-        this.$store.commit("cartItemsCount", this.orders.length);
-        this.calculateTotal();
-      }
-    }
-  }
+            querySnap.forEach((doc) => {
+                let pro = {
+                    id: doc.id,
+                    ...doc.data(),
+                };
+                this.allOrders.push(pro);
+            });
+            this.userOrders = this.allOrders.filter((order) => order.userId == this.userId);
+        },
+    },
+
+    mounted() {
+        this.getOrders();
+    },
+
+    // mounted() {
+    //     if (sessionStorage.getItem("cartData")) {
+    //         this.orders = JSON.parse(sessionStorage.getItem("cartData"));
+
+    //         let cart = JSON.parse(sessionStorage.getItem("cartData"));
+    //         if (cart) {
+    //             this.totalItems = this.orders.length;
+    //             this.$store.commit("cartItems", this.orders);
+    //             this.$store.commit("cartItemsCount", this.orders.length);
+    //             this.calculateTotal();
+    //         }
+    //     }
+    // }
 }
 </script>

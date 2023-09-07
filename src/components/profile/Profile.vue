@@ -49,6 +49,7 @@ import OrderTracking from './OrderTracking.vue';
 export default {
     name: 'Profile',
 
+    // components: { ProfileDetails, OrderTracking },
     components: { ProfileDetails, Orders, OrderTracking },
 
     setup() {

@@ -172,7 +172,6 @@ const selectedCountryCode = computed(() => {
 const submitForm = async () => {
     const currentDate = new Date();
     const colRef = collection(db, "contactMessages")
-    console.log("Form data submitted successfully.");
 
     const dataObj = {
         firstName: firstName.value,
