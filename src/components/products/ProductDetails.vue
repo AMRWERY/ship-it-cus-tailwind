@@ -174,7 +174,6 @@ export default {
     const addToCart = () => {
       if (!auth.currentUser) {
         open.value = true;
-        // router.push('/login');
       } else {
         const cartData = JSON.parse(sessionStorage.getItem("cartData"))?.cartData || [];
 
@@ -215,7 +214,6 @@ export default {
     const addToWishList = () => {
       if (!auth.currentUser) {
         open.value = true;
-        // router.push('/login');
       } else {
         let index = store.getters.getWishlistItems.findIndex(item => item.id === productData.value.id);
 

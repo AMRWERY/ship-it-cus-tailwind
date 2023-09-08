@@ -3,15 +3,15 @@
         <section class="text-gray-600 body-font overflow-hidden">
             <h2 class="text-lg title-font text-gray-500 tracking-widest text-center mb-6">Deal of the day</h2>
             <div class="container px-5 py-12 mx-auto">
-                <div class="lg:w-4/5 mx-auto flex flex-wrap">
+                <div class="lg:w-4/5 mx-auto flex flex-wrap" v-if="todayDeal">
                     <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-                        src="https://justfields.com/storage/projects/7M5rV059/1-item-a.jpg">
+                        :src="todayDeal.productImg">
                     <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                         <div class="flex justify-between text-base font-medium text-gray-900">
-                            <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">Denim Pullover</h1>
+                            <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ todayDeal.title }}</h1>
                             <div class="flex gap-2 mt-2">
-                                <p class="text-md font-medium text-gray-500 line-through">$129.00</p>
-                                <p class="text-md font-medium text-gray-900">$99.00</p>
+                                <p class="text-md font-medium text-gray-500 line-through">${{ todayDeal.originalPrice }}</p>
+                                <p class="text-md font-medium text-gray-900">${{ todayDeal.price }}</p>
                             </div>
                         </div>
                         <div class="flex mb-4">
@@ -92,6 +92,9 @@
 </template>
 
 <script>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+
 export default {
     name: 'TodayDeals',
 
@@ -120,5 +123,15 @@ export default {
     beforeDestroy() {
         clearInterval(this.timer);
     },
+
+    setup() {
+        const store = useStore()
+        store.dispatch('fetchDeals')
+        const todayDeal = computed(() => store.getters.getAllDeals[0]);
+
+        return {
+            todayDeal
+        }
+    }
 }
 </script>

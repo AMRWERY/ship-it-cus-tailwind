@@ -53,7 +53,7 @@ import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessu
 export default {
     components: { Dialog, DialogPanel, TransitionChild, TransitionRoot },
 
-    props: ['open', 'message', 'cartMessage', 'wishlistMessage'],
+    props: ['open', 'message'],
 
     data() {
         return {

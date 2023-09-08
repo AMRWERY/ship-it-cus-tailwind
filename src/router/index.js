@@ -78,6 +78,14 @@ const router = createRouter({
       path: "/contact",
       name: "Contact",
       component: () => import("../components/Contact.vue"),
+      beforeEnter: (to, from, next) => {
+        const userToken = sessionStorage.getItem("userToken");
+        if (userToken !== null && userToken !== undefined) {
+          next();
+        } else {
+          next("/login");
+        }
+      },
     },
     {
       path: "/hire-me",
@@ -85,7 +93,7 @@ const router = createRouter({
       component: () => import("../components/HireMe.vue"),
     },
     {
-      path: "/:catchAl(.*)",
+      path: "/:catchAll(.*)",
       name: "Error404",
       component: () => import("../views/Error404.vue"),
     },
