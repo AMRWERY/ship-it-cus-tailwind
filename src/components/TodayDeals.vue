@@ -91,7 +91,77 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import { onMounted, ref, computed } from 'vue'
+import { useStore } from 'vuex'
+
+const hours = ref('')
+const minutes = ref('')
+const seconds = ref('')
+
+const store = useStore()
+
+store.dispatch('fetchDeals')
+
+const todayDeal = computed(() => store.getters.getAllDeals[0]);
+
+const todayDealExpired = computed(() => {
+    if (todayDeal.value && todayDeal.value.endDate) {
+        const now = new Date().getTime();
+        const endDate = new Date(todayDeal.value.endDate).getTime();
+        return endDate <= now;
+    }
+    return false;
+});
+
+const updateClock = () => {
+    const now = new Date().getTime();
+    const timeLeft = dealExpiry - now;
+
+    if (timeLeft > 0) {
+        hours.value = String(Math.floor(timeLeft / (1000 * 60 * 60))).padStart(2, '0');
+        minutes.value = String(Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        seconds.value = String(Math.floor((timeLeft % (1000 * 60)) / 1000)).padStart(2, '0');
+    } else {
+        clearInterval(timer);
+        hours.value = '00';
+        minutes.value = '00';
+        seconds.value = '00';
+    }
+}
+
+const calculateTimeRemaining = () => {
+    const now = new Date().getTime();
+
+    if (todayDeal.value && todayDeal.value.endDate) {
+        const endDate = new Date(todayDeal.value.endDate).getTime();
+        const timeLeft = endDate - now;
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            return;
+        }
+
+        const hoursRemaining = Math.floor(timeLeft / (1000 * 60 * 60));
+        const minutesRemaining = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const secondsRemaining = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        hours.value = String(hoursRemaining).padStart(2, '0');
+        minutes.value = String(minutesRemaining).padStart(2, '0');
+        seconds.value = String(secondsRemaining).padStart(2, '0');
+    }
+};
+
+calculateTimeRemaining();
+
+const timer = setInterval(calculateTimeRemaining, 1000);
+
+onMounted(() => {
+    calculateTimeRemaining();
+});
+</script>
+
+<!-- <script>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
@@ -134,4 +204,4 @@ export default {
         }
     }
 }
-</script>
+</script> -->

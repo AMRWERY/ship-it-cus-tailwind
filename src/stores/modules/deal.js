@@ -31,12 +31,11 @@ const actions = {
           let deal = {
             id: doc.id,
             ...dealData,
+            endDate: endDate,
           };
           deals.push(deal);
-          // console.log(deal);
         }
       });
-      // console.log("Fetched deals:", deals);
       commit("setNewDeal", deals);
     } catch (error) {
       console.error("Error fetching deals:", error);
