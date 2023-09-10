@@ -242,12 +242,10 @@ export default {
         async goToOrderSummary() {
             const colRef = collection(db, "orders");
             const dataObj = {
-                // cartItems: this.cart,
                 cartItems: this.cart.map(item => ({ ...item, paymentMethod: this.card })),
                 total: this.totalAmount,
                 userId: JSON.parse(sessionStorage.getItem("cartData")).userId,
                 orderDate: new Date(),
-                // paymentMethod: this.card,
             };
             const docRef = await addDoc(colRef, dataObj);
             console.log("Document was created with ID:", docRef.id);

@@ -141,19 +141,5 @@ export default {
     mounted() {
         this.getOrders();
     },
-
-    // mounted() {
-    //     if (sessionStorage.getItem("cartData")) {
-    //         this.orders = JSON.parse(sessionStorage.getItem("cartData"));
-
-    //         let cart = JSON.parse(sessionStorage.getItem("cartData"));
-    //         if (cart) {
-    //             this.totalItems = this.orders.length;
-    //             this.$store.commit("cartItems", this.orders);
-    //             this.$store.commit("cartItemsCount", this.orders.length);
-    //             this.calculateTotal();
-    //         }
-    //     }
-    // }
 }
 </script>

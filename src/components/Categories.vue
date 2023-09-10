@@ -22,22 +22,19 @@
 </template>
 
 
-<script>
-import { mapGetters, mapActions } from "vuex";
+<script setup>
+import { computed, onMounted } from 'vue';
+import { useStore } from 'vuex';
 
-export default {
-    name: 'Categories',
+const store = useStore();
 
-    computed: {
-        ...mapGetters(['getAllCategories']),
-    },
+const getAllCategories = computed(() => store.getters.getAllCategories);
 
-    methods: {
-        ...mapActions(["fetchCategories"]),
-    },
+const fetchCategories = () => {
+    store.dispatch('fetchCategories');
+};
 
-    mounted() {
-        this.fetchCategories();
-    },
-}
+onMounted(() => {
+    fetchCategories();
+});
 </script>

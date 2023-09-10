@@ -31,9 +31,12 @@
 
                 <div
                     class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-3">
-                    <WishlistDialog />
 
-                    <CartDialog />
+                    <div v-if="isUserLoggedIn" class="flex space-x-3">
+                        <WishlistDialog />
+
+                        <CartDialog />
+                    </div>
 
                     <button type="button"
                         class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -49,33 +52,19 @@
             <i class="fa-solid fa-moon fa-xl"></i>
             </button> -->
 
-
-                    <div v-if="isUserLoggedIn">
-                        <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal"
-                            class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                            type="button">
-                            <i class="fa-solid fa-caret-down fa-2xl"></i>
-                        </button>
-
-                        <!-- Dropdown menu -->
-                        <div id="dropdownDotsHorizontal"
-                            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 text-center"
-                                aria-labelledby="dropdownMenuIconHorizontalButton">
-                                <li>
-                                    <router-link to=""
-                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</router-link>
-                                </li>
-                                <li>
-                                    <router-link to="/profile"
-                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</router-link>
-                                </li>
-                            </ul>
-                            <div class="py-2 text-center" @click="logout">
-                                <router-link to="/login"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</router-link>
-                            </div>
-                        </div>
+                    <div v-if="isUserLoggedIn" class="space-x-3">
+                        <router-link to="/profile">
+                            <button type="button"
+                                class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                <i class="fa-solid fa-user fa-xl"></i>
+                            </button>
+                        </router-link>
+                        <router-link to="/login">
+                            <button type="button" @click="logout"
+                                class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                <i class="fa-solid fa-right-from-bracket fa-xl"></i>
+                            </button>
+                        </router-link>
                     </div>
 
                     <div v-if="!isUserLoggedIn">
@@ -107,7 +96,6 @@
 <script setup>
 import { onMounted, watchEffect, ref, computed } from 'vue';
 import { useStore } from 'vuex';
-import { initDropdowns } from 'flowbite';
 import {
     Disclosure,
     DisclosureButton,
@@ -139,10 +127,6 @@ const logout = async () => {
 const isUserLoggedIn = computed(() => store.state.auth.isUserLoggedIn);
 
 store.dispatch('initAuthentication');
-
-onMounted(() => {
-    initDropdowns();
-});
 
 onMounted(() => {
     const userToken = sessionStorage.getItem("userToken");
