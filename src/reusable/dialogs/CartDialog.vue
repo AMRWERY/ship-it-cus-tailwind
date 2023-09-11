@@ -80,7 +80,7 @@
 
                                                                         <input type="number" id="Quantity"
                                                                             :value="item.cartQty"
-                                                                            class="h-10 w-10 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none" />
+                                                                            class="h-10 w-12 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none" />
 
 
                                                                         <button type="button" @click="increment(item)"
@@ -109,7 +109,7 @@
                                         <div v-else>
                                             <div class="flex justify-between text-base font-medium text-gray-900">
                                                 <p>Subtotal</p>
-                                                <p>${{ totalAmount }}</p>
+                                                <p>${{ totalAmount.toFixed(2) }}</p>
                                             </div>
                                             <p class="mt-0.5 text-sm text-gray-500">
                                                 Shipping and taxes calculated at checkout.
@@ -180,11 +180,9 @@ const userId = ref('');
 const store = useStore();
 
 const totalAmount = computed(() => {
-    let totalValue = 0;
-    cart.value.forEach((item) => {
-        totalValue += item.price * item.cartQty;
-    });
-    return totalValue.toFixed(2);
+    return cart.value.reduce((total, item) => {
+        return total + item.cartQty * item.price;
+    }, 0);
 });
 
 const totalItemsInCart = computed(() => {

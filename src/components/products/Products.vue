@@ -26,7 +26,7 @@
               class="mx-auto mt-11 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg mb-4">
               <img class="h-48 w-full object-cover object-center" :src="prod.productImg" />
               <div class="p-4">
-                <h2 class="mb-2 text-lg font-medium dark:text-white text-gray-900">{{
+                <h2 class="mb-2 text-lg font-medium dark:text-white text-gray-900 truncate">{{
                   prod.title }}</h2>
                 <p class="mb-2 text-base dark:text-gray-300 text-gray-700">
                   <Rating :rating="prod.rating" />

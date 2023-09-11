@@ -98,7 +98,7 @@ export default {
     name: 'Filters',
 
     setup(props, { emit }) {
-        const categories = ['Hoodies', 'T-shirts', 'Music', 'Accessories', 'Posters', 'Decor', 'Clothing'];
+        const categories = ['Hoodies', 'T-shirts', 'Music', 'Accessories', 'Posters', 'Decor', 'Clothing', 'Mobile', 'Laptop', "Shoes", 'Electronics', 'Jewelry', 'Groceries', "Women's Clothing", "Men's Clothing", 'Skincare', 'Albums'];
         const selectedCategories = ref([]);
         const size = ['XXL', 'XL', 'Large', 'Medium', 'Small'];
         const selectedSize = ref([]);

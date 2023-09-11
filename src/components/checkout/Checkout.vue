@@ -228,6 +228,7 @@ export default {
             total: 0,
             totalItems: 0,
             totalAmount: 0,
+            orderStatus: [],
         };
     },
 
@@ -240,12 +241,15 @@ export default {
             this.$store.commit('setSelectedShipping', shipping)
         },
         async goToOrderSummary() {
+            // this.orderStatus[0]["isActive"] = true;
+
             const colRef = collection(db, "orders");
             const dataObj = {
                 cartItems: this.cart.map(item => ({ ...item, paymentMethod: this.card })),
                 total: this.totalAmount,
                 userId: JSON.parse(sessionStorage.getItem("cartData")).userId,
                 orderDate: new Date(),
+                status: this.orderStatus,
             };
             const docRef = await addDoc(colRef, dataObj);
             console.log("Document was created with ID:", docRef.id);
@@ -273,6 +277,17 @@ export default {
             this.calculateTotal()
             sessionStorage.setItem('cartData', JSON.stringify(this.cart))
         },
+        // async getStatus() {
+        //     const querySnap = await getDocs(query(collection(db, "orderTracking")));
+
+        //     querySnap.forEach((doc) => {
+        //         let pro = {
+        //             id: doc.id,
+        //             ...doc.data(doc.id),
+        //         };
+        //         this.orderStatus.push(pro);
+        //     });
+        // },
     },
 
     computed: {
@@ -301,6 +316,8 @@ export default {
                 this.calculateTotal();
             }
         }
+
+        // this.getStatus();
     }
 };
 </script>

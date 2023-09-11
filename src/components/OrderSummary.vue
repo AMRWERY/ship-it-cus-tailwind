@@ -30,7 +30,8 @@
                                         </h3>
                                         <div class="flex justify-start items-start flex-col space-y-2">
                                             <p class="text-sm dark:text-white leading-none text-gray-800">
-                                                <span class="dark:text-gray-400 text-gray-400">Status: </span>Processing
+                                                <span class="dark:text-gray-400 text-gray-400">Status: </span>{{
+                                                    prod?.status }}
                                             </p>
                                             <p class="text-sm dark:text-white leading-none text-gray-800">
                                                 <span class="dark:text-gray-400 text-gray-400">Payment Method: </span>

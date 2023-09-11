@@ -2,8 +2,12 @@
   <section class="text-gray-700 body-font overflow-hidden bg-white">
     <div class="container px-5 py-24 mx-auto">
       <div class="lg:w-4/5 mx-auto flex flex-wrap">
-        <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200"
-          :src="selectedImg">
+        <div class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200">
+          <div class="h-[630px]">
+            <img alt="ecommerce" class="w-full h-full object-cover object-center" :src="selectedImg">
+          </div>
+        </div>
+
         <p class="text-base font-medium text-green-500 absolute m-3">
           <span
             class="inline-flex items-center rounded-md bg-red-400 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red-600/10"
@@ -71,8 +75,9 @@
           <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
             <div class="flex flex-col items-center">
               <div class="flex items-center my-10">
-                <input type="number" id="Quantity" value="1"
-                  class="h-10 w-10 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none" />
+                <input type="number" id="Quantity" v-model="chosenItems" min="1"
+                  class="h-10 w-16 rounded border-gray-200 text-center sm:text-sm" />
+
 
                 <button @click="addToCart" :class="{
                   'bg-green-500 hover:bg-green-600': isAddingToCart,
@@ -128,7 +133,7 @@
 </template>
   
 <script>
-import { ref, watch, onMounted } from 'vue';
+import { ref, watch, onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import Rating from '../../reusable/Rating.vue';
@@ -183,8 +188,7 @@ export default {
         if (isItem) {
           cart.value[index]["totalPrice"] =
             Number(cart.value[index].cartQty) * Number(cart.value[index].price);
-          cart.value[index].cartQty =
-            Number(chosenItems.value) + Number(cart.value[index].cartQty);
+          cart.value[index].cartQty = Number(chosenItems.value);
           Number(cart.value[index]["cart"]) * Number(cart.value[index]["price"]);
         } else {
           productData.value["cartQty"] = Number(chosenItems.value);
@@ -229,6 +233,12 @@ export default {
         }, 3000);
       }
     };
+
+    const cartTotalPrice = computed(() => {
+      return cart.value.reduce((total, item) => {
+        return total + item.cartQty * item.price;
+      }, 0);
+    });
 
     const resetIconColor = () => {
       iconColor.value = 'black';
