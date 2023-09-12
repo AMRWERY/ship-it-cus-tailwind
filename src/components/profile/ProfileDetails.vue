@@ -187,7 +187,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-// import { ref } from 'vue'
 
 export default {
     name: 'ProfileDetails',

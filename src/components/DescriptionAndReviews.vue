@@ -107,7 +107,7 @@
                             <div class="mt-1 text-xl mb-2 text-gray-900">Share your thoughts</div>
                             <div class="text-sm mb-4">If you have used this product, we would love to hear about your
                                 experience.</div>
-                            <form class="writeReview ease-in-out transform transition-all">
+                            <form class="writeReview ease-in-out transform transition-all" @submit.prevent="submitForm">
                                 <div class="w-full text-gray-500">
                                     <div class="p-5 mt-3 grid gap-2 border rounded-lg">
                                         <div class="block text-center mb-1.5">
@@ -115,87 +115,34 @@
                                                 experience with this product? We strive for a 5 star experience
                                                 <span class="text-red-500">*</span>
                                             </label>
-                                            <div class="gap-1 flex justify-center mt-2 relative">
-                                                <label class="grid p-1 rounded disable-star">
-                                                    <input type="radio"
-                                                        class="overflow-hidden appearance-none opacity-0 absolute"
-                                                        name="rating" required value="1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
-                                                        role="img" class="icon" width="21px" height="21px"
-                                                        viewBox="0 0 512 512">
-                                                        <path fill="currentColor"
-                                                            d="M394 480a16 16 0 0 1-9.39-3L256 383.76L127.39 477a16 16 0 0 1-24.55-18.08L153 310.35L23 221.2a16 16 0 0 1 9-29.2h160.38l48.4-148.95a16 16 0 0 1 30.44 0l48.4 149H480a16 16 0 0 1 9.05 29.2L359 310.35l50.13 148.53A16 16 0 0 1 394 480Z">
-                                                        </path>
-                                                    </svg>
-                                                </label>
-                                                <label class="grid p-1 rounded disable-star">
-                                                    <input type="radio"
-                                                        class="overflow-hidden appearance-none opacity-0 absolute"
-                                                        name="rating" required value="2">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
-                                                        role="img" class="icon" width="21px" height="21px"
-                                                        viewBox="0 0 512 512">
-                                                        <path fill="currentColor"
-                                                            d="M394 480a16 16 0 0 1-9.39-3L256 383.76L127.39 477a16 16 0 0 1-24.55-18.08L153 310.35L23 221.2a16 16 0 0 1 9-29.2h160.38l48.4-148.95a16 16 0 0 1 30.44 0l48.4 149H480a16 16 0 0 1 9.05 29.2L359 310.35l50.13 148.53A16 16 0 0 1 394 480Z">
-                                                        </path>
-                                                    </svg>
-                                                </label>
-                                                <label class="grid p-1 rounded disable-star">
-                                                    <input type="radio"
-                                                        class="overflow-hidden appearance-none opacity-0 absolute"
-                                                        name="rating" required value="3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
-                                                        role="img" class="icon" width="21px" height="21px"
-                                                        viewBox="0 0 512 512">
-                                                        <path fill="currentColor"
-                                                            d="M394 480a16 16 0 0 1-9.39-3L256 383.76L127.39 477a16 16 0 0 1-24.55-18.08L153 310.35L23 221.2a16 16 0 0 1 9-29.2h160.38l48.4-148.95a16 16 0 0 1 30.44 0l48.4 149H480a16 16 0 0 1 9.05 29.2L359 310.35l50.13 148.53A16 16 0 0 1 394 480Z">
-                                                        </path>
-                                                    </svg>
-                                                </label>
-                                                <label class="grid p-1 rounded disable-star">
-                                                    <input type="radio"
-                                                        class="overflow-hidden appearance-none opacity-0 absolute"
-                                                        name="rating" required value="4">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
-                                                        role="img" class="icon" width="21px" height="21px"
-                                                        viewBox="0 0 512 512">
-                                                        <path fill="currentColor"
-                                                            d="M394 480a16 16 0 0 1-9.39-3L256 383.76L127.39 477a16 16 0 0 1-24.55-18.08L153 310.35L23 221.2a16 16 0 0 1 9-29.2h160.38l48.4-148.95a16 16 0 0 1 30.44 0l48.4 149H480a16 16 0 0 1 9.05 29.2L359 310.35l50.13 148.53A16 16 0 0 1 394 480Z">
-                                                        </path>
-                                                    </svg>
-                                                </label>
-                                                <label class="grid p-1 rounded disable-star">
-                                                    <input type="radio"
-                                                        class="overflow-hidden appearance-none opacity-0 absolute"
-                                                        name="rating" required value="5">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
-                                                        role="img" class="icon" width="21px" height="21px"
-                                                        viewBox="0 0 512 512">
-                                                        <path fill="currentColor"
-                                                            d="M394 480a16 16 0 0 1-9.39-3L256 383.76L127.39 477a16 16 0 0 1-24.55-18.08L153 310.35L23 221.2a16 16 0 0 1 9-29.2h160.38l48.4-148.95a16 16 0 0 1 30.44 0l48.4 149H480a16 16 0 0 1 9.05 29.2L359 310.35l50.13 148.53A16 16 0 0 1 394 480Z">
-                                                        </path>
-                                                    </svg>
-                                                </label>
+
+                                            <div class="rating">
+                                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-yellow-400"
+                                                    v-model="rating" />
+                                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-yellow-400"
+                                                    v-model="rating" />
+                                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-yellow-400"
+                                                    v-model="rating" />
+                                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-yellow-400"
+                                                    v-model="rating" />
+                                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-yellow-400"
+                                                    v-model="rating" />
                                             </div>
                                         </div>
                                         <div class="w-full col-span-full">
                                             <label for="content" class="text-sm mb-0.5">How was your experience?
                                                 <span class="text-red-500">*</span>
                                             </label>
-                                            <textarea class="w-full" id="content" placeholder="Great Quality" required>
+                                            <textarea class="w-full" id="content" placeholder="Great Quality" required
+                                                v-model.trim="comment">
                                             </textarea>
                                         </div>
                                         <div class="w-full col-span-full">
-                                            <label for="author" class="text-sm mb-0.5">Your email <span
+                                            <label for="author" class="text-sm mb-0.5">Your email<span
                                                     class="text-red-500">*</span>
                                             </label>
                                             <input class="w-full" id="author" placeholder="example@example.com" type="email"
-                                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                                                required v-model="getUserEmail">
                                         </div>
                                         <div class="w-full col-span-full text-center mt-3">
                                             <button
@@ -215,14 +162,50 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted, computed } from 'vue'
+import { useStore } from 'vuex';
 import { initTabs } from 'flowbite'
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from "@/firebase/config";
 
-export default {
-    name: 'DescriptionAndReviews',
+const rating = ref('')
+const comment = ref('')
+const email = ref('')
 
-    mounted() {
-        initTabs()
+const store = useStore()
+
+const getUserEmail = computed(() => {
+    return store.getters.getUserEmail;
+});
+
+onMounted(() => {
+    const email = sessionStorage.getItem("email");
+    store.commit("setUserEmail", email);
+});
+
+const submitForm = async () => {
+    const colRef = collection(db, "userFeedback")
+
+    const dataObj = {
+        rating: rating.value,
+        comment: comment.value,
+        email: email.value,
     }
-}
+
+    const docRef = await addDoc(colRef, dataObj)
+    console.log(docRef.id)
+
+    clearForm();
+};
+
+const clearForm = () => {
+    rating.value = "";
+    comment.value = "";
+    email.value = "";
+};
+
+onMounted(() => {
+    initTabs()
+});
 </script>

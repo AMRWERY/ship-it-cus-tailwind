@@ -63,7 +63,6 @@ watch(products, (newProducts) => {
 });
 
 watch(() => route.params.id, async (newId) => {
-
     if (newId)
         await store.dispatch('getProductById', newId);
 });
