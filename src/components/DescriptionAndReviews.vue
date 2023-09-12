@@ -13,7 +13,7 @@
                         <button
                             class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                             id="reviews-tab" data-tabs-target="#reviews" type="button" role="tab" aria-controls="reviews"
-                            aria-selected="false">Reviews (0)</button>
+                            aria-selected="false">Reviews</button>
                     </li>
                 </ul>
             </div>
@@ -117,17 +117,31 @@
                                             </label>
 
                                             <div class="rating">
-                                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-yellow-400"
-                                                    v-model="rating" />
-                                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-yellow-400"
-                                                    v-model="rating" />
-                                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-yellow-400"
-                                                    v-model="rating" />
-                                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-yellow-400"
-                                                    v-model="rating" />
-                                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-yellow-400"
-                                                    v-model="rating" />
+                                                <input type="radio" name="rating" class="mask mask-star-2 bg-yellow-400"
+                                                    :checked="rating === '1'" @change="setRating(1)" />
+                                                <input type="radio" name="rating" class="mask mask-star-2 bg-yellow-400"
+                                                    :checked="rating === '2'" @change="setRating(2)" />
+                                                <input type="radio" name="rating" class="mask mask-star-2 bg-yellow-400"
+                                                    :checked="rating === '3'" @change="setRating(3)" />
+                                                <input type="radio" name="rating" class="mask mask-star-2 bg-yellow-400"
+                                                    :checked="rating === '4'" @change="setRating(4)" />
+                                                <input type="radio" name="rating" class="mask mask-star-2 bg-yellow-400"
+                                                    :checked="rating === '5'" @change="setRating(5)" />
                                             </div>
+
+                                            <!-- <div class="rating">
+                                                <input type="number" name="rating-2" class="mask mask-star-2 bg-yellow-400"
+                                                    v-model="rating" />
+                                                <input type="number" name="rating-2" class="mask mask-star-2 bg-yellow-400"
+                                                    v-model="rating" />
+                                                <input type="number" name="rating-2" class="mask mask-star-2 bg-yellow-400"
+                                                    v-model="rating" />
+                                                <input type="number" name="rating-2" class="mask mask-star-2 bg-yellow-400"
+                                                    v-model="rating" />
+                                                <input type="number" name="rating-2" class="mask mask-star-2 bg-yellow-400"
+                                                    v-model="rating" />
+                                            </div> -->
+
                                         </div>
                                         <div class="w-full col-span-full">
                                             <label for="content" class="text-sm mb-0.5">How was your experience?
@@ -171,7 +185,10 @@ import { db } from "@/firebase/config";
 
 const rating = ref('')
 const comment = ref('')
-const email = ref('')
+
+const setRating = (value) => {
+    rating.value = value;
+};
 
 const store = useStore()
 
@@ -190,7 +207,6 @@ const submitForm = async () => {
     const dataObj = {
         rating: rating.value,
         comment: comment.value,
-        email: email.value,
     }
 
     const docRef = await addDoc(colRef, dataObj)
@@ -202,7 +218,6 @@ const submitForm = async () => {
 const clearForm = () => {
     rating.value = "";
     comment.value = "";
-    email.value = "";
 };
 
 onMounted(() => {
