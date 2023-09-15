@@ -2,10 +2,8 @@
   <section class="text-gray-700 body-font overflow-hidden bg-white">
     <div class="container px-5 py-24 mx-auto">
       <div class="lg:w-4/5 mx-auto flex flex-wrap">
-        <div class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200">
-          <div class="h-[630px]">
-            <img alt="ecommerce" class="w-full h-full object-cover object-center" :src="selectedImg">
-          </div>
+        <div class="lg:w-1/2 w-full h-[630px] object-cover object-center rounded border border-gray-200">
+          <img alt="ecommerce" class="w-full h-full object-cover object-center" :src="selectedImg">
         </div>
 
         <p class="text-base font-medium text-green-500 absolute m-3">
@@ -17,11 +15,11 @@
         <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
           <div class="flex items-start">
             <button type="button" @click="selectCard('imgFront')" v-if="productData?.imgFront != null"
-              class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-900 text-center mr-3">
+              class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-900 text-center mr-3 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
               <img class="h-full w-full object-cover" :src="productData?.productImg" />
             </button>
             <button type="button" @click="selectCard('imgBack')" v-if="productData?.imgBack != null"
-              class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2  border-gray-900 text-center ml-2">
+              class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-900 text-center ml-2 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
               <img class="h-full w-full object-cover" :src="productData?.imgBack" />
             </button>
           </div>
@@ -83,7 +81,8 @@
                   'bg-green-500 hover:bg-green-600': isAddingToCart,
                   'bg-red-500': !isAddingToCart,
                 }"
-                  class="ml-3 flex items-center justify-center text-white border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded">
+                  class="ml-3 flex items-center justify-center text-white border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
+                  <i class="fa-solid fa-cart-arrow-down mr-3"></i>
                   {{ buttonLabel }}
                 </button>
 
@@ -101,25 +100,25 @@
           </div>
           <div class="flex">
             <button @click="addToWishList"
-              :class="['rounded-full w-10 h-10 p-0 border-0 inline-flex items-center justify-center ml-4', { 'text-red-500': iconColor === 'red', 'text-gray-500 bg-gray-200': iconColor === 'black' }]">
+              :class="['rounded-full w-10 h-10 p-0 border-0 inline-flex items-center justify-center ml-4 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300', { 'text-red-500': iconColor === 'red', 'text-gray-500 bg-gray-200': iconColor === 'black' }]">
               <i class="fa-regular fa-heart"></i>
             </button>
             <button
-              class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4"
+              class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
               @click="shareBtn">
               <i class="fa-solid fa-share-nodes"></i>
             </button>
             <div v-if="showShareButtons" class="mt-2 ml-3">
               <button
-                class="rounded-full w-7 h-7 bg-blue-600 text-white p-0 border-0 inline-flex items-center justify-center ml-4">
+                class="rounded-full w-7 h-7 bg-blue-600 text-white p-0 border-0 inline-flex items-center justify-center ml-4  transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
                 <i class="fa-brands fa-facebook-f"></i>
               </button>
               <button
-                class="rounded-full w-7 h-7 bg-gradient-to-br from-pink-500 to-fuchsia-500 text-white p-0 border-0 inline-flex items-center justify-center ml-4">
+                class="rounded-full w-7 h-7 bg-gradient-to-br from-pink-500 to-fuchsia-500 text-white p-0 border-0 inline-flex items-center justify-center ml-4  transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
                 <i class="fa-brands fa-instagram"></i>
               </button>
               <button
-                class="rounded-full w-7 h-7 bg-blue-400 text-white p-0 border-0 inline-flex items-center justify-center ml-4">
+                class="rounded-full w-7 h-7 bg-blue-400 text-white p-0 border-0 inline-flex items-center justify-center ml-4  transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
                 <i class="fa-brands fa-twitter"></i>
               </button>
             </div>
