@@ -1,6 +1,6 @@
 <template>
     <div class="relative">
-        <span
+        <span v-if="wishlist.length > 0"
             class="absolute top-0 right-0 -mt-2 -mr-2 inline-flex items-center justify-center rounded-full bg-red-500 h-4 w-4 text-white text-xs">{{
                 totalItems }}</span>
         <button type="button"
@@ -10,7 +10,7 @@
         </button>
     </div>
 
-    <TransitionRoot as="template" id="wishlistDialog" :show="cartOpen" v-if="cartOpen === true">
+    <TransitionRoot as="template" id="wishlistDialog" :show="wishlistOpen" v-if="wishlistOpen === true">
         <Dialog as="div" class="relative z-10" @close="open = false">
             <TransitionChild as="template" enter="ease-in-out duration-500" enter-from="opacity-0" enter-to="opacity-100"
                 leave="ease-in-out duration-500" leave-from="opacity-100" leave-to="opacity-0">
@@ -31,7 +31,7 @@
                                             <DialogTitle class="text-lg font-medium text-gray-900">Wishlist</DialogTitle>
                                             <div class="ml-3 flex h-7 items-center">
                                                 <button type="button" class="-m-2 p-2 text-gray-400 hover:text-gray-500"
-                                                    @click="cartOpen = false">
+                                                    @click="wishlistOpen = false">
                                                     <i class="fa-solid fa-xmark fa-xl"></i>
                                                 </button>
                                             </div>
@@ -65,15 +65,6 @@
                                                                 <p class="text-gray-500">
                                                                     {{ item.categories }}
                                                                 </p>
-
-                                                                <div class="mt-4">
-                                                                    <div class="flex items-center gap-1">
-                                                                        <button type="button" @click="addToCart(item)"
-                                                                            class="font-medium text-indigo-600 hover:text-indigo-500">
-                                                                            Add to Cart
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
                                                             </div>
                                                             <div class="flex justify-end mt-4">
                                                                 <button type="button" @click="removeItemFromWishlist(item)"
@@ -105,31 +96,8 @@ import { useStore } from 'vuex';
 import { ref, onMounted, watch, computed } from 'vue';
 
 const wishlist = ref([]);
-const img = ref("");
 const totalItems = ref(0);
-const cart = ref([]);
 const store = useStore();
-
-const addToCart = () => {
-    for (const item of wishlist.value) {
-        let index = cart.value.indexOf(item);
-
-        if (index !== -1) {
-            cart.value[index].cartQty += 1;
-            cart.value[index].totalPrice = cart.value[index].cartQty * cart.value[index].price;
-        } else {
-            const product = { ...item };
-            product.cartQty = 1;
-            product.totalPrice = product.cartQty * product.price;
-            cart.value.push(product);
-        }
-    }
-    wishlist.value = [];
-    sessionStorage.setItem("wishListData", JSON.stringify(wishlist.value));
-    store.commit("cartItemsCount", cart.value.length);
-    store.commit("wishlistItems", wishlist.value);
-    store.commit("wishlistItemsCount", wishlist.value.length);
-};
 
 const removeItemFromWishlist = (item) => {
     const index = wishlist.value.indexOf(item);
@@ -146,11 +114,11 @@ const totalItemsInWishlist = computed(() => {
     return store.getters.totalItemsInWishlist;
 });
 
-watch(totalItemsInWishlist, (newVal, oldVal) => {
+watch(totalItemsInWishlist, (newVal) => {
     totalItems.value = newVal;
 });
 
-watch(wishlist, (newVal, oldVal) => {
+watch(wishlist, (newVal) => {
     wishlist.value = newVal
     totalItems.value = wishlist.value.length
 });
@@ -160,11 +128,11 @@ onMounted(() => {
 });
 
 const open = ref(true);
-const cartOpen = ref(false);
+const wishlistOpen = ref(false);
 
 const OpenDialog = (isClicked = false) => {
     if (isClicked) {
-        cartOpen.value = true
+        wishlistOpen.value = true
     }
 
     if (sessionStorage.getItem("wishListData")) {

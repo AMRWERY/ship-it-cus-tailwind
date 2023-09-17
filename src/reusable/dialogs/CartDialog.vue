@@ -1,6 +1,6 @@
 <template>
     <div class="relative">
-        <span
+        <span v-if="cart.length > 0"
             class="absolute top-0 right-0 -mt-2 -mr-2 inline-flex items-center justify-center rounded-full bg-red-500 h-4 w-4 text-white text-xs">
             {{ totalItems }}
         </span>
@@ -174,7 +174,6 @@ import {
 const open = ref(true);
 const cartOpen = ref(false);
 const cart = ref([]);
-const total = ref(0);
 const totalItems = ref(0);
 const userId = ref('');
 const store = useStore();
@@ -189,7 +188,7 @@ const totalItemsInCart = computed(() => {
     return store.getters.totalItemsInCart;
 });
 
-watch(totalItemsInCart, (newVal, oldVal) => {
+watch(totalItemsInCart, (newVal) => {
     totalItems.value = newVal;
 });
 

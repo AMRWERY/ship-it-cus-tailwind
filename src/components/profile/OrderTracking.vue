@@ -40,8 +40,7 @@
                                                     prod?.originalPrice }}</span>
                                         </p>
                                         <p class="text-base dark:text-white xl:text-lg font-normal leading-6 text-gray-800">
-                                            Qty:
-                                            {{ prod?.cartQty }}
+                                            Qty: {{ prod?.cartQty }} Piece
                                         </p>
                                     </div>
                                 </div>

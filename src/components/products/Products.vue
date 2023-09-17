@@ -117,7 +117,6 @@ export default {
         );
       }
       if (this.filterOptions.priceRanges.length > 0) {
-        // Filter based on price ranges
         filteredProducts = filteredProducts.filter((product) =>
           this.filterOptions.priceRanges.some((priceRange) => {
             const price = parseFloat(product.price.replace('$', '').replace(',', ''));

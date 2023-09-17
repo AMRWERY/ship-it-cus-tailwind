@@ -10,20 +10,8 @@
                         <span class="font-semibold">{{ item.title }}</span>
                         <span class="float-right text-gray-400">{{ item.category }}</span>
                         <p class="text-lg font-bold">${{ item.price }}</p>
-                    </div>
-                    <div class="flex items-center gap-1 mt-16">
-                        <button type="button" class=" w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
-                            @click="decrement(item)">
-                            &minus;
-                        </button>
-
-                        <input type="number" id="Quantity" v-model="item.cartQty"
-                            class="h-10 w-10 rounded border-gray-200text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none" />
-
-                        <button type="button" class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
-                            @click="increment(item)">
-                            &plus;
-                        </button>
+                        <p class="text-lg font-normal">
+                            Qty: <span class="text-blue-700">{{ item.cartQty }}</span> Piece</p>
                     </div>
                 </div>
             </div>
@@ -199,15 +187,13 @@
                 <button class="mt-4 mb-8 w-full rounded-md px-6 py-3 font-medium text-white bg-blue-600"
                     @click="goToOrderSummary" to="/order-summary" v-if="card === 'PAYPAL'">Paypal</button>
             </router-link>
-
-
         </div>
     </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, query } from "firebase/firestore";
 import { db } from "../../firebase/config";
 
 export default {
@@ -241,8 +227,6 @@ export default {
             this.$store.commit('setSelectedShipping', shipping)
         },
         async goToOrderSummary() {
-            // this.orderStatus[0]["isActive"] = true;
-
             const colRef = collection(db, "orders");
             const dataObj = {
                 cartItems: this.cart.map(item => ({ ...item, paymentMethod: this.card })),
@@ -267,27 +251,18 @@ export default {
             }
             this.total = total.toFixed(2);
         },
-        increment(item) {
-            item.cartQty++;
-            this.calculateTotal()
-            sessionStorage.setItem('cartData', JSON.stringify(this.cart))
-        },
-        decrement(item) {
-            item.cartQty--;
-            this.calculateTotal()
-            sessionStorage.setItem('cartData', JSON.stringify(this.cart))
-        },
-        // async getStatus() {
-        //     const querySnap = await getDocs(query(collection(db, "orderTracking")));
 
-        //     querySnap.forEach((doc) => {
-        //         let pro = {
-        //             id: doc.id,
-        //             ...doc.data(doc.id),
-        //         };
-        //         this.orderStatus.push(pro);
-        //     });
-        // },
+        async getStatus() {
+            const querySnap = await getDocs(query(collection(db, "orderTracking")));
+
+            querySnap.forEach((doc) => {
+                let pro = {
+                    id: doc.id,
+                    ...doc.data(doc.id),
+                };
+                this.orderStatus.push(pro);
+            });
+        },
     },
 
     computed: {
@@ -295,10 +270,10 @@ export default {
     },
 
     watch: {
-        getSelectedCard(newVal, oldVal) {
+        getSelectedCard(newVal) {
             this.card = newVal;
         },
-        getSelectedShipping(newVal, oldVal) {
+        getSelectedShipping(newVal) {
             this.shipping = newVal;
             this.calculateTotal();
         },
@@ -317,7 +292,7 @@ export default {
             }
         }
 
-        // this.getStatus();
+        this.getStatus();
     }
 };
 </script>
