@@ -87,6 +87,36 @@
                     </div>
                 </details>
             </div>
+
+            <div class="relative">
+                <details class="group" id="priceDetails">
+                    <summary
+                        class="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
+                        <span class="text-sm font-medium">Price</span>
+
+                        <span class="transition group-open:-rotate-180">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <div class="z-50 group-open:absolute group-open:start-0 group-open:top-auto group-open:mt-2">
+                        <div class="w-44 rounded border border-gray-200 bg-white">
+
+                            <ul class="space-y-1 border-t border-gray-200 p-4">
+                                <li v-for="price in priceRanges" :key="price">
+                                    <label :for="price" class="inline-flex items-center gap-2">
+                                        <input type="checkbox" :id="price" class="h-5 w-5 rounded border-gray-300"
+                                            v-model="selectedPriceRanges" :value="price" />
+
+                                        <span class="text-sm font-medium text-gray-700">
+                                            {{ price }}
+                                        </span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+            </div>
         </div>
     </div>
 </template>
@@ -104,12 +134,21 @@ export default {
         const selectedSize = ref([]);
         const availability = ['in stock', 'out of stock'];
         const selectedAvailability = ref([]);
+        const priceRanges = [
+            '$10 - $999',
+            '$1000 - $9999',
+            '$10000 - $15999',
+            '$16000 - $35000'
+        ];
+        const selectedPriceRanges = ref([]);
+
 
         const updateFilter = () => {
             const filterOptions = {
                 categories: selectedCategories.value,
                 size: selectedSize.value,
                 availability: selectedAvailability.value,
+                priceRanges: selectedPriceRanges.value,
             };
             emit('apply-filters', filterOptions);
         };
@@ -117,6 +156,7 @@ export default {
         watch(selectedCategories, updateFilter);
         watch(selectedSize, updateFilter);
         watch(selectedAvailability, updateFilter);
+        watch(selectedPriceRanges, updateFilter);
 
         return {
             categories,
@@ -125,6 +165,8 @@ export default {
             selectedSize,
             availability,
             selectedAvailability,
+            priceRanges,
+            selectedPriceRanges,
             updateFilter,
         };
     },

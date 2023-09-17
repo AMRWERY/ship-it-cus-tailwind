@@ -59,6 +59,12 @@
                                 <i class="fa-solid fa-user fa-xl"></i>
                             </button>
                         </router-link>
+                        <router-link to="/mail">
+                            <button type="button"
+                                class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                <i class="fa-solid fa-bell fa-xl"></i>
+                            </button>
+                        </router-link>
                         <router-link to="/login">
                             <button type="button" @click="logout"
                                 class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">

@@ -78,7 +78,7 @@ export default {
         categories: [],
         size: [],
         availability: [],
-        rating: null,
+        priceRanges: [],
       },
     }
   },
@@ -114,6 +114,16 @@ export default {
       if (this.filterOptions.availability.length > 0) {
         filteredProducts = filteredProducts.filter((product) =>
           this.filterOptions.availability.includes(product.availability)
+        );
+      }
+      if (this.filterOptions.priceRanges.length > 0) {
+        // Filter based on price ranges
+        filteredProducts = filteredProducts.filter((product) =>
+          this.filterOptions.priceRanges.some((priceRange) => {
+            const price = parseFloat(product.price.replace('$', '').replace(',', ''));
+            const [minPrice, maxPrice] = priceRange.split(' - ').map(str => parseFloat(str.replace('$', '').replace(',', '')));
+            return price >= minPrice && price <= maxPrice;
+          })
         );
       }
       return filteredProducts;

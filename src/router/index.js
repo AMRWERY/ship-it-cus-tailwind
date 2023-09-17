@@ -65,6 +65,11 @@ const router = createRouter({
       component: () => import("../components/FAQ.vue"),
     },
     {
+      path: "/mail",
+      name: "Mail",
+      component: () => import("../components/Mail.vue"),
+    },
+    {
       path: "/privacy-policy",
       name: "PrivacyPolicy",
       component: () => import("../components/PrivacyPolicy.vue"),
