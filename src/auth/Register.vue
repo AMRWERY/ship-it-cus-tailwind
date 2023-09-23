@@ -2,17 +2,18 @@
     <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                Sign up new account
+                {{ $t('sign_up.sign_up_new_account') }}
             </h2>
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <FormKit type="form" id="my-form" class="space-y-6" :actions="false" @submit="signUp">
                 <div>
-                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">{{ $t('sign_up.username')
+                    }}</label>
                     <div class="mt-2">
                         <FormKit id="email" name="email" type="email" autocomplete="email" validation="required|email"
-                            validation-label="e-mail" message-class="text-red-600" placeholder="your email"
+                            validation-label="e-mail" message-class="text-red-600" :placeholder="$t('sign_in.your_email')"
                             outer-class="mb-5" label-class="block mb-1 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
@@ -21,11 +22,13 @@
                 </div>
 
                 <div>
-                    <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
+                    <label for="username" class="block text-sm font-medium leading-6 text-gray-900">{{
+                        $t('sign_up.username') }}</label>
                     <div class="mt-2">
                         <FormKit id="username" name="username" type="text" autocomplete="username"
                             validation="required|username" validation-label="username" message-class="text-red-600"
-                            placeholder="your username" outer-class="mb-5" label-class="block mb-1 font-bold text-sm"
+                            :placeholder="$t('sign_up.your_username')" outer-class="mb-5"
+                            label-class="block mb-1 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
                             help-class="text-xs text-gray-500" v-model.trim="username" />
@@ -34,20 +37,21 @@
 
                 <div>
                     <div class="flex items-center justify-between">
-                        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">{{
+                            $t('sign_in.password') }}</label>
                     </div>
 
                     <div class="mt-2 relative">
                         <div class="relative">
                             <FormKit id="password" name="password" :type="passwordVisible ? 'text' : 'password'"
                                 autocomplete="password" validation="required|password" validation-label="password"
-                                message-class="text-red-600" placeholder="Your password" outer-class="mb-5"
+                                message-class="text-red-600" :placeholder="$t('sign_in.your_password')" outer-class="mb-5"
                                 label-class="block mb-1 font-bold text-sm"
                                 inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
                                 input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
                                 help-class="text-xs text-gray-500" v-model.trim="password" />
                             <span
-                                class="absolute inset-y-0 right-0 grid place-content-center mr-5 cursor-pointer text-green-600"
+                                class="absolute inset-y-0 end-0 grid place-content-center me-5 mb-1-5 cursor-pointer text-green-600"
                                 @click="togglePasswordVisibility">
                                 <i class="far fa-eye" v-if="!passwordVisible"></i>
                                 <i class="far fa-eye-slash" v-else></i>
@@ -59,16 +63,16 @@
                 <div>
                     <button @click="signUp"
                         class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        Sign up
+                        {{ $t('btn.sign_up') }}
                     </button>
                 </div>
             </FormKit>
 
             <p class="mt-10 text-center text-sm text-gray-500">
-                Already have an account?
+                {{ $t('sign_up.already_have_an_account?') }}
                 {{ ' ' }}
-                <router-link to="/login" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Please Sign
-                    in</router-link>
+                <router-link to="/login" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">{{
+                    $t('sign_up.please_ign_in') }}</router-link>
             </p>
         </div>
     </div>

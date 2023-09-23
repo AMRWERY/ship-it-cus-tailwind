@@ -1704,6 +1704,27 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@intlify/core-base@9.4.1":
+  version "9.4.1"
+  resolved "https://registry.npmjs.org/@intlify/core-base/-/core-base-9.4.1.tgz"
+  integrity sha512-WIwx+elsZbxSMxRG5+LC+utRohFvmZMoDevfKOfnYMLbpCjCSavqTfHJAtfsY6ruowzqXeKkeLhRHbYbjoJx5g==
+  dependencies:
+    "@intlify/message-compiler" "9.4.1"
+    "@intlify/shared" "9.4.1"
+
+"@intlify/message-compiler@9.4.1":
+  version "9.4.1"
+  resolved "https://registry.npmjs.org/@intlify/message-compiler/-/message-compiler-9.4.1.tgz"
+  integrity sha512-aN2N+dUx320108QhH51Ycd2LEpZ+NKbzyQ2kjjhqMcxhHdxtOnkgdx+MDBhOy/CObwBmhC3Nygzc6hNlfKvPNw==
+  dependencies:
+    "@intlify/shared" "9.4.1"
+    source-map-js "^1.0.2"
+
+"@intlify/shared@9.4.1":
+  version "9.4.1"
+  resolved "https://registry.npmjs.org/@intlify/shared/-/shared-9.4.1.tgz"
+  integrity sha512-A51elBmZWf1FS80inf/32diO9DeXoqg9GR9aUDHFcfHoNDuT46Q+fpPOdj8jiJnSHSBh8E1E+6qWRhAZXdK3Ng==
+
 "@jest/create-cache-key-function@^29.2.1":
   version "29.6.2"
   resolved "https://registry.npmjs.org/@jest/create-cache-key-function/-/create-cache-key-function-29.6.2.tgz"
@@ -6693,6 +6714,11 @@ swiper@^10.1.0:
   resolved "https://registry.npmjs.org/swiper/-/swiper-10.1.0.tgz"
   integrity sha512-E+wh+hcSbwlRfXuwBTclcOOikOjNdSF0a2Sdg3J4cIWtHO64A7SaLRfezfrJ67CW3GEc15AduYU2YKlElsjqsQ==
 
+tailwindcss-rtl@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.npmjs.org/tailwindcss-rtl/-/tailwindcss-rtl-0.9.0.tgz"
+  integrity sha512-y7yC8QXjluDBEFMSX33tV6xMYrf0B3sa+tOB5JSQb6/G6laBU313a+Z+qxu55M1Qyn8tDMttjomsA8IsJD+k+w==
+
 tailwindcss@^3.2.0, tailwindcss@^3.3.3, "tailwindcss@>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1", "tailwindcss@>=3.0.0 || >= 3.0.0-alpha.1":
   version "3.3.3"
   resolved "https://registry.npmjs.org/tailwindcss/-/tailwindcss-3.3.3.tgz"
@@ -7005,6 +7031,15 @@ vue-awesome-paginate@^1.1.46:
   dependencies:
     vue "^3.2.25"
 
+vue-i18n@^9.4.1:
+  version "9.4.1"
+  resolved "https://registry.npmjs.org/vue-i18n/-/vue-i18n-9.4.1.tgz"
+  integrity sha512-vnQyYE9LBuNOqPpETIcCaGnAyLEqfeIvDcyZ9T+WBCWFTqWw1J8FuF1jfeDwpHBi5JKgAwgXyq1mt8jp/x/GPA==
+  dependencies:
+    "@intlify/core-base" "9.4.1"
+    "@intlify/shared" "9.4.1"
+    "@vue/devtools-api" "^6.5.0"
+
 vue-router@^4.2.4:
   version "4.2.4"
   resolved "https://registry.npmjs.org/vue-router/-/vue-router-4.2.4.tgz"
@@ -7012,7 +7047,7 @@ vue-router@^4.2.4:
   dependencies:
     "@vue/devtools-api" "^6.5.0"
 
-vue@^3.0.2, vue@^3.2.0, vue@^3.2.25, vue@^3.3.4, vue@3.3.4:
+vue@^3.0.0, vue@^3.0.2, vue@^3.2.0, vue@^3.2.25, vue@^3.3.4, vue@3.3.4:
   version "3.3.4"
   resolved "https://registry.npmjs.org/vue/-/vue-3.3.4.tgz"
   integrity sha512-VTyEYn3yvIeY1Py0WaYGZsXnz3y5UnGi62GjVEqvEGPl6nxbOrCXbVOTQWBEJUqAyTUk2uJ5JLVnYJ6ZzGbrSw==

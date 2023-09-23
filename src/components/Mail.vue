@@ -1,10 +1,7 @@
 <template>
     <div class="bg-white shadow-lg rounded-lg overflow-hidden w-full md:w-2/3 lg:w-1/2 mx-auto mt-14">
-        <!-- Check if there are emails to display -->
         <div v-if="userEmail.length > 0">
-            <!-- Email Content -->
             <div class="p-6" v-for="email in userEmail" :key="email.id">
-                <!-- Sender Info -->
                 <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
                         <img src="https://justfields.com/storage/projects/7M5rV059/p.jpg" class="w-12 h-12 rounded-full" />
@@ -14,11 +11,7 @@
                         <p class="text-gray-600">amrmounir2@gmail.com</p>
                     </div>
                 </div>
-
-                <!-- Email Subject -->
                 <h3 class="text-2xl mt-4 font-semibold">{{ email.title }}</h3>
-
-                <!-- Email Body -->
                 <p class="mt-4 text-gray-800">{{ email.message }}</p>
             </div>
         </div>
@@ -27,7 +20,6 @@
             <p class="text-2xl font-semibold text-gray-600">Your inbox is empty</p>
         </div>
 
-        <!-- Email Footer -->
         <div v-if="userEmail.length > 0" class="p-4 float-right">
             <router-link to="/contact">
                 <button
@@ -43,6 +35,7 @@
 <script>
 import { getDocs, query, collection } from "firebase/firestore";
 import { db } from "../firebase/config";
+import { mapGetters } from "vuex";
 
 export default {
     name: 'Mail',
@@ -50,13 +43,15 @@ export default {
     data() {
         return {
             emails: [],
+            userEmail: ''
         }
     },
 
     computed: {
         userEmail() {
             return this.emails.filter((mail) => mail.userId == this.userId);
-        }
+        },
+        ...mapGetters(['getUserEmail'])
     },
 
     methods: {
@@ -70,6 +65,7 @@ export default {
                 };
                 this.emails.push(mail);
             });
+            this.emails = this.emails.filter((mail) => mail.email === this.userEmail)
         }
     },
 
@@ -81,6 +77,7 @@ export default {
 
     mounted() {
         this.getMails();
+        this.userEmail = sessionStorage.getItem('email')
     }
 }
 </script>

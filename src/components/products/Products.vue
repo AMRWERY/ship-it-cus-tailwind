@@ -7,10 +7,10 @@
       <div class="w-full md:w-1/2 lg:w-1/3">
         <label for="hs-as-table-product-review-search" class="sr-only">Search</label>
         <div class="relative">
-          <input type="text" id="hs-as-table-product-review-search" name="hs-as-table-product-review-search"
-            class="py-2 px-3 pl-11 w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-            placeholder="What are you looking for?" v-model="searchQuery" />
-          <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none pl-4">
+          <input type="text" id="hs-as-table-product-review-search" v-model="searchQuery"
+            class="py-2 px-3 pe-11 w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+            :placeholder="$t('products.what_are_you_looking_for')">
+          <div class="absolute inset-y-0 end-0 flex items-center pe-3 pointer-events-none">
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
         </div>
@@ -32,14 +32,14 @@
                   <Rating :rating="prod.rating" />
                 </p>
                 <div class="flex items-center">
-                  <p class="mr-2 text-lg font-semibold text-gray-900 dark:text-white">
+                  <p class="me-2 text-lg font-semibold text-gray-900 dark:text-white">
                     ${{ prod.price }}</p>
-                  <p class="text-base  font-medium text-gray-500 line-through dark:text-gray-300"
+                  <p class="text-base font-medium text-gray-500 line-through dark:text-gray-300"
                     v-if="prod?.originalPrice !== null && prod?.originalPrice !== '' && prod?.originalPrice !== 0">${{
                       prod.originalPrice }}</p>
-                  <p class="ml-auto text-base font-medium text-green-500"
+                  <p class="ms-auto text-base font-medium text-green-500"
                     v-if="prod.discount !== null && prod.discount > 0">
-                    {{ prod.discount }}% off
+                    {{ prod.discount }}% {{ $t('products.off') }}
                   </p>
                 </div>
               </div>

@@ -1,34 +1,37 @@
 <template>
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-        <h2 class="text-lg title-font text-gray-500 tracking-widest text-center mb-6">Featured Products</h2>
+        <h2 class="text-lg title-font text-gray-500 tracking-widest text-center mb-6">{{ $t('banner.featured_products') }}
+        </h2>
         <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center justify-center" id="myTab"
                 data-tabs-toggle="#myTabContent" role="tablist">
                 <li class="mr-2" role="presentation">
                     <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#men"
-                        type="button" role="tab" aria-controls="men" aria-selected="false">Men</button>
+                        type="button" role="tab" aria-controls="men" aria-selected="false">{{ $t('banner.men') }}</button>
                 </li>
                 <li class="mr-2" role="presentation">
                     <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#women"
-                        type="button" role="tab" aria-controls="women" aria-selected="false">Women</button>
+                        type="button" role="tab" aria-controls="women" aria-selected="false">{{ $t('banner.women')
+                        }}</button>
                 </li>
                 <li class="mr-2" role="presentation">
                     <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#gadgets"
-                        type="button" role="tab" aria-controls="gadgets" aria-selected="false">Gadgets</button>
+                        type="button" role="tab" aria-controls="gadgets" aria-selected="false">{{ $t('banner.gadgets')
+                        }}</button>
                 </li>
                 <li class="mr-2" role="presentation">
                     <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab"
                         data-tabs-target="#accessories" type="button" role="tab" aria-controls="accessories"
-                        aria-selected="false">Accessories</button>
+                        aria-selected="false">{{ $t('banner.accessories') }}</button>
                 </li>
             </ul>
         </div>
         <div id="myTabContent">
             <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="men" role="tabpanel" aria-labelledby="men-tab">
-                <div class="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
+                <div class="mx-auto  max-w-2xl px-4 py-8 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
                     <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                         <div v-for="(product, index) in men" :key="product.id" class="group relative">
-                            <button type="button" class="absolute top-2 right-2 mx-3 mt-3 z-10"
+                            <button type="button" class="absolute top-2 end-2 mx-3 mt-3 z-10"
                                 @click="toggleHeartColor(index)">
                                 <i class="fa-regular fa-heart" :style="{ color: product.heartColor }"></i>
                             </button>
@@ -51,7 +54,7 @@
                                     <div class="mt-12">
                                         <router-link :to="product.route">
                                             <button type="button" id="hs-as-table-table-export-dropdown"
-                                                class="absolute bottom-2 right-2 float-right">
+                                                class="absolute bottom-2 end-2 float-right">
                                                 <i class="fa-solid fa-bag-shopping" style="color: #614BC3"></i>
                                             </button>
                                         </router-link>
@@ -66,7 +69,7 @@
                 <div class="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
                     <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                         <div v-for="(product, index) in women" :key="product.id" class="group relative">
-                            <button type="button" class="absolute top-2 right-2 mx-3 mt-3 z-10"
+                            <button type="button" class="absolute top-2 end-2 mx-3 mt-3 z-10"
                                 @click="toggleHeartColor(index)">
                                 <i class="fa-regular fa-heart" :style="{ color: product.heartColor }"></i>
                             </button>
@@ -89,7 +92,7 @@
                                     <div class="mt-12">
                                         <router-link :to="product.route">
                                             <button type="button" id="hs-as-table-table-export-dropdown"
-                                                class="absolute bottom-2 right-2 float-right">
+                                                class="absolute bottom-2 end-2 float-right">
                                                 <i class="fa-solid fa-bag-shopping" style="color: #614BC3"></i>
                                             </button>
                                         </router-link>
@@ -104,7 +107,7 @@
                 <div class="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
                     <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                         <div v-for="(product, index) in gadgets" :key="product.id" class="group relative">
-                            <button type="button" class="absolute top-2 right-2 mx-3 mt-3 z-10"
+                            <button type="button" class="absolute top-2 end-2 mx-3 mt-3 z-10"
                                 @click="toggleHeartColor(index)">
                                 <i class="fa-regular fa-heart" :style="{ color: product.heartColor }"></i>
                             </button>
@@ -127,7 +130,7 @@
                                     <div class="mt-12">
                                         <router-link :to="product.route">
                                             <button type="button" id="hs-as-table-table-export-dropdown"
-                                                class="absolute bottom-2 right-2 float-right">
+                                                class="absolute bottom-2 end-2 float-right">
                                                 <i class="fa-solid fa-bag-shopping" style="color: #614BC3"></i>
                                             </button>
                                         </router-link>
@@ -143,7 +146,7 @@
                 <div class="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
                     <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                         <div v-for="(product, index) in accessories" :key="index" class="group relative">
-                            <button type="button" class="absolute top-2 right-2 mx-3 mt-3 z-10"
+                            <button type="button" class="absolute top-2 end-2 mx-3 mt-3 z-10"
                                 @click="toggleHeartColor(index)">
                                 <i class="fa-regular fa-heart" :style="{ color: product.heartColor }"></i>
                             </button>
@@ -166,7 +169,7 @@
                                     <div class="mt-12">
                                         <router-link :to="product.route">
                                             <button type="button" id="hs-as-table-table-export-dropdown"
-                                                class="absolute bottom-2 right-2 float-right">
+                                                class="absolute bottom-2 end-2 float-right">
                                                 <i class="fa-solid fa-bag-shopping" style="color: #614BC3"></i>
                                             </button>
                                         </router-link>

@@ -1,12 +1,12 @@
 <template>
     <div class="relative">
         <span v-if="wishlist.length > 0"
-            class="absolute top-0 right-0 -mt-2 -mr-2 inline-flex items-center justify-center rounded-full bg-red-500 h-4 w-4 text-white text-xs">{{
+            class="absolute top-0 end-2 -mt-2 -mr-2 inline-flex items-center justify-center rounded-full bg-red-500 h-4 w-4 text-white text-xs">{{
                 totalItems }}</span>
         <button type="button"
             class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
             @click="OpenDialog(true)">
-            <i class="fa-solid fa-heart fa-xl"></i>
+            <i class="fa-solid fa-heart fa-xl me-2"></i>
         </button>
     </div>
 
@@ -28,7 +28,8 @@
                                 <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                                     <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                                         <div class="flex items-start justify-between">
-                                            <DialogTitle class="text-lg font-medium text-gray-900">Wishlist</DialogTitle>
+                                            <DialogTitle class="text-lg font-medium text-gray-900">{{
+                                                $t('cart_wishlist.wishlist') }}</DialogTitle>
                                             <div class="ml-3 flex h-7 items-center">
                                                 <button type="button" class="-m-2 p-2 text-gray-400 hover:text-gray-500"
                                                     @click="wishlistOpen = false">
@@ -38,7 +39,8 @@
                                         </div>
 
                                         <div class="mt-8 flex items-center justify-center" v-if="wishlist.length === 0">
-                                            <p class="text-center text-gray-500">Your wishlist is empty.</p>
+                                            <p class="text-center text-gray-500">{{
+                                                $t('cart_wishlist.your_wishlist_is_empty') }}</p>
                                         </div>
 
                                         <div class="mt-8" v-else>
@@ -51,7 +53,7 @@
                                                                 class="h-full w-full object-cover object-center" />
                                                         </div>
 
-                                                        <div class="ml-4 flex flex-1 flex-col">
+                                                        <div class="ms-4 flex flex-1 flex-col">
                                                             <div>
                                                                 <div
                                                                     class="flex justify-between text-base font-medium text-gray-900">
@@ -68,8 +70,8 @@
                                                             </div>
                                                             <div class="flex justify-end mt-4">
                                                                 <button type="button" @click="removeItemFromWishlist(item)"
-                                                                    class="font-medium text-red-600 hover:text-indigo-500">
-                                                                    Remove
+                                                                    class="font-medium text-red-600 hover:text-indigo-500 me-6">
+                                                                    {{ $t('btn.remove') }}
                                                                 </button>
                                                             </div>
                                                         </div>

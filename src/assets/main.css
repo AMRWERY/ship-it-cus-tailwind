@@ -12,13 +12,26 @@ body {
   margin-inline: 5px;
   cursor: pointer;
 }
+
 .back-btn {
   background-color: #ffffff;
 }
+
 .next-btn {
   background-color: #ffffff;
 }
+
 .btn-active {
   background-color: #4f46e5;
   color: white;
+}
+
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.ltr {
+  direction: ltr;
+  text-align: left;
 }

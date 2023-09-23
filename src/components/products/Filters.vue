@@ -5,7 +5,7 @@
                 <details class="group" id="availabilityDetails">
                     <summary
                         class="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
-                        <span class="text-sm font-medium">Categories</span>
+                        <span class="text-sm font-medium">{{ $t('navbar.categories') }}</span>
 
                         <span class="transition group-open:-rotate-180">
                             <i class="fa-solid fa-chevron-down"></i>
@@ -32,7 +32,7 @@
                 <details class="group" id="priceDetails">
                     <summary
                         class="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
-                        <span class="text-sm font-medium">Size</span>
+                        <span class="text-sm font-medium">{{ $t('products.size') }}</span>
 
                         <span class="transition group-open:-rotate-180">
                             <i class="fa-solid fa-chevron-down"></i>
@@ -62,7 +62,7 @@
                 <details class="group" id="priceDetails">
                     <summary
                         class="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
-                        <span class="text-sm font-medium">Availability</span>
+                        <span class="text-sm font-medium">{{ $t('products.availability') }}</span>
 
                         <span class="transition group-open:-rotate-180">
                             <i class="fa-solid fa-chevron-down"></i>
@@ -92,7 +92,7 @@
                 <details class="group" id="priceDetails">
                     <summary
                         class="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
-                        <span class="text-sm font-medium">Price</span>
+                        <span class="text-sm font-medium">{{ $t('products.price') }}</span>
 
                         <span class="transition group-open:-rotate-180">
                             <i class="fa-solid fa-chevron-down"></i>
@@ -123,16 +123,19 @@
 
 <script>
 import { ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n'
 
 export default {
     name: 'Filters',
 
     setup(props, { emit }) {
+        const { t } = useI18n();
+
         const categories = ['Hoodies', 'T-shirts', 'Music', 'Accessories', 'Posters', 'Decor', 'Clothing', 'Mobile', 'Laptop', "Shoes", 'Electronics', 'Jewelry', 'Groceries', "Women's Clothing", "Men's Clothing", 'Skincare', 'Albums'];
         const selectedCategories = ref([]);
-        const size = ['XXL', 'XL', 'Large', 'Medium', 'Small'];
+        const size = ['XXL', 'XL', t('products.large'), t('products.medium'), t('products.small')];
         const selectedSize = ref([]);
-        const availability = ['in stock', 'out of stock'];
+        const availability = [t('products.in_stock'), t('products.out_of_stock')];
         const selectedAvailability = ref([]);
         const priceRanges = [
             '$10 - $999',

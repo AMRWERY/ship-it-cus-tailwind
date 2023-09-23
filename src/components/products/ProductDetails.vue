@@ -15,16 +15,16 @@
         <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
           <div class="flex items-start">
             <button type="button" @click="selectCard('imgFront')" v-if="productData?.imgFront != null"
-              class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-900 text-center mr-3 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
+              class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-900 text-center me-3 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
               <img class="h-full w-full object-cover" :src="productData?.productImg" />
             </button>
             <button type="button" @click="selectCard('imgBack')" v-if="productData?.imgBack != null"
-              class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-900 text-center ml-2 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
+              class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-900 text-center ms-2 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
               <img class="h-full w-full object-cover" :src="productData?.imgBack" />
             </button>
           </div>
         </div>
-        <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+        <div class="lg:w-1/2 w-full lg:ps-10 lg:py-6 mt-6 lg:mt-0">
           <div class="flex items-center">
             <h2 class="text-md title-font text-gray-500 tracking-widest inline"
               v-if="productData?.sku !== null && productData?.sku !== ''">
@@ -35,7 +35,7 @@
           <div class="flex items-center justify-between my-5">
             <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ productData?.title }}</h1>
             <div class="flex items-center">
-              <p class="mr-2 text-lg font-semibold text-gray-900 dark:text-white">${{ productData?.price }}
+              <p class="me-2 text-lg font-semibold text-gray-900 dark:text-white">${{ productData?.price }}
               </p>
               <p class="text-lg font-medium text-gray-400 line-through dark:text-gray-300"
                 v-if="productData?.originalPrice !== null && productData?.originalPrice !== '' && productData?.originalPrice !== 0">
@@ -43,8 +43,8 @@
             </div>
           </div>
           <div class="flex items-center my-8">
-            <h2 class="text-md title-font text-gray-500 tracking-widest inline">Availability:</h2>
-            <h4 class="text-md title-font text-green-500 tracking-widest inline ml-1"
+            <h2 class="text-md title-font text-gray-500 tracking-widest inline">{{ $t('products.availability') }}:</h2>
+            <h4 class="text-md title-font text-green-500 tracking-widest inline ms-1"
               :class="{ 'text-green-500': productData?.availability !== 'out of stock', 'text-red-500': productData?.availability === 'out of stock' }">
               {{ productData?.availability }}</h4>
           </div>
@@ -81,8 +81,8 @@
                   'bg-green-500 hover:bg-green-600': isAddingToCart,
                   'bg-red-500': !isAddingToCart,
                 }"
-                  class="ml-3 flex items-center justify-center text-white border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
-                  <i class="fa-solid fa-cart-arrow-down mr-3"></i>
+                  class="ms-3 flex items-center justify-center text-white border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
+                  <i class="fa-solid fa-cart-arrow-down me-3"></i>
                   {{ buttonLabel }}
                 </button>
 
@@ -91,9 +91,8 @@
               </div>
 
               <div class="flex items-center mt-2">
-                <h2 class="text-md title-font text-gray-500 tracking-widest">Categories:</h2>
-                <h4 class="text-md title-font text-gray-500 tracking-widest ml-1">{{ productData?.categories
-                }}</h4>
+                <h2 class="text-md title-font text-gray-500 tracking-widest">{{ $t('navbar.categories') }}:</h2>
+                <h4 class="text-md title-font text-gray-500 tracking-widest ml-1">{{ productData?.categories }}</h4>
               </div>
             </div>
 
@@ -135,6 +134,7 @@
 import { ref, watch, onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import Rating from '../../reusable/Rating.vue';
 import MightLike from '../MightLike.vue';
 import DescriptionAndReviews from '../DescriptionAndReviews.vue';
@@ -147,6 +147,8 @@ export default {
   components: { Rating, MightLike, DescriptionAndReviews, AuthAlert },
 
   setup() {
+    const { t } = useI18n();
+
     const tab = ref(null);
     const showShareButtons = ref(false);
     const selectedCardIndex = ref(0);
@@ -161,7 +163,7 @@ export default {
     const message = ref("");
     const iconColor = ref('black');
     const isAddingToCart = ref(false);
-    const buttonLabel = ref('Buy Now');
+    const buttonLabel = ref(t('btn.buy_now'));
     const productId = ref('');
 
     const store = useStore();

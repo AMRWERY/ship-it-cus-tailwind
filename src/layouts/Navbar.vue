@@ -14,7 +14,7 @@
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                             <div class="hidden sm:ml-6 sm:block">
-                                <div class="flex space-x-4">
+                                <div class="flex space-s-4">
                                     <router-link v-for="item in navigation" :key="item.name" :to="item.route" :class="[
                                         $route.path === item.route
                                             ? 'bg-gray-600 text-white'
@@ -38,31 +38,36 @@
                         <CartDialog />
                     </div>
 
-                    <button type="button"
-                        class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                        <i class="fa-solid fa-sun fa-xl"></i>
+                    <button type="button" @click="switchLanguage"
+                        class="rounded-full p-1 text-gray-400  dark:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <i class="fa-solid fa-earth-africa fa-xl me-2"></i>
                     </button>
 
                     <!-- don't delete it -->
 
-                    <!-- <button
+                    <!--  <button type="button"
+                        class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <i class="fa-solid fa-sun fa-xl me-2"></i>
+                    </button>
+
+                     <button
               type="button"
               class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
             >
-            <i class="fa-solid fa-moon fa-xl"></i>
+            <i class="fa-solid fa-moon fa-xl me-2"></i>
             </button> -->
 
                     <div v-if="isUserLoggedIn" class="space-x-3">
                         <router-link to="/profile">
                             <button type="button"
                                 class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                                <i class="fa-solid fa-user fa-xl"></i>
+                                <i class="fa-solid fa-user fa-xl me-2"></i>
                             </button>
                         </router-link>
                         <router-link to="/mail">
                             <button type="button"
                                 class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                                <i class="fa-solid fa-bell fa-xl"></i>
+                                <i class="fa-solid fa-bell fa-xl ms-2"></i>
                             </button>
                         </router-link>
                         <router-link to="/login">
@@ -100,7 +105,8 @@
 
 
 <script setup>
-import { onMounted, watchEffect, ref, computed } from 'vue';
+import { onMounted, watchEffect, ref, computed, watch } from 'vue';
+import { useI18n } from 'vue-i18n'
 import { useStore } from 'vuex';
 import {
     Disclosure,
@@ -110,11 +116,13 @@ import {
 import WishlistDialog from '../reusable/dialogs/WishlistDialog.vue';
 import CartDialog from '../reusable/dialogs/CartDialog.vue';
 
+const { t } = useI18n();
+
 const navigation = [
-    { name: 'Home', route: '/', current: true },
-    { name: 'Products', route: '/products', current: false },
-    { name: 'Categories', route: '/categories', current: false },
-    { name: 'Contact', route: '/contact', current: false },
+    { name: t('navbar.home'), route: '/', current: true },
+    { name: t('navbar.products'), route: '/products', current: false },
+    { name: t('navbar.categories'), route: '/categories', current: false },
+    { name: t('navbar.Contact'), route: '/contact', current: false },
 ];
 
 const store = useStore();
@@ -143,5 +151,39 @@ const userToken = ref(null);
 
 watchEffect(userToken, () => {
     isUserLoggedIn.value = userToken.value !== null && userToken.value !== undefined;
+});
+
+const switchLanguage = () => {
+    const currentLang = $i18n.locale.value;
+    const newLang = currentLang === "ar" ? "en" : "ar";
+    sessionStorage.setItem("currentLang", newLang);
+    $i18n.locale.value = newLang;
+    updateLanguageClassInBody(newLang);
+    // config.locale = newLang
+};
+
+const updateLanguageClassInBody = (lang) => {
+    const body = document.querySelector("body");
+    if (lang === "ar") {
+        body.classList.remove("ltr");
+        body.classList.add("rtl");
+    } else {
+        body.classList.remove("rtl");
+        body.classList.add("ltr");
+    }
+};
+
+const $i18n = useI18n()
+
+const currentLang = computed(() => $i18n.locale.value);
+
+watch(currentLang, (newLang) => {
+    debugger
+    sessionStorage.setItem("currentLang", newLang);
+    updateLanguageClassInBody(newLang);
+});
+
+onMounted(() => {
+    updateLanguageClassInBody(currentLang.value);
 });
 </script>

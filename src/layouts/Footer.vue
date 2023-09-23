@@ -4,7 +4,7 @@
       <div class="sm:col-span-2">
         <router-link to="/" aria-label="Go home" title="Ship-IT" class="inline-flex items-center">
           <img src="/shopping-bags-svgrepo-com.svg" class="w-8 text-deep-purple-accent-400" viewBox="0 0 24 24">
-          <span class="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">Ship-IT</span>
+          <span class="ms-2 text-xl font-bold tracking-wide text-gray-800 uppercase">Ship-IT</span>
         </router-link>
         <div class="mt-6 lg:max-w-sm">
           <p class="text-sm text-gray-800">
@@ -17,29 +17,30 @@
         </div>
       </div>
       <div class="space-y-2 text-sm">
-        <router-link to="/hire-me" class="text-base font-bold tracking-wide text-gray-900">Hire Me</router-link>
+        <router-link to="/hire-me" class="text-base font-bold tracking-wide text-gray-900">{{ $t('footer.hire_me')
+        }}</router-link>
         <div class="flex">
-          <p class="mr-1 text-gray-800">Phone:</p>
+          <p class="me-1 text-gray-800">{{ $t('footer.phone') }}:</p>
           <a href="tel:102-265-5742" aria-label="Our phone" title="Our phone"
             class="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800">(+20) 102 265
             5742</a>
         </div>
         <div class="flex">
-          <p class="mr-1 text-gray-800">Email:</p>
+          <p class="me-1 text-gray-800">{{ $t('footer.email') }}:</p>
           <a href="mailto:amrmounir2@gmail.com" aria-label="Our email" title="Our email"
             class="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800">amrmounir2@gmail.com</a>
         </div>
         <div class="flex">
-          <p class="mr-1 text-gray-800">Address:</p>
+          <p class="me-1 text-gray-800">{{ $t('footer.address') }}:</p>
           <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" aria-label="Our address"
             title="Our address"
             class="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800">
-            New Maadi, Cairo, Egypt
+            {{ $t('footer.new_maadi,_cairo,_egypt') }}
           </a>
         </div>
       </div>
       <div>
-        <span class="text-base font-bold tracking-wide text-gray-900">Social</span>
+        <span class="text-base font-bold tracking-wide text-gray-900">{{ $t('footer.social') }}</span>
         <div class="flex items-center mt-1">
           <a href="https://www.facebook.com/Amr.Wery/" target="_blank" rel="noopener noreferrer"
             class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400">
@@ -70,22 +71,22 @@
     </div>
     <div class="flex flex-col-reverse justify-between pt-5 pb-10 border-t lg:flex-row">
       <p class="text-sm text-gray-600">
-        © Copyright 2023 Ship-IT. All rights reserved.
+        © {{ $t('footer.copyright_2023_Ship_IT_all_rights_reserved') }}.
       </p>
-      <ul class="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
+      <ul class="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-s-5 sm:flex-row">
         <li>
           <router-link to="/f-a-q"
-            class="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">F.A.Q</router-link>
+            class="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">{{ $t('footer.frequently_asked_questions') }}</router-link>
         </li>
         <li>
           <router-link to="/privacy-policy"
-            class="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Privacy
-            Policy</router-link>
+            class="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">{{ $t('footer.privacy_policy') }}</router-link>
         </li>
         <li>
           <router-link to="/terms-and-conditions"
-            class="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Terms &amp;
-            Conditions</router-link>
+            class="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">{{ $t('footer.terms') }}
+            &amp;
+            {{ $t('footer.conditions') }}</router-link>
         </li>
       </ul>
     </div>

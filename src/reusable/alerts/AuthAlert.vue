@@ -22,7 +22,7 @@
                                         <i class="fa-solid fa-triangle-exclamation fa-xl h-6 w-6 text-red-600 mt-4"
                                             aria-hidden="true"></i>
                                     </div>
-                                    <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                                    <div class="mt-3 text-center sm:ms-4 sm:mt-0 sm:text-left">
 
                                         <div class="mt-2">
                                             <p as="h6" class="text-base font-semibold leading-6 text-gray-900">{{ message }}
@@ -35,7 +35,7 @@
                                 <router-link to="/login">
                                     <button type="button"
                                         class="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                                        @click="open = false">Login</button>
+                                        @click="open = false">{{ $t('btn.login') }}</button>
                                 </router-link>
                             </div>
                         </DialogPanel>
@@ -49,16 +49,19 @@
 
 <script>
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import { useI18n } from 'vue-i18n'
 
 export default {
     components: { Dialog, DialogPanel, TransitionChild, TransitionRoot },
 
     props: ['open', 'message'],
 
-    data() {
+    setup() {
+        const { t } = useI18n();
+
         return {
-            message: 'Please Login into your account First'
-        }
+            message: t("message.please_login_into_your_account_first")
+        };
     }
 }
 </script>

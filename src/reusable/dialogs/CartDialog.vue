@@ -1,13 +1,13 @@
 <template>
     <div class="relative">
         <span v-if="cart.length > 0"
-            class="absolute top-0 right-0 -mt-2 -mr-2 inline-flex items-center justify-center rounded-full bg-red-500 h-4 w-4 text-white text-xs">
+            class="absolute top-0 end-2 -mt-2 -mr-2 inline-flex items-center justify-center rounded-full bg-red-500 h-4 w-4 text-white text-xs">
             {{ totalItems }}
         </span>
         <button type="button"
             class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
             @click="cartOpen = !cartOpen">
-            <i class="fa-solid fa-cart-shopping fa-xl"></i>
+            <i class="fa-solid fa-cart-shopping fa-xl me-2 ms-2"></i>
         </button>
     </div>
 
@@ -29,7 +29,8 @@
                                 <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                                     <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                                         <div class="flex items-start justify-between">
-                                            <DialogTitle class="text-lg font-medium text-gray-900">Shopping Cart
+                                            <DialogTitle class="text-lg font-medium text-gray-900">{{
+                                                $t('cart_wishlist.shopping_cart') }}
                                             </DialogTitle>
                                             <div class="ml-3 flex h-7 items-center">
                                                 <button type="button" class="-m-2 p-2 text-gray-400 hover:text-gray-500"
@@ -40,7 +41,8 @@
                                         </div>
 
                                         <div class="mt-8 flex items-center justify-center" v-if="cart.length === 0">
-                                            <p class="text-center text-gray-500">Your cart is empty.</p>
+                                            <p class="text-center text-gray-500">{{ $t('cart_wishlist.your_cart_is_empty')
+                                            }}</p>
                                         </div>
 
                                         <div class="mt-8" v-else>
@@ -53,7 +55,7 @@
                                                                 class="h-full w-full object-cover object-center" />
                                                         </div>
 
-                                                        <div class="ml-4 flex flex-1 flex-col">
+                                                        <div class="ms-4 flex flex-1 flex-col">
                                                             <div>
                                                                 <div
                                                                     class="flex justify-between text-base font-medium text-gray-900">
@@ -68,7 +70,7 @@
                                                             </div>
                                                             <div class="flex flex-1 items-end justify-between text-sm">
                                                                 <p class="text-gray-500">
-                                                                    Qty {{ item.cartQty }}
+                                                                    {{ $t('cart_wishlist.qty') }} : {{ item.cartQty }}
                                                                 </p>
 
                                                                 <div>
@@ -92,8 +94,8 @@
                                                             </div>
                                                             <div class="flex justify-end mt-4">
                                                                 <button type="button" @click="removeCartItem(item)"
-                                                                    class="font-medium text-red-600 hover:text-indigo-500 mr-6">
-                                                                    Remove
+                                                                    class="font-medium text-red-600 hover:text-indigo-500 me-6">
+                                                                    {{ $t('btn.remove') }}
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -108,11 +110,11 @@
 
                                         <div v-else>
                                             <div class="flex justify-between text-base font-medium text-gray-900">
-                                                <p>Subtotal</p>
+                                                <p>{{ $t('cart_wishlist.subtotal') }}</p>
                                                 <p>${{ totalAmount.toFixed(2) }}</p>
                                             </div>
                                             <p class="mt-0.5 text-sm text-gray-500">
-                                                Shipping and taxes calculated at checkout.
+                                                {{ $t('cart_wishlist.shipping_and_taxes_calculated_at_checkout') }}
                                             </p>
                                         </div>
 
@@ -122,8 +124,7 @@
                                                     <button type="button"
                                                         class="font-medium text-indigo-600 hover:text-indigo-500"
                                                         @click="cartOpen = false">
-                                                        Start Shopping
-                                                        <span aria-hidden="true"> &rarr;</span>
+                                                        {{ $t('cart_wishlist.start_shopping') }}
                                                     </button>
                                                 </router-link>
                                             </div>
@@ -132,17 +133,17 @@
                                         <div v-else>
                                             <div class="mt-6">
                                                 <router-link to="/checkout" @click="cartOpen = false"
-                                                    class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</router-link>
+                                                    class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">{{
+                                                        $t('btn.checkout') }}</router-link>
                                             </div>
                                             <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
                                                 <p>
-                                                    or
+                                                    {{ $t('cart_wishlist.or') }} <br>
                                                     <router-link to="/products">
                                                         <button type="button"
                                                             class="font-medium text-indigo-600 hover:text-indigo-500"
                                                             @click="cartOpen = false">
-                                                            Continue Shopping
-                                                            <span aria-hidden="true"> &rarr;</span>
+                                                            {{ $t('cart_wishlist.continue_shopping') }}
                                                         </button>
                                                     </router-link>
                                                 </p>

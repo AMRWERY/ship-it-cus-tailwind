@@ -1,0 +1,128 @@
+{
+  "sign_in": {
+    "sign_in_to_your_account": "تسجيل الدخول إلى حسابك",
+    "email_address": "عنوان البريد الإلكتروني",
+    "your_email": "بريدك الالكتروني",
+    "password": "كلمة المرور",
+    "your_password": "كلمة السر خاصتك",
+    "forgot_password?": "هل نسيت كلمة المرور؟",
+    "not_a_member?": "ليس عضوا؟",
+    "please_sign_up": "يرجى الاشتراك"
+  },
+  "sign_up": {
+    "sign_up_new_account": "تسجيل حساب جديد",
+    "username": "اسم المستخدم",
+    "your_username": "اسم المستخدم الخاص بك",
+    "already_have_an_account?": "هل لديك حساب؟",
+    "please_ign_in": "يرجى تسجيل الدخول"
+  },
+  "reset_password": {
+    "reset_password": "إعادة تعيين كلمة المرور",
+    "back_to_login": "العودة إلى تسجيل الدخول"
+  },
+  "navbar": {
+    "home": "الرئيسيه",
+    "products": "منتجات",
+    "categories": "فئات",
+    "Contact": "اتصال"
+  },
+  "banner": {
+    "just_landed": "هبطت للتو",
+    "the_autumn_collection": "مجموعة الخريف",
+    "view_the_autumn_collection_and_discover_the_latest": "شاهد مجموعة الخريف واكتشف الأحدث",
+    "trends_in_fashion_and_accessories_we_have_everything": "اتجاهات الموضة والإكسسوارات لدينا كل شيء",
+    "you_need_to_look_your_best_this_season": "عليك أن تبدو بأفضل ما لديك هذا الموسم",
+    "trusted_by_the_world’s_most_innovative_teams": "موثوق به من قبل الفرق الأكثر ابتكارًا في العالم",
+    "shop_by_category": "تسوق حسب الاقسام",
+    "view_all": "عرض الكل",
+    "featured_products": "منتجات مميزة",
+    "men": "رجال",
+    "women": "نسائي",
+    "gadgets": "الأدوات",
+    "accessories": "مكملات"
+  },
+  "deal": {
+    "today_deal": "صفقة اليوم",
+    "reviews": "المراجعات",
+    "hours": "ساعات",
+    "minutes": "دقائق",
+    "seconds": "ثواني",
+    "latest_from_blogs": "أحدث المدونات",
+    "here_are_some_of_best_online_shopping_sites_for_you_in_the_world": "إليك بعض أفضل مواقع التسوق عبر الإنترنت لك في العالم",
+    "get_awesome_offers_on_new_collection_is_available_at_all_stores": "احصل على عروض رهيبة على التشكيلة الجديدة المتوفرة في جميع المتاجر",
+    "festival_sale_has_lots_of_amazing_offer_for_men_and_women": "تخفيضات المهرجان لديها الكثير من العروض المذهلة للرجال والنساء",
+    "learn_more": "يتعلم أكثر"
+  },
+  "products": {
+    "size": "مقاس",
+    "availability": "التوفر",
+    "price": "سعر",
+    "in_stock": "متوفر",
+    "out_of_stock": "غير متوفر",
+    "large": "كبير",
+    "medium": "متوسط",
+    "small": "صغير",
+    "what_are_you_looking_for": "ما الذي تبحث عنه",
+    "rating": "تقييمات",
+    "off": "خصم"
+  },
+  "description_reviews": {
+    "description": "وصف",
+    "no_reviews_yet": "لا توجد تقييمات حتى الآن",
+    "out_of": "من",
+    "global_ratings": "التقييمات العالمية",
+    "star": "نجمة",
+    "share_your_thoughts": "شارك افكارك",
+    "if_you_have_used_this_product,_we_would_love_to_hear_about_your_experience": "إذا كنت قد استخدمت هذا المنتج، فنحن نود أن نسمع عن تجربتك",
+    "how_would_you_rate_your_experience_with_this_product?_we_strive_for_a_5_star_experience": "كيف تقيم تجربتك مع هذا المنتج؟ نحن نسعى جاهدين للحصول على تجربة 5 نجوم",
+    "how_was_your_experience?": "كيف كانت تجربتك؟",
+    "great_quality": "جودة ممتازة",
+    "you_may_also_like": "ربما يعجبك أيضا"
+  },
+  "cart_wishlist": {
+    "shopping_cart": "عربة التسوق",
+    "your_cart_is_empty": "عربة التسوق فارغة",
+    "or": "او",
+    "start_shopping": "ابدأ التسوق",
+    "continue_shopping": "مواصلة التسوق",
+    "qty": "الكميه",
+    "subtotal": "المجموع الفرعي",
+    "shipping_and_taxes_calculated_at_checkout": "الشحن والضرائب تحسب عند الدفع",
+    "wishlist": "قائمة الرغبات",
+    "your_wishlist_is_empty": "قائمة رغباتك فارغة"
+  },
+  "btn": {
+    "sign_in": "تسجيل الدخول",
+    "sign_up": "اشتراك",
+    "reset": "إعادة ضبط",
+    "shop_now": "تسوق الآن",
+    "login": "تسجيل الدخول",
+    "buy_now": "اشتري الآن",
+    "submit": "يقدم",
+    "remove": "ازاله",
+    "checkout": "الدفع"
+  },
+  "footer": {
+    "hire_me": "وظفني",
+    "phone": "هاتف",
+    "email": "بريد إلكتروني",
+    "address": "عنوان",
+    "new_maadi,_cairo,_egypt": "المعادي الجديدة، القاهرة، مصر",
+    "social": "اجتماعي",
+    "copyright_2023_Ship_IT_all_rights_reserved": "حقوق الطبع والنشر لعام 2023 لشركة Ship-IT جميع الحقوق محفوظة",
+    "frequently_asked_questions": "أسئلة مكررة",
+    "privacy_policy": "سياسة الخصوصية",
+    "terms": "الشروط",
+    "conditions": "الأحكام"
+  },
+  "hire_me": {
+    "do_not_be_shy": "لا تخجل",
+    "feel_free_to_get_in_touch_with_me_i_am_always_open_to_discussing_new_projects_creative_ideas_or_opportunities_to_be_part_of_your_visions": "لا تتردد في الاتصال بي. أنا دائمًا منفتح لمناقشة المشاريع الجديدة أو الأفكار الإبداعية أو الفرص لأكون جزءًا من رؤيتك",
+    "address_point": "نقطة العنوان",
+    "mobile_no": "رقم المحمول"
+  },
+  "message": {
+    "successMessage": "تم إرسال إعادة تعيين كلمة المرور. تحقق من صندوق الوارد الخاص بك",
+    "please_login_into_your_account_first": "يُرجى تسجيل الدخول إلى حسابك أولاً"
+  }
+}
