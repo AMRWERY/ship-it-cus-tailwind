@@ -5,19 +5,20 @@
                 data-tabs-toggle="#myTabContent" role="tablist">
                 <li class="mr-2" role="presentation">
                     <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#profile"
-                        type="button" role="tab" aria-controls="profile" aria-selected="false">My Details</button>
+                        type="button" role="tab" aria-controls="profile"
+                        aria-selected="false">{{ $t('profile.my_details') }}</button>
                 </li>
                 <li class="mr-2" role="presentation">
                     <button
                         class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                         id="orders-tab" data-tabs-target="#orders" type="button" role="tab" aria-controls="orders"
-                        aria-selected="false">Orders</button>
+                        aria-selected="false">{{ $t('profile.orders') }}</button>
                 </li>
                 <li class="mr-2" role="presentation">
                     <button
                         class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                         id="tracking-tab" data-tabs-target="#tracking" type="button" role="tab" aria-controls="tracking"
-                        aria-selected="false">Order Tracking</button>
+                        aria-selected="false">{{ $t('profile.order_tracking') }}</button>
                 </li>
             </ul>
         </div>
@@ -49,7 +50,6 @@ import OrderTracking from './OrderTracking.vue';
 export default {
     name: 'Profile',
 
-    // components: { ProfileDetails, OrderTracking },
     components: { ProfileDetails, Orders, OrderTracking },
 
     setup() {

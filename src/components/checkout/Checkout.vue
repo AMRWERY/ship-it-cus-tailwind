@@ -1,8 +1,8 @@
 <template>
     <div class="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
         <div class="px-4 pt-8">
-            <p class="text-xl font-medium">Order Summary</p>
-            <p class="text-gray-400">Check your items. And select a suitable shipping method.</p>
+            <p class="text-xl font-medium">{{ $t('checkout.order_summary') }}</p>
+            <p class="text-gray-400">{{ $t('checkout.check_your_items_and_select_a_suitable_shipping_method') }}</p>
             <div class="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6" v-for="item in cart" :key="item">
                 <div class="flex flex-col rounded-lg bg-white sm:flex-row">
                     <img class="m-2 h-24 w-28 rounded-md border object-cover object-center" :src="item.imgFront" />
@@ -11,96 +11,99 @@
                         <span class="float-right text-gray-400">{{ item.category }}</span>
                         <p class="text-lg font-bold">${{ item.price }}</p>
                         <p class="text-lg font-normal">
-                            Qty: <span class="text-blue-700">{{ item.cartQty }}</span> Piece</p>
+                            {{ $t('cart_wishlist.qty') }}: <span class="text-blue-700">{{ item.cartQty }}</span> {{
+                                $t('checkout.piece') }}</p>
                     </div>
                 </div>
             </div>
 
-            <p class="mt-8 text-lg font-medium">Shipping Methods</p>
+            <p class="mt-8 text-lg font-medium">{{ $t('checkout.shipping_methods') }}</p>
             <form class="mt-5 grid gap-6 grid-cols-2">
                 <div class="relative" @click="selectShipping('STANDARD')">
                     <input class="peer hidden" id="radio_1" type="radio" name="radio" checked />
                     <span
-                        class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+                        class="peer-checked:border-gray-700 absolute end-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                     <label
                         class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                         for="radio_1">
                         <p class="mt-2 font-semibold text-2xl text-blue-700">%10</p>
-                        <div class="ml-5">
-                            <span class="mt-2 font-semibold">Standard Shipping</span>
-                            <p class="text-slate-500 text-sm leading-6">Delivery: 3-6 Days</p>
+                        <div class="ms-5">
+                            <span class="mt-2 font-semibold">{{ $t('checkout.standard_shipping') }}</span>
+                            <p class="text-slate-500 text-sm leading-6">{{ $t('checkout.delivery') }}: 3-6 {{
+                                $t('checkout.days') }}</p>
                         </div>
                     </label>
                 </div>
                 <div class="relative" @click="selectShipping('EXPRESS')">
                     <input class="peer hidden" id="radio_2" type="radio" name="radio" checked />
                     <span
-                        class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+                        class="peer-checked:border-gray-700 absolute end-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                     <label
                         class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                         for="radio_2">
                         <p class="mt-2 font-semibold text-2xl text-blue-700">%25</p>
-                        <div class="ml-5">
-                            <span class="mt-2 font-semibold">Express Shipping</span>
-                            <p class="text-slate-500 text-sm leading-6">Delivery: 2-4 Days</p>
+                        <div class="ms-5">
+                            <span class="mt-2 font-semibold">{{ $t('checkout.express_shipping') }}</span>
+                            <p class="text-slate-500 text-sm leading-6">{{ $t('checkout.delivery') }}: 2-4 {{
+                                $t('checkout.days') }}</p>
                         </div>
                     </label>
                 </div>
             </form>
 
-            <p class="mt-8 text-lg font-medium">Payment Options</p>
+            <p class="mt-8 text-lg font-medium">{{ $t('checkout.payment_options') }}</p>
             <form class="mt-5 grid gap-4 grid-cols-2">
                 <div class="relative" @click="selectCard('CREDIT_CARD')">
                     <input class="peer hidden" id="radio_3" type="radio" name="radio" checked />
                     <span
-                        class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+                        class="peer-checked:border-gray-700 absolute end-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                     <label
                         class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                         for="radio_3">
                         <img src="/cridetcard.svg">
-                        <div class="ml-5">
-                            <span class="mt-2 font-semibold">Credit Card</span>
+                        <div class="ms-5">
+                            <span class="mt-2 font-semibold">{{ $t('checkout.credit_card') }}</span>
                         </div>
                     </label>
                 </div>
                 <div class="relative" @click="selectCard('PAYPAL')">
                     <input class="peer hidden" id="radio_4" type="radio" name="radio" checked />
                     <span
-                        class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+                        class="peer-checked:border-gray-700 absolute end-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                     <label
                         class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                         for="radio_4">
                         <img src="/paypal-svgrepo-com.svg">
-                        <div class="ml-5">
-                            <span class="mt-2 font-semibold">Paypal</span>
+                        <div class="ms-5">
+                            <span class="mt-2 font-semibold">{{ $t('checkout.paypal') }}</span>
                         </div>
                     </label>
                 </div>
                 <div class="relative" @click="selectCard('CASH')">
                     <input class="peer hidden" id="radio_5" type="radio" name="radio" checked />
                     <span
-                        class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+                        class="peer-checked:border-gray-700 absolute end-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                     <label
                         class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                         for="radio_5">
                         <img src="/cash.svg">
-                        <div class="ml-5">
-                            <span class="mt-2 font-semibold">Cash on Delivery</span>
+                        <div class="ms-5">
+                            <span class="mt-2 font-semibold">{{ $t('checkout.cash_on_delivery') }}</span>
                         </div>
                     </label>
                 </div>
             </form>
         </div>
         <div class="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
-            <p class="text-xl font-medium">Payment Details</p>
-            <p class="text-gray-400">Complete your order by providing your payment details.</p>
+            <p class="text-xl font-medium">{{ $t('checkout.payment_detail') }}</p>
+            <p class="text-gray-400">{{ $t('checkout.complete_your_order_by_providing_your_payment_details') }}</p>
             <div class="">
-                <label for="email" class="mt-4 mb-2 block text-sm font-medium">Email</label>
+                <label for="email" class="mt-4 mb-2 block text-sm font-medium">{{ $t('footer.email') }}</label>
                 <div class="relative">
                     <input type="text" id="email" name="email"
-                        class="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                        class="w-full rounded-md border border-gray-200 px-4 py-3 ps-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                         v-model="getUserEmail" />
-                    <div class="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
+                    <div class="pointer-events-none absolute inset-y-0 start-0 inline-flex items-center px-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -108,12 +111,13 @@
                         </svg>
                     </div>
                 </div>
-                <label for="card-holder" class="mt-4 mb-2 block text-sm font-medium">Card Holder</label>
+                <label for="card-holder" class="mt-4 mb-2 block text-sm font-medium">{{ $t('checkout.card_holder')
+                }}</label>
                 <div class="relative">
                     <input type="text" id="card-holder" name="card-holder"
-                        class="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-                        placeholder="Your full name here" />
-                    <div class="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
+                        class="w-full rounded-md border border-gray-200 px-4 py-3 ps-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                        :placeholder="$t('checkout.your_full_name_here')" />
+                    <div class="pointer-events-none absolute inset-y-0 start-0 inline-flex items-center px-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -121,13 +125,13 @@
                         </svg>
                     </div>
                 </div>
-                <label for="card-no" class="mt-4 mb-2 block text-sm font-medium">Card Details</label>
+                <label for="card-no" class="mt-4 mb-2 block text-sm font-medium">{{ $t('checkout.card_details') }}</label>
                 <div class="flex">
                     <div class="relative w-7/12 flex-shrink-0">
                         <input type="text" id="card-no" name="card-no"
-                            class="w-full rounded-md border border-gray-200 px-2 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                            class="w-full rounded-md border border-gray-200 px-2 py-3 ps-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                             placeholder="xxxx-xxxx-xxxx-xxxx" />
-                        <div class="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
+                        <div class="pointer-events-none absolute inset-y-0 start-0 inline-flex items-center px-3">
                             <svg class="h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" viewBox="0 0 16 16">
                                 <path
@@ -144,14 +148,15 @@
                         class="w-1/6 flex-shrink-0 rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                         placeholder="CVC" />
                 </div>
-                <label for="billing-address" class="mt-4 mb-2 block text-sm font-medium">Billing Address</label>
+                <label for="billing-address" class="mt-4 mb-2 block text-sm font-medium">{{ $t('checkout.billing_address')
+                }}</label>
                 <div class="flex flex-col sm:flex-row">
                     <div class="relative flex-shrink-0 sm:w-7/12">
                         <input type="text" id="billing-address" name="billing-address"
                             class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-                            placeholder="Street Address" />
+                            :placeholder="$t('checkout.street_address')" />
                     </div>
-                    <input type="text" id="billing-address" name="billing-address" placeholder="City"
+                    <input type="text" id="billing-address" name="billing-address" :placeholder="$t('checkout.city')"
                         class="w-full rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" />
                     <input type="text" name="billing-zip"
                         class="flex-shrink-0 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none sm:w-1/6 focus:z-10 focus:border-blue-500 focus:ring-blue-500"
@@ -161,31 +166,33 @@
                 <!-- Total -->
                 <div class="mt-6 border-t border-b py-2">
                     <div class="flex items-center justify-between">
-                        <p class="text-sm font-medium text-gray-900">Subtotal</p>
+                        <p class="text-sm font-medium text-gray-900">{{ $t('cart_wishlist.subtotal') }}</p>
                         <p class="font-semibold text-gray-900">${{ total }}</p>
                     </div>
                     <div class="flex items-center justify-between">
-                        <p class="text-sm font-medium text-gray-900">Shipping</p>
+                        <p class="text-sm font-medium text-gray-900">{{ $t('checkout.shipping') }}</p>
                         <p class="font-semibold text-gray-900" v-if="shipping === 'STANDARD'">+ {{ STANDARD }}</p>
                         <p class="font-semibold text-gray-900" v-if="shipping === 'EXPRESS'">+ {{ EXPRESS }}</p>
                     </div>
                 </div>
                 <div class="mt-6 flex items-center justify-between">
-                    <p class="text-sm font-medium text-gray-900">Total</p>
+                    <p class="text-sm font-medium text-gray-900">{{ $t('checkout.total') }}</p>
                     <p class="text-2xl font-semibold text-gray-900">${{ total }}</p>
                 </div>
             </div>
             <router-link to="/order-summary">
                 <button class="mt-4 mb-8 w-full rounded-md  px-6 py-3 font-medium text-white bg-green-600"
-                    @click="goToOrderSummary" v-if="card === 'CREDIT_CARD'">Credit Card</button>
+                    @click="goToOrderSummary" v-if="card === 'CREDIT_CARD'">{{ $t('checkout.credit_card') }}</button>
             </router-link>
             <router-link to="/order-summary">
                 <button class="mt-4 mb-8 w-full rounded-md px-6 py-3 font-medium text-white bg-red-600"
-                    @click="goToOrderSummary" to="/order-summary" v-if="card === 'CASH'">Cash on delivery</button>
+                    @click="goToOrderSummary" to="/order-summary" v-if="card === 'CASH'">{{ $t('checkout.cash_on_delivery')
+                    }}</button>
             </router-link>
             <router-link to="/order-summary">
                 <button class="mt-4 mb-8 w-full rounded-md px-6 py-3 font-medium text-white bg-blue-600"
-                    @click="goToOrderSummary" to="/order-summary" v-if="card === 'PAYPAL'">Paypal</button>
+                    @click="goToOrderSummary" to="/order-summary" v-if="card === 'PAYPAL'">{{ $t('checkout.paypal')
+                    }}</button>
             </router-link>
         </div>
     </div>

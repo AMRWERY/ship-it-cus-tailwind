@@ -2,7 +2,7 @@
     <div class="bg-white shadow-lg rounded-lg overflow-hidden w-full md:w-2/3 lg:w-1/2 mx-auto mt-14">
         <div v-if="userEmail.length > 0">
             <div class="p-6" v-for="email in userEmail" :key="email.id">
-                <div class="flex items-center space-x-4">
+                <div class="flex items-center space-s-4">
                     <div class="flex-shrink-0">
                         <img src="https://justfields.com/storage/projects/7M5rV059/p.jpg" class="w-12 h-12 rounded-full" />
                     </div>
@@ -17,14 +17,14 @@
         </div>
 
         <div v-else class="p-6 text-center">
-            <p class="text-2xl font-semibold text-gray-600">Your inbox is empty</p>
+            <p class="text-2xl font-semibold text-gray-600">{{ $t('order_summary.your_inbox_is_empty') }}</p>
         </div>
 
-        <div v-if="userEmail.length > 0" class="p-4 float-right">
+        <div v-if="userEmail.length > 0" class="p-4 float-end">
             <router-link to="/contact">
                 <button
                     class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200">
-                    Reply
+                    {{ $t('btn.reply') }}
                 </button>
             </router-link>
         </div>

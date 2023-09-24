@@ -3,7 +3,7 @@
         <div class="flex flex-col">
             <div class="overflow-x-auto shadow-md sm:rounded-lg">
                 <div class="inline-block min-w-full align-middle">
-                    <div class="overflow-hidden ">
+                    <div class="overflow-hidden">
                         <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
                             <thead class="bg-gray-100 dark:bg-gray-700">
                                 <tr>
@@ -14,32 +14,30 @@
                                         </div>
                                     </th>
                                     <th scope="col"
-                                        class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400">
-                                        Image
+                                        class="py-3 px-6 text-xs font-medium tracking-wider text-start text-gray-700 dark:text-gray-400">
+                                        {{ $t('order_summary.image') }}
                                     </th>
                                     <th scope="col"
-                                        class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400">
-                                        Product
+                                        class="py-3 px-6 text-xs font-medium tracking-wider text-start text-gray-700 dark:text-gray-400">
+                                        {{ $t('order_summary.product') }}
                                     </th>
                                     <th scope="col"
-                                        class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400">
-                                        Date
+                                        class="py-3 px-6 text-xs font-medium tracking-wider text-start text-gray-700 dark:text-gray-400">
+                                        {{ $t('order_summary.date') }}
                                     </th>
                                     <th scope="col"
-                                        class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400">
-                                        Payment Method
+                                        class="py-3 px-6 text-xs font-medium tracking-wider text-start text-gray-700 dark:text-gray-400">
+                                        {{ $t('order_summary.payment_method') }}
                                     </th>
                                     <th scope="col"
-                                        class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400">
-                                        Price
+                                        class="py-3 px-6 text-xs font-medium tracking-wider text-start text-gray-700 dark:text-gray-400">
+                                        {{ $t('products.price') }}
                                     </th>
                                     <th scope="col"
-                                        class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400">
-                                        Status
+                                        class="py-3 px-6 text-xs font-medium tracking-wider text-start text-gray-700 dark:text-gray-400">
+                                        {{ $t('order_summary.status') }}
                                     </th>
-                                    <th scope="col" class="p-4">
-                                        <span class="sr-only">Action</span>
-                                    </th>
+                                    <th scope="col" class="p-4" />
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700"
@@ -72,9 +70,9 @@
                                     <td
                                         class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <span
-                                            class="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10">Processing</span>
+                                            class="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10">{{ $t('order_summary.processing') }}</span>
                                     </td>
-                                    <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                                    <td class="py-4 px-16 text-sm font-medium text-end whitespace-nowrap">
                                         <router-link to="/order-summary"
                                             class="text-blue-600 dark:text-blue-500 hover:underline">
                                             <i class="fa-solid fa-eye fa-lg" data-tooltip-target="tooltip-right"

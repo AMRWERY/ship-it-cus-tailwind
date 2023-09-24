@@ -10,13 +10,13 @@
                         <div v-for="prod in item.cartItems" :key="prod">
                             <div class="mb-5 flex justify-start item-start space-y-2 flex-col">
                                 <h3 class="text-2xl dark:text-white font-semibold leading-7 lg:leading-9 text-gray-800">
-                                    Order <span class="text-blue-500">#{{ prod.id }}</span>
+                                    {{ $t('order_summary.order') }} <span class="text-blue-500">#{{ item.id }}</span>
                                 </h3>
                                 <p class="text-base dark:text-gray-300 font-medium leading-6 text-gray-600">{{ new
                                     Date(date).toLocaleDateString() }}</p>
                             </div>
                             <div class="flex">
-                                <div class="pb-4 md:pb-8 w-full md:w-40 mr-16">
+                                <div class="pb-4 md:pb-8 w-full md:w-40 me-16">
                                     <img class="w-full hidden md:block" :src="prod?.imgFront" />
                                     <img class="w-full md:hidden" :src="prod?.imgFront" />
                                 </div>
@@ -27,20 +27,23 @@
                                             class="text-xl dark:text-white xl:text-2xl font-semibold leading-6 text-gray-800">
                                             {{ prod?.title }}</h3>
                                         <div class="flex justify-start items-start flex-col space-y-2">
-                                            <p class="text-sm dark:text-white leading-none text-gray-800">Category: <span
-                                                    class="text-red-500">{{ prod?.categories }}</span></p>
-                                            <p class="text-sm dark:text-white leading-none text-gray-800">Status: <span
-                                                    class="text-red-500">Shipped</span></p>
+                                            <p class="text-sm dark:text-white leading-none text-gray-800">{{
+                                                $t('order_summary.category') }}: <span class="text-red-500">{{
+        prod?.categories }}</span></p>
+                                            <p class="text-sm dark:text-white leading-none text-gray-800">{{
+                                                $t('order_summary.status') }}: <span class="text-red-500">{{
+        item?.status[0].name }}</span></p>
                                         </div>
                                     </div>
-                                    <div class="flex justify-between space-x-8 items-start w-full">
+                                    <div class="flex justify-between space-s-8 items-start w-full">
                                         <p class="text-base dark:text-white xl:text-lg leading-6">${{ prod?.price }}
                                             <span class="text-red-300 line-through"
                                                 v-if="prod?.originalPrice !== null && prod?.originalPrice !== '' && prod?.originalPrice !== 0">${{
                                                     prod?.originalPrice }}</span>
                                         </p>
                                         <p class="text-base dark:text-white xl:text-lg font-normal leading-6 text-gray-800">
-                                            Qty: {{ prod?.cartQty }} Piece
+                                            {{ $t('cart_wishlist.qty') }}:
+                                            {{ prod?.cartQty }}
                                         </p>
                                     </div>
                                 </div>
