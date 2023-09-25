@@ -195,6 +195,14 @@
     "message": "رسالة",
     "by_selecting_this_you_agree_to_our": "باختيار هذا فإنك توافق على"
   },
+  "lang": {
+    "arabic": "العربيه",
+    "english": "الأنجليزيه",
+    "deutsch": "الهولنديه",
+    "italian": "الأيطاليه",
+    "french": "الفرنسيه",
+    "german": "الألمانيه"
+  },
   "message": {
     "successMessage": "تم إرسال إعادة تعيين كلمة المرور. تحقق من صندوق الوارد الخاص بك",
     "please_login_into_your_account_first": "يُرجى تسجيل الدخول إلى حسابك أولاً",

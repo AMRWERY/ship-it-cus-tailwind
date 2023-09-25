@@ -195,6 +195,14 @@
     "message": "Message",
     "by_selecting_this_you_agree_to_our": "By selecting this you agree to our"
   },
+  "lang": {
+    "arabic": "Arabic",
+    "english": "English",
+    "deutsch": "Deutsch",
+    "italian": "Italian",
+    "french": "French",
+    "german": "German"
+  },
   "message": {
     "successMessage": "Reset Password sent. check your inbox",
     "please_login_into_your_account_first": "Please Login into your account First",
