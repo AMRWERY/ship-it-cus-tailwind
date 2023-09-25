@@ -8,7 +8,7 @@
         <label for="hs-as-table-product-review-search" class="sr-only">Search</label>
         <div class="relative">
           <input type="text" id="hs-as-table-product-review-search" v-model="searchQuery"
-            class="py-2 px-3 pe-11 w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+            class="py-2 px-3 pe-11 w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-zinc-100 dark:border-gray-700 dark:text-gray-400"
             :placeholder="$t('products.what_are_you_looking_for')">
           <div class="absolute inset-y-0 end-0 flex items-center pe-3 pointer-events-none">
             <i class="fa-solid fa-magnifying-glass"></i>
@@ -28,7 +28,7 @@
               <div class="p-4">
                 <h2 class="mb-2 text-lg font-medium dark:text-white text-gray-900 truncate">{{
                   prod.title }}</h2>
-                <p class="mb-2 text-base dark:text-gray-300 text-gray-700">
+                <p class="mb-2 text-base text-gray-700 dark:text-gray-200">
                   <Rating :rating="prod.rating" />
                 </p>
                 <div class="flex items-center">
@@ -37,7 +37,7 @@
                   <p class="text-base font-medium text-gray-500 line-through dark:text-gray-300"
                     v-if="prod?.originalPrice !== null && prod?.originalPrice !== '' && prod?.originalPrice !== 0">${{
                       prod.originalPrice }}</p>
-                  <p class="ms-auto text-base font-medium text-green-500"
+                  <p class="ms-auto text-base font-medium text-green-500 dark:text-green-300"
                     v-if="prod.discount !== null && prod.discount > 0">
                     {{ prod.discount }}% {{ $t('products.off') }}
                   </p>
@@ -47,7 +47,7 @@
           </router-link>
         </div>
       </div>
-      <div class="flex justify-center mt-4">
+      <div class="flex justify-center mt-4 dark:text-zinc-400">
         <vue-awesome-paginate :total-items="filterProducts.length" v-model="currentPage" :items-per-page="perPage"
           :max-pages-shown="5" paginate-buttons-class="btn" active-page-class="btn-active" back-button-class="back-btn"
           next-button-class="next-btn" />
@@ -112,6 +112,7 @@ export default {
         );
       }
       if (this.filterOptions.availability.length > 0) {
+        debugger
         filteredProducts = filteredProducts.filter((product) =>
           this.filterOptions.availability.includes(product.availability)
         );

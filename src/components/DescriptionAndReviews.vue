@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white">
+    <div>
         <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
             <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
                 <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab"
@@ -30,9 +30,10 @@
                 </div>
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="reviews" role="tabpanel"
                     aria-labelledby="reviews-tab">
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <h4 class="font-semibold text-sm text-gray-900 mb-4">{{ $t('description_reviews.no_reviews_yet')
+                            <h4 class="font-semibold text-sm text-gray-900 dark:text-white mb-4">{{
+                                $t('description_reviews.no_reviews_yet')
                             }}.</h4>
                             <div class="flex items-center mb-2">
                                 <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
@@ -107,16 +108,19 @@
                             </div>
                         </div>
                         <div>
-                            <div class="mt-1 text-xl mb-2 text-gray-900">{{ $t('description_reviews.share_your_thoughts') }}
+                            <div class="mt-1 text-xl mb-2 text-gray-900 dark:text-zinc-400
+                            ">{{ $t('description_reviews.share_your_thoughts') }}
                             </div>
-                            <div class="text-sm mb-4">{{
+                            <div class="text-sm mb-4 dark:text-zinc-200
+                            ">{{
                                 $t('description_reviews.if_you_have_used_this_product,_we_would_love_to_hear_about_your_experience')
                             }}.</div>
                             <form class="writeReview ease-in-out transform transition-all" @submit.prevent="submitForm">
                                 <div class="w-full text-gray-500">
                                     <div class="p-5 mt-3 grid gap-2 border rounded-lg">
                                         <div class="block text-center mb-1.5">
-                                            <label class="text-center text-sm block relative m-auto">{{
+                                            <label class="text-center text-sm block relative m-auto dark:text-zinc-400
+                                            ">{{
                                                 $t('description_reviews.how_would_you_rate_your_experience_with_this_product?_we_strive_for_a_5_star_experience')
                                             }}
                                                 <span class="text-red-500">*</span>
@@ -136,7 +140,8 @@
                                             </div>
                                         </div>
                                         <div class="w-full col-span-full">
-                                            <label for="content" class="text-sm mb-0.5">{{
+                                            <label for="content" class="text-sm mb-0.5 dark:text-zinc-400
+                                            ">{{
                                                 $t('description_reviews.how_was_your_experience?')
                                             }}
                                                 <span class="text-red-500">*</span>
@@ -147,8 +152,8 @@
                                             </textarea>
                                         </div>
                                         <div class="w-full col-span-full">
-                                            <label for="author" class="text-sm mb-0.5">{{ $t('sign_in.your_email') }}<span
-                                                    class="text-red-500">*</span>
+                                            <label for="author" class="text-sm mb-0.5 dark:text-zinc-400
+                                            ">{{ $t('sign_in.your_email') }}<span class="text-red-500">*</span>
                                             </label>
                                             <input class="w-full" id="author" type="email" required v-model="getUserEmail">
                                         </div>

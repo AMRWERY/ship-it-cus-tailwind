@@ -1,7 +1,7 @@
 <template>
     <div class="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
         <div class="px-4 pt-8">
-            <p class="text-xl font-medium">{{ $t('checkout.order_summary') }}</p>
+            <p class="text-xl font-medium dark:text-white">{{ $t('checkout.order_summary') }}</p>
             <p class="text-gray-400">{{ $t('checkout.check_your_items_and_select_a_suitable_shipping_method') }}</p>
             <div class="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6" v-for="item in cart" :key="item">
                 <div class="flex flex-col rounded-lg bg-white sm:flex-row">
@@ -17,14 +17,14 @@
                 </div>
             </div>
 
-            <p class="mt-8 text-lg font-medium">{{ $t('checkout.shipping_methods') }}</p>
+            <p class="mt-8 text-lg font-medium dark:text-white">{{ $t('checkout.shipping_methods') }}</p>
             <form class="mt-5 grid gap-6 grid-cols-2">
-                <div class="relative" @click="selectShipping('STANDARD')">
+                <div class="relative dark:bg-zinc-100" @click="selectShipping('STANDARD')">
                     <input class="peer hidden" id="radio_1" type="radio" name="radio" checked />
                     <span
                         class="peer-checked:border-gray-700 absolute end-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                     <label
-                        class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+                        class="peer-checked:border-2 peer-checked:border-gray-700 dark:peer-checked:border-gray-200 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                         for="radio_1">
                         <p class="mt-2 font-semibold text-2xl text-blue-700">%10</p>
                         <div class="ms-5">
@@ -34,12 +34,12 @@
                         </div>
                     </label>
                 </div>
-                <div class="relative" @click="selectShipping('EXPRESS')">
+                <div class="relative dark:bg-zinc-100" @click="selectShipping('EXPRESS')">
                     <input class="peer hidden" id="radio_2" type="radio" name="radio" checked />
                     <span
                         class="peer-checked:border-gray-700 absolute end-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                     <label
-                        class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+                        class="peer-checked:border-2 peer-checked:border-gray-700 dark:peer-checked:border-gray-200 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                         for="radio_2">
                         <p class="mt-2 font-semibold text-2xl text-blue-700">%25</p>
                         <div class="ms-5">
@@ -51,14 +51,14 @@
                 </div>
             </form>
 
-            <p class="mt-8 text-lg font-medium">{{ $t('checkout.payment_options') }}</p>
+            <p class="mt-8 text-lg font-medium dark:text-white">{{ $t('checkout.payment_options') }}</p>
             <form class="mt-5 grid gap-4 grid-cols-2">
-                <div class="relative" @click="selectCard('CREDIT_CARD')">
+                <div class="relative dark:bg-zinc-100" @click="selectCard('CREDIT_CARD')">
                     <input class="peer hidden" id="radio_3" type="radio" name="radio" checked />
                     <span
                         class="peer-checked:border-gray-700 absolute end-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                     <label
-                        class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+                        class="peer-checked:border-2 peer-checked:border-gray-700 dark:peer-checked:border-gray-200 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                         for="radio_3">
                         <img src="/cridetcard.svg">
                         <div class="ms-5">
@@ -66,12 +66,12 @@
                         </div>
                     </label>
                 </div>
-                <div class="relative" @click="selectCard('PAYPAL')">
+                <div class="relative dark:bg-zinc-100" @click="selectCard('PAYPAL')">
                     <input class="peer hidden" id="radio_4" type="radio" name="radio" checked />
                     <span
                         class="peer-checked:border-gray-700 absolute end-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                     <label
-                        class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+                        class="peer-checked:border-2 peer-checked:border-gray-700 dark:peer-checked:border-gray-200 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                         for="radio_4">
                         <img src="/paypal-svgrepo-com.svg">
                         <div class="ms-5">
@@ -79,12 +79,12 @@
                         </div>
                     </label>
                 </div>
-                <div class="relative" @click="selectCard('CASH')">
+                <div class="relative dark:bg-zinc-100" @click="selectCard('CASH')">
                     <input class="peer hidden" id="radio_5" type="radio" name="radio" checked />
                     <span
                         class="peer-checked:border-gray-700 absolute end-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                     <label
-                        class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+                        class="peer-checked:border-2 peer-checked:border-gray-700 dark:peer-checked:border-gray-200 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                         for="radio_5">
                         <img src="/cash.svg">
                         <div class="ms-5">
@@ -94,11 +94,12 @@
                 </div>
             </form>
         </div>
-        <div class="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
-            <p class="text-xl font-medium">{{ $t('checkout.payment_detail') }}</p>
+        <div class="mt-10 px-4 pt-8 lg:mt-0">
+            <p class="text-xl font-medium dark:text-white">{{ $t('checkout.payment_detail') }}</p>
             <p class="text-gray-400">{{ $t('checkout.complete_your_order_by_providing_your_payment_details') }}</p>
             <div class="">
-                <label for="email" class="mt-4 mb-2 block text-sm font-medium">{{ $t('footer.email') }}</label>
+                <label for="email" class="mt-4 mb-2 block text-sm font-medium dark:text-white">{{ $t('footer.email')
+                }}</label>
                 <div class="relative">
                     <input type="text" id="email" name="email"
                         class="w-full rounded-md border border-gray-200 px-4 py-3 ps-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
@@ -111,7 +112,8 @@
                         </svg>
                     </div>
                 </div>
-                <label for="card-holder" class="mt-4 mb-2 block text-sm font-medium">{{ $t('checkout.card_holder')
+                <label for="card-holder" class="mt-4 mb-2 block text-sm font-medium dark:text-white">{{
+                    $t('checkout.card_holder')
                 }}</label>
                 <div class="relative">
                     <input type="text" id="card-holder" name="card-holder"
@@ -125,7 +127,8 @@
                         </svg>
                     </div>
                 </div>
-                <label for="card-no" class="mt-4 mb-2 block text-sm font-medium">{{ $t('checkout.card_details') }}</label>
+                <label for="card-no" class="mt-4 mb-2 block text-sm font-medium dark:text-white">{{
+                    $t('checkout.card_details') }}</label>
                 <div class="flex">
                     <div class="relative w-7/12 flex-shrink-0">
                         <input type="text" id="card-no" name="card-no"
@@ -148,7 +151,8 @@
                         class="w-1/6 flex-shrink-0 rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                         placeholder="CVC" />
                 </div>
-                <label for="billing-address" class="mt-4 mb-2 block text-sm font-medium">{{ $t('checkout.billing_address')
+                <label for="billing-address" class="mt-4 mb-2 block text-sm font-medium dark:text-white">{{
+                    $t('checkout.billing_address')
                 }}</label>
                 <div class="flex flex-col sm:flex-row">
                     <div class="relative flex-shrink-0 sm:w-7/12">
@@ -166,18 +170,21 @@
                 <!-- Total -->
                 <div class="mt-6 border-t border-b py-2">
                     <div class="flex items-center justify-between">
-                        <p class="text-sm font-medium text-gray-900">{{ $t('cart_wishlist.subtotal') }}</p>
-                        <p class="font-semibold text-gray-900">${{ total }}</p>
+                        <p class="text-sm font-medium text-gray-900 dark:text-zinc-400">{{ $t('cart_wishlist.subtotal') }}
+                        </p>
+                        <p class="font-semibold text-gray-900 dark:text-zinc-400">${{ total }}</p>
                     </div>
                     <div class="flex items-center justify-between">
-                        <p class="text-sm font-medium text-gray-900">{{ $t('checkout.shipping') }}</p>
-                        <p class="font-semibold text-gray-900" v-if="shipping === 'STANDARD'">+ {{ STANDARD }}</p>
-                        <p class="font-semibold text-gray-900" v-if="shipping === 'EXPRESS'">+ {{ EXPRESS }}</p>
+                        <p class="text-sm font-medium text-gray-900 dark:text-zinc-400">{{ $t('checkout.shipping') }}</p>
+                        <p class="font-semibold text-gray-900 dark:text-zinc-400" v-if="shipping === 'STANDARD'">+ {{
+                            STANDARD }}</p>
+                        <p class="font-semibold text-gray-900 dark:text-zinc-400" v-if="shipping === 'EXPRESS'">+ {{ EXPRESS
+                        }}</p>
                     </div>
                 </div>
                 <div class="mt-6 flex items-center justify-between">
-                    <p class="text-sm font-medium text-gray-900">{{ $t('checkout.total') }}</p>
-                    <p class="text-2xl font-semibold text-gray-900">${{ total }}</p>
+                    <p class="text-sm font-medium text-gray-900 dark:text-zinc-400">{{ $t('checkout.total') }}</p>
+                    <p class="text-2xl font-semibold text-gray-90 dark:text-zinc-200">${{ total }}</p>
                 </div>
             </div>
             <router-link to="/order-summary">

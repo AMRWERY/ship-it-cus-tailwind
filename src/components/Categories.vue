@@ -1,8 +1,8 @@
 <template>
-    <div class="mx-auto py-5 px-4 w-full max-w-7xl bg-gray-100">
+    <div class="mx-auto py-5 px-4 w-full max-w-7xl">
         <div class="mx-auto max-w-sm sm:max-w-3xl lg:max-w-none">
-            <h2 class="text-2xl lg:text-3xl text-black font-bold text-center mb-6">Shop by Category</h2>
-
+            <h2 class="text-2xl lg:text-3xl text-black dark:text-white font-bold text-center mb-6">{{
+                $t('products.shop_by_category') }}</h2>
             <div class="mt-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-y-8 gap-x-4 sm:gap-x-8">
                 <div class="col-span-1 aspect-w-2 aspect-h-3 relative rounded-lg overflow-hidden bg-white shadow-md duration-300 hover:scale-105 hover:shadow-lg"
                     v-for="category in getAllCategories" :key="category.id">

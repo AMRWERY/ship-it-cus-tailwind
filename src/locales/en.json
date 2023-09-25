@@ -64,7 +64,8 @@
     "small": "small",
     "what_are_you_looking_for": "What are you looking for",
     "rating": "Rating",
-    "off": "off"
+    "off": "off",
+    "shop_by_category": "Shop by Category"
   },
   "description_reviews": {
     "description": "Description",
@@ -164,7 +165,8 @@
     "edit_details": "Edit Details",
     "reply": "Reply",
     "update": "Update",
-    "update_password": "Update Password"
+    "update_password": "Update Password",
+    "lets_talk": "Let's Talk"
   },
   "footer": {
     "hire_me": "Hire Me",
@@ -185,8 +187,17 @@
     "address_point": "Address Point",
     "mobile_no": "Mobile No"
   },
+  "contact": {
+    "contact_us": "Contact Us",
+    "we_are_always_here_to_help": "We are always here to help",
+    "company": "Company",
+    "title": "Title",
+    "message": "Message",
+    "by_selecting_this_you_agree_to_our": "By selecting this you agree to our"
+  },
   "message": {
     "successMessage": "Reset Password sent. check your inbox",
-    "please_login_into_your_account_first": "Please Login into your account First"
+    "please_login_into_your_account_first": "Please Login into your account First",
+    "hey": "Hey"
   }
 }

@@ -1,11 +1,11 @@
 <template>
-    <Disclosure as="nav" class="bg-white text-black" v-slot="{ open }">
+    <Disclosure as="nav" class="bg-white dark:bg-cyan-900 text-black dark:text-white" v-slot="{ open }">
         <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div class="relative flex h-16 items-center justify-between">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                     <!-- Mobile menu button-->
                     <DisclosureButton
-                        class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                        class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 dark:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                         <i class="fa-solid fa-bars fa-xl" v-if="!open"></i>
                         <i class="fa-solid fa-xmark fa-xl" v-else></i>
                     </DisclosureButton>
@@ -17,8 +17,8 @@
                                 <div class="flex space-s-4">
                                     <router-link v-for="item in navigation" :key="item.name" :to="item.route" :class="[
                                         $route.path === item.route
-                                            ? 'bg-gray-600 text-white'
-                                            : 'text-gray-500 hover:bg-gray-700 hover:text-white',
+                                            ? 'bg-gray-600 text-white dark:text-white'
+                                            : 'text-gray-500 hover:bg-gray-700 hover:text-white dark:text-white',
                                         'rounded-md px-3 py-2 text-sm font-medium',
                                     ]" :aria-current="$route.path === item.route ? 'page' : undefined" exact>
                                         {{ item.name }}
@@ -30,49 +30,40 @@
                 </div>
 
                 <div
-                    class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-3">
+                    class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-s-3">
 
-                    <div v-if="isUserLoggedIn" class="flex space-x-3">
+                    <div v-if="isUserLoggedIn" class="flex space-s-3">
                         <WishlistDialog />
 
                         <CartDialog />
                     </div>
 
                     <button type="button" @click="switchLanguage"
-                        class="rounded-full p-1 text-gray-400  dark:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        class="rounded-full p-1 text-gray-400 dark:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <i class="fa-solid fa-earth-africa fa-xl me-2"></i>
                     </button>
 
-                    <!-- don't delete it -->
-
-                    <!--  <button type="button"
-                        class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                        <i class="fa-solid fa-sun fa-xl me-2"></i>
+                    <button type="button" @click="toggleTheme"
+                        class="rounded-full p-1 text-gray-400 dark:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <i :class="theme === 'dark' ? 'fa-solid fa-sun fa-xl' : 'fa-solid fa-moon fa-xl'"></i>
                     </button>
 
-                     <button
-              type="button"
-              class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-            >
-            <i class="fa-solid fa-moon fa-xl me-2"></i>
-            </button> -->
-
-                    <div v-if="isUserLoggedIn" class="space-x-3">
+                    <div v-if="isUserLoggedIn" class="space-s-3">
                         <router-link to="/profile">
                             <button type="button"
-                                class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                class="rounded-full p-1 text-gray-400 dark:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                                 <i class="fa-solid fa-user fa-xl me-2"></i>
                             </button>
                         </router-link>
                         <router-link to="/mail">
                             <button type="button"
-                                class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                class="rounded-full p-1 text-gray-400 dark:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                                 <i class="fa-solid fa-bell fa-xl ms-2"></i>
                             </button>
                         </router-link>
                         <router-link to="/login">
                             <button type="button" @click="logout"
-                                class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                class="rounded-full p-1 text-gray-400 dark:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                                 <i class="fa-solid fa-right-from-bracket fa-xl"></i>
                             </button>
                         </router-link>
@@ -186,4 +177,23 @@ watch(currentLang, (newLang) => {
 onMounted(() => {
     updateLanguageClassInBody(currentLang.value);
 });
+
+const theme = ref('light');
+
+const toggleTheme = () => {
+    theme.value = theme.value === 'dark' ? 'light' : 'dark';
+    sessionStorage.setItem('theme', theme.value);
+    updateThemeClasses(theme.value);
+};
+
+const updateThemeClasses = (newTheme) => {
+    const body = document.querySelector('body');
+    if (newTheme === 'dark') {
+        body.classList.add('dark');
+    } else {
+        body.classList.remove('dark');
+    }
+};
+
+updateThemeClasses(sessionStorage.getItem('theme') || 'light');
 </script>

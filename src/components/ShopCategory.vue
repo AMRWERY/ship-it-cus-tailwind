@@ -1,8 +1,8 @@
 <template>
     <section class="container m-16 mx-auto max-w-full py-6 sm:px-6 lg:px-8">
         <div class="flex items-end justify-between px-4 sm:px-0">
-            <h2 class="text-lg font-semibold md:text-2xl">{{ $t('banner.shop_by_category') }}</h2>
-            <router-link to="/categories" class="text-blue-800">{{ $t('banner.view_all') }}</router-link>
+            <h2 class="text-lg font-semibold md:text-2xl dark:text-white">{{ $t('banner.shop_by_category') }}</h2>
+            <router-link to="/categories" class="text-blue-800 dark:text-zinc-300">{{ $t('banner.view_all') }}</router-link>
         </div>
         <div class="mt-8 flex overflow-x-auto">
             <swiper class="mySwiper">
@@ -30,7 +30,7 @@ import { useStore } from 'vuex';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
+// import { Pagination } from 'swiper/modules';
 
 const store = useStore();
 

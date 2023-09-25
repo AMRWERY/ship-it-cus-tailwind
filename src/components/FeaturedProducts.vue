@@ -1,26 +1,30 @@
 <template>
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-        <h2 class="text-lg title-font text-gray-500 tracking-widest text-center mb-6">{{ $t('banner.featured_products') }}
+        <h2 class="text-lg title-font text-gray-500 dark:text-white tracking-widest text-center mb-6">{{
+            $t('banner.featured_products') }}
         </h2>
         <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center justify-center" id="myTab"
                 data-tabs-toggle="#myTabContent" role="tablist">
                 <li class="mr-2" role="presentation">
-                    <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#men"
-                        type="button" role="tab" aria-controls="men" aria-selected="false">{{ $t('banner.men') }}</button>
+                    <button class="inline-block p-4 border-b-2 rounded-t-lg dark:text-zinc-200" id="profile-tab"
+                        data-tabs-target="#men" type="button" role="tab" aria-controls="men" aria-selected="false">{{
+                            $t('banner.men') }}</button>
                 </li>
                 <li class="mr-2" role="presentation">
-                    <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#women"
-                        type="button" role="tab" aria-controls="women" aria-selected="false">{{ $t('banner.women')
+                    <button class="inline-block p-4 border-b-2 rounded-t-lg dark:text-zinc-200" id="profile-tab"
+                        data-tabs-target="#women" type="button" role="tab" aria-controls="women" aria-selected="false">{{
+                            $t('banner.women')
                         }}</button>
                 </li>
                 <li class="mr-2" role="presentation">
-                    <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#gadgets"
-                        type="button" role="tab" aria-controls="gadgets" aria-selected="false">{{ $t('banner.gadgets')
+                    <button class="inline-block p-4 border-b-2 rounded-t-lg dark:text-zinc-200" id="profile-tab"
+                        data-tabs-target="#gadgets" type="button" role="tab" aria-controls="gadgets"
+                        aria-selected="false">{{ $t('banner.gadgets')
                         }}</button>
                 </li>
                 <li class="mr-2" role="presentation">
-                    <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab"
+                    <button class="inline-block p-4 border-b-2 rounded-t-lg dark:text-zinc-200" id="profile-tab"
                         data-tabs-target="#accessories" type="button" role="tab" aria-controls="accessories"
                         aria-selected="false">{{ $t('banner.accessories') }}</button>
                 </li>
@@ -42,14 +46,15 @@
                             </div>
                             <div class="mt-4 flex justify-between">
                                 <div>
-                                    <h3 class="text-sm text-gray-700">
+                                    <h3 class="text-sm text-gray-700 dark:text-white">
                                         <span aria-hidden="true" class="absolute inset-0" />
                                         {{ product.title }}
                                     </h3>
                                 </div>
                                 <div>
                                     <div class="flex gap-2">
-                                        <p class="text-sm font-medium text-gray-900">${{ product.price }}</p>
+                                        <p class="text-sm font-medium text-gray-900 dark:text-zinc-300">${{ product.price }}
+                                        </p>
                                     </div>
                                     <div class="mt-12">
                                         <router-link :to="product.route">
@@ -80,14 +85,15 @@
                             </div>
                             <div class="mt-4 flex justify-between">
                                 <div>
-                                    <h3 class="text-sm text-gray-700">
+                                    <h3 class="text-sm text-gray-700 dark:text-white">
                                         <span aria-hidden="true" class="absolute inset-0" />
                                         {{ product.title }}
                                     </h3>
                                 </div>
                                 <div>
                                     <div class="flex gap-2">
-                                        <p class="text-sm font-medium text-gray-900">${{ product.price }}</p>
+                                        <p class="text-sm font-medium text-gray-900 dark:text-zinc-300">${{ product.price }}
+                                        </p>
                                     </div>
                                     <div class="mt-12">
                                         <router-link :to="product.route">
@@ -118,14 +124,15 @@
                             </div>
                             <div class="mt-4 flex justify-between">
                                 <div>
-                                    <h3 class="text-sm text-gray-700">
+                                    <h3 class="text-sm text-gray-700 dark:text-white">
                                         <span aria-hidden="true" class="absolute inset-0" />
                                         {{ product.title }}
                                     </h3>
                                 </div>
                                 <div>
                                     <div class="flex gap-2">
-                                        <p class="text-sm font-medium text-gray-900">${{ product.price }}</p>
+                                        <p class="text-sm font-medium text-gray-900 dark:text-zinc-300">${{ product.price }}
+                                        </p>
                                     </div>
                                     <div class="mt-12">
                                         <router-link :to="product.route">
@@ -157,14 +164,15 @@
                             </div>
                             <div class="mt-4 flex justify-between">
                                 <div>
-                                    <h3 class="text-sm text-gray-700">
+                                    <h3 class="text-sm text-gray-700 dark:text-white">
                                         <span aria-hidden="true" class="absolute inset-0" />
                                         {{ product.title }}
                                     </h3>
                                 </div>
                                 <div>
                                     <div class="flex gap-2">
-                                        <p class="text-sm font-medium text-gray-900">${{ product.price }}</p>
+                                        <p class="text-sm font-medium text-gray-900 dark:text-zinc-300">${{ product.price }}
+                                        </p>
                                     </div>
                                     <div class="mt-12">
                                         <router-link :to="product.route">

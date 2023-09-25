@@ -1,7 +1,8 @@
 <template>
-    <div class="bg-white">
+    <div>
         <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-            <h2 class="text-lg font-semibold md:text-2xl">{{ $t('description_reviews.you_may_also_like') }}</h2>
+            <h2 class="text-lg font-semibold md:text-2xl dark:text-white">{{ $t('description_reviews.you_may_also_like') }}
+            </h2>
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                 <router-link v-for="card in subProducts" :key="card" :to="'/product/' + card.id" class="group relative">
                     <div
@@ -16,14 +17,14 @@
                                     </router-link>
                                 </h3>
                                 <div class="flex items-center">
-                                    <p class="text-sm font-medium text-gray-900 me-2">${{ card.price }}</p>
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white me-2">${{ card.price }}</p>
                                     <p class="text-sm font-medium text-gray-400 line-through dark:text-gray-300"
                                         v-if="card.originalPrice !== null && card.originalPrice !== '' && card.originalPrice !== 0">
                                         ${{ card.originalPrice }}</p>
                                 </div>
                             </div>
                         </div>
-                        <p class="text-sm font-medium text-green-500"
+                        <p class="text-sm font-medium text-green-500 dark:text-green-300"
                             v-if="card.discount !== null && card.discount !== '' && card.discount !== 0">{{ card.discount
                             }}% {{ $t('products.off') }}
                         </p>

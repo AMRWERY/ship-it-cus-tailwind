@@ -35,3 +35,7 @@ body {
   direction: ltr;
   text-align: left;
 }
+
+.dark {
+  background-color: #0d2438;
+}

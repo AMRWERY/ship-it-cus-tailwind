@@ -1,7 +1,8 @@
 <template>
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <section class="text-gray-400 body-font">
-            <h2 class="text-lg title-font text-gray-500 tracking-widest text-center mb-6">{{ $t('deal.latest_from_blogs') }}
+            <h2 class="text-lg title-font text-gray-500 dark:text-white tracking-widest text-center mb-6">{{
+                $t('deal.latest_from_blogs') }}
             </h2>
             <div class="container px-5 py-12 mx-auto">
                 <div class="flex flex-wrap -m-4">
@@ -9,20 +10,22 @@
                         <div class="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
                             <img class="lg:h-48 md:h-36 w-full object-cover object-center" :src="card.img">
                             <div class="p-6">
-                                <h2 class="tracking-widest text-xs title-font font-medium text-gray-500 mb-1 text-center">
+                                <h2
+                                    class="tracking-widest text-xs title-font font-medium text-gray-500 dark:text-zinc-200 mb-1 text-center">
                                     {{ card.title }}</h2>
                                 <br>
-                                <p class="leading-relaxed mb-3">{{ card.subtitle }}</p>
+                                <p class="leading-relaxed mb-3 dark:text-white">{{ card.subtitle }}</p>
                                 <div class="flex items-center flex-wrap ">
-                                    <a class="text-indigo-400 inline-flex items-center md:mb-2 lg:mb-0">{{
+                                    <a class="text-indigo-400 dark:text-zinc-400 inline-flex items-center md:mb-2 lg:mb-0">{{
                                         $t('deal.learn_more') }}
                                     </a>
                                     <span
-                                        class="text-gray-500 me-3 inline-flex items-center lg:ms-auto md:ms-0 ml-auto leading-none text-sm pe-3 py-1 border-e-2 border-gray-800">
+                                        class="text-gray-500 dark:text-white me-3 inline-flex items-center lg:ms-auto md:ms-0 ms-auto leading-none text-sm pe-3 py-1 border-e-2 border-gray-800 dark:border-gray-400">
                                         <i class="fa-regular fa-eye"></i>
                                         <p class="ms-1">1.2K</p>
                                     </span>
-                                    <span class="text-gray-500 inline-flex items-center leading-none text-sm">
+                                    <span
+                                        class="text-gray-500 dark:text-white inline-flex items-center leading-none text-sm">
                                         <i class="fa-regular fa-comment"></i>
                                         <p class="ms-1">8</p>
                                     </span>

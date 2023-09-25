@@ -1,7 +1,7 @@
 <template>
     <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">
                 {{ $t('reset_password.reset_password') }}
             </h2>
         </div>
@@ -9,7 +9,7 @@
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <FormKit type="form" id="my-form" class="space-y-6" :actions="false" @submit="resetPassword(email)">
                 <div>
-                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">{{
+                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900 dark:text-zinc-400">{{
                         $t('sign_in.email_address') }}</label>
                     <div class="mt-2">
                         <FormKit id="email" name="email" type="email" autocomplete="email" validation="required|email"
@@ -30,8 +30,9 @@
             </FormKit>
 
             <p class="mt-10 text-center text-sm text-gray-500">
-                <router-link to="/login" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">{{
-                    $t('reset_password.back_to_login') }}</router-link>
+                <router-link to="/login"
+                    class="font-semibold leading-6 text-indigo-600 dark:text-zinc-400 hover:text-indigo-500">{{
+                        $t('reset_password.back_to_login') }}</router-link>
             </p>
         </div>
     </div>

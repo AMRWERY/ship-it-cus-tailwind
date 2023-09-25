@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden w-full md:w-2/3 lg:w-1/2 mx-auto mt-14">
+    <div class="bg-white dark:bg-zinc-400 shadow-lg rounded-lg overflow-hidden w-full md:w-2/3 lg:w-1/2 mx-auto mt-14">
         <div v-if="userEmail.length > 0">
             <div class="p-6" v-for="email in userEmail" :key="email.id">
                 <div class="flex items-center space-s-4">

@@ -1,7 +1,7 @@
 <template>
     <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">
                 {{ $t('sign_up.sign_up_new_account') }}
             </h2>
         </div>
@@ -9,7 +9,8 @@
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <FormKit type="form" id="my-form" class="space-y-6" :actions="false" @submit="signUp">
                 <div>
-                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">{{ $t('sign_up.username')
+                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900 dark:text-zinc-400">{{
+                        $t('sign_up.username')
                     }}</label>
                     <div class="mt-2">
                         <FormKit id="email" name="email" type="email" autocomplete="email" validation="required|email"
@@ -22,7 +23,7 @@
                 </div>
 
                 <div>
-                    <label for="username" class="block text-sm font-medium leading-6 text-gray-900">{{
+                    <label for="username" class="block text-sm font-medium leading-6 text-gray-900 dark:text-zinc-400">{{
                         $t('sign_up.username') }}</label>
                     <div class="mt-2">
                         <FormKit id="username" name="username" type="text" autocomplete="username"
@@ -37,8 +38,9 @@
 
                 <div>
                     <div class="flex items-center justify-between">
-                        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">{{
-                            $t('sign_in.password') }}</label>
+                        <label for="password"
+                            class="block text-sm font-medium leading-6 text-gray-900 dark:text-zinc-400">{{
+                                $t('sign_in.password') }}</label>
                     </div>
 
                     <div class="mt-2 relative">
@@ -68,11 +70,12 @@
                 </div>
             </FormKit>
 
-            <p class="mt-10 text-center text-sm text-gray-500">
+            <p class="mt-10 text-center text-sm text-gray-500 dark:text-gray-300">
                 {{ $t('sign_up.already_have_an_account?') }}
                 {{ ' ' }}
-                <router-link to="/login" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">{{
-                    $t('sign_up.please_ign_in') }}</router-link>
+                <router-link to="/login"
+                    class="font-semibold leading-6 text-indigo-600 dark:text-zinc-400 hover:text-indigo-500">{{
+                        $t('sign_up.please_ign_in') }}</router-link>
             </p>
         </div>
     </div>

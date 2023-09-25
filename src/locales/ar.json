@@ -64,7 +64,8 @@
     "small": "صغير",
     "what_are_you_looking_for": "ما الذي تبحث عنه",
     "rating": "تقييمات",
-    "off": "خصم"
+    "off": "خصم",
+    "shop_by_category": "تسوق حسب الاقسام"
   },
   "description_reviews": {
     "description": "وصف",
@@ -164,7 +165,8 @@
     "edit_details": "عدل التفاصيل",
     "reply": "رد",
     "update": "تحديث",
-    "update_password": "تحديث كلمة السر"
+    "update_password": "تحديث كلمة السر",
+    "lets_talk": "دعونا نتحدث"
   },
   "footer": {
     "hire_me": "وظفني",
@@ -185,8 +187,17 @@
     "address_point": "نقطة العنوان",
     "mobile_no": "رقم المحمول"
   },
+  "contact": {
+    "contact_us": "اتصل بنا",
+    "we_are_always_here_to_help": "نحن دائما هنا المساعدة",
+    "company": "شركة",
+    "title": "عنوان",
+    "message": "رسالة",
+    "by_selecting_this_you_agree_to_our": "باختيار هذا فإنك توافق على"
+  },
   "message": {
     "successMessage": "تم إرسال إعادة تعيين كلمة المرور. تحقق من صندوق الوارد الخاص بك",
-    "please_login_into_your_account_first": "يُرجى تسجيل الدخول إلى حسابك أولاً"
+    "please_login_into_your_account_first": "يُرجى تسجيل الدخول إلى حسابك أولاً",
+    "hey": "اهلا"
   }
 }

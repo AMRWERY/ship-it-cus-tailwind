@@ -3,7 +3,7 @@
     class="fixed bottom-4 end-4 z-50 flex items-center justify-center gap-4 rounded-lg bg-black px-5 py-3 text-white animate__animated animate__backInLeft"
     v-if="showAlert">
     <p class="text-sm font-medium hover:opacity-75">
-      Hey! {{ getUsername }} 👋
+      {{ $t('message.hey') }}! <span>{{ getUsername }}</span> 👋
     </p>
 
     <button class="rounded bg-white/20 p-1 hover:bg-white/10" @click="hideAlert">

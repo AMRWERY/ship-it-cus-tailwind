@@ -5,7 +5,7 @@
             {{ totalItems }}
         </span>
         <button type="button"
-            class="rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+            class="rounded-full p-1 text-gray-400 dark:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
             @click="cartOpen = !cartOpen">
             <i class="fa-solid fa-cart-shopping fa-xl me-2 ms-2"></i>
         </button>

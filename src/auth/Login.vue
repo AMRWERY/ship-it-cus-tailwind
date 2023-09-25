@@ -1,7 +1,7 @@
 <template>
     <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">
                 {{ $t('sign_in.sign_in_to_your_account') }}
             </h2>
         </div>
@@ -9,7 +9,7 @@
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <FormKit type="form" id="my-form" class="space-y-6" :actions="false" @submit="signIn">
                 <div>
-                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">{{
+                    <label for="email" class="block text-sm font-medium leading-6 text-gray-700 dark:text-zinc-400">{{
                         $t('sign_in.email_address') }}</label>
                     <div class="mt-2">
                         <FormKit id="email" name="email" type="email" autocomplete="email" validation="required|email"
@@ -23,11 +23,13 @@
 
                 <div>
                     <div class="flex items-center justify-between">
-                        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">{{
-                            $t('sign_in.password') }}</label>
+                        <label for="password"
+                            class="block text-sm font-medium leading-6 text-gray-700 dark:text-zinc-400">{{
+                                $t('sign_in.password') }}</label>
                         <div class="text-sm">
-                            <router-link to="/reset-password" class="font-semibold text-indigo-600 hover:text-indigo-500">{{
-                                $t('sign_in.forgot_password?') }}</router-link>
+                            <router-link to="/reset-password"
+                                class="font-semibold text-indigo-600 dark:text-zinc-400 hover:text-indigo-500">{{
+                                    $t('sign_in.forgot_password?') }}</router-link>
                         </div>
                     </div>
 
@@ -56,11 +58,12 @@
                 </div>
             </FormKit>
 
-            <p class="mt-10 text-center text-sm text-gray-500">
+            <p class="mt-10 text-center text-sm text-gray-300 dark:text-gray-300">
                 {{ $t('sign_in.not_a_member?') }}
                 {{ ' ' }}
-                <router-link to="/sign-up" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">{{
-                    $t('sign_in.please_sign_up') }}</router-link>
+                <router-link to="/sign-up"
+                    class="font-semibold leading-6 text-indigo-600 dark:text-zinc-400 hover:text-indigo-500">{{
+                        $t('sign_in.please_sign_up') }}</router-link>
             </p>
         </div>
     </div>
