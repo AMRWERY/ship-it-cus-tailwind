@@ -23,7 +23,6 @@
                                             aria-hidden="true"></i>
                                     </div>
                                     <div class="mt-3 text-center sm:ms-4 sm:mt-0 sm:text-left">
-
                                         <div class="mt-2">
                                             <p as="h6" class="text-base font-semibold leading-6 text-gray-900">{{ message }}
                                             </p>

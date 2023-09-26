@@ -56,8 +56,9 @@
                                         <img :src="prod.imgFront" class="h-12 w-12">
                                     </td>
                                     <td
-                                        class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ prod.title }}</td>
+                                        class="py-4 px-6 text-sm font-medium truncate text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ prod.title }}
+                                    </td>
                                     <td
                                         class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
                                         {{ new Date(prod.date).toLocaleDateString() }}</td>
@@ -70,7 +71,8 @@
                                     <td
                                         class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <span
-                                            class="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10">{{ $t('order_summary.processing') }}</span>
+                                            class="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10">{{
+                                                $t('order_summary.processing') }}</span>
                                     </td>
                                     <td class="py-4 px-16 text-sm font-medium text-end whitespace-nowrap">
                                         <router-link to="/order-summary"

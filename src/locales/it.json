@@ -2,22 +2,22 @@
   "sign_in": {
     "sign_in_to_your_account": "Accedi al tuo account",
     "email_address": "Indirizzo email",
-    "your_email": "il tuo indirizzo email",
+    "your_email": "la tua email",
     "password": "Password",
     "your_password": "la tua password",
     "forgot_password?": "Password dimenticata?",
     "not_a_member?": "Non sei ancora un membro?",
-    "please_sign_up": "Iscriviti ora"
+    "please_sign_up": "Per favore, registrati"
   },
   "sign_up": {
-    "sign_up_new_account": "Iscrivi un nuovo account",
+    "sign_up_new_account": "Crea un nuovo account",
     "username": "Nome utente",
     "your_username": "il tuo nome utente",
     "already_have_an_account?": "Hai già un account?",
-    "please_ign_in": "Effettua il login"
+    "please_ign_in": "Per favore, accedi"
   },
   "reset_password": {
-    "reset_password": "Reimposta la password",
+    "reset_password": "Reimposta password",
     "back_to_login": "Torna al login"
   },
   "navbar": {
@@ -28,9 +28,11 @@
   },
   "banner": {
     "just_landed": "Appena arrivato",
-    "the_autumn_collection": "Collezione Autunno",
-    "view_the_autumn_collection_and_discover_the_latest": "Visualizza la Collezione Autunno e scopri le ultime tendenze della moda e degli accessori. Abbiamo tutto ciò di cui hai bisogno per essere al meglio in questa stagione.",
-    "trusted_by_the_world’s_most_innovative_teams": "Affidabile per le squadre più innovative del mondo",
+    "the_autumn_collection": "La Collezione Autunno",
+    "view_the_autumn_collection_and_discover_the_latest": "Guarda la Collezione Autunno e scopri le ultime tendenze in moda e accessori. Abbiamo tutto ciò di cui hai bisogno in questa stagione",
+    "trends_in_fashion_and_accessories_we_have_everything": "Tendenze in moda e accessori. Abbiamo tutto ciò di cui hai bisogno in questa stagione",
+    "you_need_to_look_your_best_this_season": "Devi apparire al meglio in questa stagione",
+    "trusted_by_the_world’s_most_innovative_teams": "Affidato dalle squadre più innovative del mondo",
     "shop_by_category": "Acquista per categoria",
     "view_all": "Visualizza tutto",
     "featured_products": "Prodotti in primo piano",
@@ -46,9 +48,9 @@
     "minutes": "minuti",
     "seconds": "secondi",
     "latest_from_blogs": "Ultimi articoli dai blog",
-    "here_are_some_of_best_online_shopping_sites_for_you_in_the_world": "Ecco alcuni dei migliori siti di shopping online per te nel mondo",
+    "here_are_some_of_best_online_shopping_sites_for_you_in_the_world": "Ecco alcuni dei migliori siti di shopping online al mondo per te",
     "get_awesome_offers_on_new_collection_is_available_at_all_stores": "Ottieni fantastiche offerte sulla nuova collezione disponibile in tutti i negozi",
-    "festival_sale_has_lots_of_amazing_offer_for_men_and_women": "Il Festival delle Vendite ha molte incredibili offerte per uomini e donne",
+    "festival_sale_has_lots_of_amazing_offer_for_men_and_women": "La vendita del festival offre molte fantastiche offerte per uomini e donne",
     "learn_more": "Scopri di più"
   },
   "products": {
@@ -68,25 +70,25 @@
   "description_reviews": {
     "description": "Descrizione",
     "no_reviews_yet": "Ancora nessuna recensione",
-    "out_of": "di",
+    "out_of": "su",
     "global_ratings": "valutazioni globali",
     "star": "stella",
     "share_your_thoughts": "Condividi le tue opinioni",
-    "if_you_have_used_this_product,_we_would_love_to_hear_about_your_experience": "Se hai usato questo prodotto, ci piacerebbe conoscere la tua esperienza",
-    "how_would_you_rate_your_experience_with_this_product?_we_strive_for_a_5_star_experience": "Come valuteresti la tua esperienza con questo prodotto? Cerchiamo un'esperienza a 5 stelle",
-    "how_was_your_experience?": "Com'è stata la tua esperienza?",
+    "if_you_have_used_this_product,_we_would_love_to_hear_about_your_experience": "Se hai utilizzato questo prodotto, ci piacerebbe sentire la tua esperienza",
+    "how_would_you_rate_your_experience_with_this_product?_we_strive_for_a_5_star_experience": "Come valuteresti la tua esperienza con questo prodotto? Ci impegniamo per una esperienza a 5 stelle",
+    "how_was_your_experience?": "Come è stata la tua esperienza?",
     "great_quality": "Ottima qualità",
-    "you_may_also_like": "Potrebbe interessarti anche"
+    "you_may_also_like": "Potrebbe piacerti anche"
   },
   "cart_wishlist": {
     "shopping_cart": "Carrello",
     "your_cart_is_empty": "Il tuo carrello è vuoto",
     "or": "o",
-    "start_shopping": "Inizia a fare acquisti",
-    "continue_shopping": "Continua a fare acquisti",
+    "start_shopping": "Inizia lo shopping",
+    "continue_shopping": "Continua lo shopping",
     "qty": "Qtà",
     "subtotal": "Subtotale",
-    "shipping_and_taxes_calculated_at_checkout": "Spedizione e tasse calcolate al checkout",
+    "shipping_and_taxes_calculated_at_checkout": "Spedizione e tasse calcolate al momento del pagamento",
     "wishlist": "Lista dei desideri",
     "your_wishlist_is_empty": "La tua lista dei desideri è vuota"
   },
@@ -97,8 +99,8 @@
     "shipping_methods": "Metodi di spedizione",
     "standard_shipping": "Spedizione standard",
     "delivery": "Consegna",
-    "days": "Giorni",
-    "express_shipping": "Spedizione express",
+    "days": "giorni",
+    "express_shipping": "Spedizione espresso",
     "payment_options": "Opzioni di pagamento",
     "credit_card": "Carta di credito",
     "paypal": "Paypal",
@@ -119,8 +121,8 @@
     "order": "Ordine",
     "category": "Categoria",
     "status": "Stato",
-    "summary": "Riepilogo",
-    "tax": "Tasse",
+    "summary": "Sommario",
+    "tax": "Tassa",
     "student": "STUDENTE",
     "customer": "Cliente",
     "previous_orders": "Ordini precedenti",
@@ -135,11 +137,12 @@
   "profile": {
     "my_details": "I miei dettagli",
     "orders": "Ordini",
-    "order_tracking": "Tracciamento ordini",
+    "order_tracking": "Tracciamento ordine",
     "personal_information": "Informazioni personali",
     "first_name": "Nome",
+    "your_first_name": "Il tuo nome",
     "last_name": "Cognome",
-    "your_last_name": "il tuo cognome",
+    "your_last_name": "Il tuo cognome",
     "change_password": "Cambia password",
     "current_password": "Password attuale",
     "new_password": "Nuova password",
@@ -147,16 +150,16 @@
     "billing": "Fatturazione",
     "address_1": "Indirizzo 1",
     "address_2": "Indirizzo 2",
-    "country_code": "Codice paese",
+    "country_code": "Codice Paese",
     "country": "Paese"
   },
   "btn": {
     "sign_in": "Accedi",
-    "sign_up": "Iscriviti",
+    "sign_up": "Registrati",
     "reset": "Reimposta",
     "shop_now": "Acquista ora",
-    "login": "Accedi",
-    "buy_now": "Compra ora",
+    "login": "Login",
+    "buy_now": "Acquista ora",
     "submit": "Invia",
     "remove": "Rimuovi",
     "checkout": "Vai alla cassa",
@@ -171,7 +174,7 @@
     "phone": "Telefono",
     "email": "Email",
     "address": "Indirizzo",
-    "new_maadi,_cairo,_egypt": "Nuovo Maadi, Il Cairo, Egitto",
+    "new_maadi,_cairo,_egypt": "New Maadi, Il Cairo, Egitto",
     "social": "Social",
     "copyright_2023_Ship_IT_all_rights_reserved": "Copyright 2023 Ship-IT. Tutti i diritti riservati",
     "frequently_asked_questions": "Domande frequenti",
@@ -181,8 +184,8 @@
   },
   "hire_me": {
     "do_not_be_shy": "Non essere timido",
-    "feel_free_to_get_in_touch_with_me_i_am_always_open_to_discussing_new_projects_creative_ideas_or_opportunities_to_be_part_of_your_visions": "Sentiti libero di contattarmi. Sono sempre aperto a discutere nuovi progetti, idee creative o opportunità per far parte delle tue visioni",
-    "address_point": "Punto di indirizzo",
+    "feel_free_to_get_in_touch_with_me_i_am_always_open_to_discussing_new_projects_creative_ideas_or_opportunities_to_be_part_of_your_visions": "Sentiti libero di metterti in contatto con me. Sono sempre aperto a discutere nuovi progetti, idee creative o opportunità per far parte delle tue visioni",
+    "address_point": "Punto indirizzo",
     "mobile_no": "Numero di telefono"
   },
   "contact": {
@@ -191,7 +194,7 @@
     "company": "Azienda",
     "title": "Titolo",
     "message": "Messaggio",
-    "by_selecting_this_you_agree_to_our": "Selezionando questa opzione accetti i nostri"
+    "by_selecting_this_you_agree_to_our": "Selezione di questo implica l'accettazione dei nostri"
   },
   "lang": {
     "arabic": "Arabo",
@@ -203,7 +206,18 @@
   },
   "message": {
     "successMessage": "Password reimpostata. Controlla la tua casella di posta",
-    "please_login_into_your_account_first": "Effettua prima il login nel tuo account",
+    "please_login_into_your_account_first": "Per favore, accedi al tuo account prima",
     "hey": "Ciao"
+  },
+  "validation": {
+    "email_address_is_required": "L'indirizzo email è obbligatorio",
+    "password_is_required": "La password è obbligatoria",
+    "username_is_required": "Il nome utente è obbligatorio",
+    "firstname_is_required": "Il nome è obbligatorio",
+    "lastname_is_required": "Il cognome è obbligatorio",
+    "company_is_required": "Il nome aziendale è obbligatorio",
+    "phone_is_required": "Il numero di telefono è obbligatorio",
+    "title_is_required": "Il titolo è obbligatorio",
+    "message_is_required": "Il messaggio è obbligatorio"
   }
 }

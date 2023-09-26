@@ -140,6 +140,7 @@
     "order_tracking": "تتبع الطلب",
     "personal_information": "معلومات شخصية",
     "first_name": "الاسم الأول",
+    "your_first_name": "اسمك الأول",
     "last_name": "اسم العائلة",
     "your_last_name": "اسمك الاخير",
     "change_password": "تغيير كلمة المرور",
@@ -207,5 +208,16 @@
     "successMessage": "تم إرسال إعادة تعيين كلمة المرور. تحقق من صندوق الوارد الخاص بك",
     "please_login_into_your_account_first": "يُرجى تسجيل الدخول إلى حسابك أولاً",
     "hey": "اهلا"
+  },
+  "validation": {
+    "email_address_is_required": "عنوان البريد الإلكتروني مطلوب",
+    "password_is_required": "كلمة المرور مطلوبة",
+    "username_is_required": "اسم المستخدم مطلوب",
+    "firstname_is_required": "الإسم الأول مطلوب",
+    "lastname_is_required": "إسم العائلة مطلوب",
+    "company_is_required": "الشركة مطلوبة",
+    "phone_is_required": "الهاتف مطلوب",
+    "title_is_required": "العنوان مطلوب",
+    "message_is_required": "الرسالة مطلوبة"
   }
 }

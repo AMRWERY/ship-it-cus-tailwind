@@ -9,49 +9,40 @@
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <FormKit type="form" id="my-form" class="space-y-6" :actions="false" @submit="signUp">
                 <div>
-                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900 dark:text-zinc-400">{{
-                        $t('sign_up.username')
-                    }}</label>
                     <div class="mt-2">
-                        <FormKit id="email" name="email" type="email" autocomplete="email" validation="required|email"
-                            validation-label="e-mail" message-class="text-red-600" :placeholder="$t('sign_in.your_email')"
-                            outer-class="mb-5" label-class="block mb-1 font-bold text-sm"
+                        <FormKit id="email" name="email" type="email" validation="required|email"
+                            :label="$t('sign_in.email_address')" v-model.trim="email"
+                            :validation-messages="{ required: $t('validation.email_address_is_required') }"
+                            :placeholder="$t('sign_in.your_email')" message-class="text-red-600" outer-class="mb-5"
+                            label-class="block text-sm font-medium leading-6 text-gray-700 dark:text-zinc-400 mb-1"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-                            help-class="text-xs text-gray-500" v-model.trim="email" />
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600" />
                     </div>
                 </div>
 
                 <div>
-                    <label for="username" class="block text-sm font-medium leading-6 text-gray-900 dark:text-zinc-400">{{
-                        $t('sign_up.username') }}</label>
                     <div class="mt-2">
-                        <FormKit id="username" name="username" type="text" autocomplete="username"
-                            validation="required|username" validation-label="username" message-class="text-red-600"
-                            :placeholder="$t('sign_up.your_username')" outer-class="mb-5"
-                            label-class="block mb-1 font-bold text-sm"
+                        <FormKit id="username" name="username" type="text" validation="required|username"
+                            :label="$t('sign_in.email_address')" v-model.trim="username"
+                            :validation-messages="{ required: $t('validation.username_is_required') }"
+                            :placeholder="$t('sign_up.your_username')" message-class="text-red-600" outer-class="mb-5"
+                            label-class="block text-sm font-medium leading-6 text-gray-700 dark:text-zinc-400 mb-1"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-                            help-class="text-xs text-gray-500" v-model.trim="username" />
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600" />
                     </div>
                 </div>
 
                 <div>
-                    <div class="flex items-center justify-between">
-                        <label for="password"
-                            class="block text-sm font-medium leading-6 text-gray-900 dark:text-zinc-400">{{
-                                $t('sign_in.password') }}</label>
-                    </div>
-
                     <div class="mt-2 relative">
                         <div class="relative">
-                            <FormKit id="password" name="password" :type="passwordVisible ? 'text' : 'password'"
-                                autocomplete="password" validation="required|password" validation-label="password"
-                                message-class="text-red-600" :placeholder="$t('sign_in.your_password')" outer-class="mb-5"
-                                label-class="block mb-1 font-bold text-sm"
+                            <FormKit id="password" name="password" type="password" validation="required|password"
+                                v-model.trim="password" :validation-messages="{
+                                    required: $t('validation.password_is_required')
+                                }
+                                    " :placeholder="$t('sign_in.your_password')" message-class="text-red-600"
+                                outer-class="mb-5"
                                 inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
-                                input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-                                help-class="text-xs text-gray-500" v-model.trim="password" />
+                                input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600" />
                             <span
                                 class="absolute inset-y-0 end-0 grid place-content-center me-5 mb-1-5 cursor-pointer text-green-600"
                                 @click="togglePasswordVisibility">

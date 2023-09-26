@@ -38,10 +38,6 @@
                         <CartDialog />
                     </div>
 
-                    <!-- <button type="button" @click="switchLanguage"
-                        class="rounded-full p-1 text-gray-400 dark:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                        <i class="fa-solid fa-earth-africa fa-xl me-2"></i>
-                    </button> -->
                     <Menu as="div" class="relative ml-3">
                         <div>
                             <MenuButton
@@ -61,8 +57,7 @@
                                 <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
                                     @click="switchLanguage('ar')">
                                     <div class="inline-flex items-center">
-                                        <img src="../../public/palestine-flag-circular.svg"
-                                            class="h-3.5 w-3.5 rounded-full me-2">
+                                        <img src="palestine-flag-circular.svg" class="h-3.5 w-3.5 rounded-full me-2">
                                         {{ $t('lang.arabic') }}
                                     </div>
                                 </a>
@@ -71,7 +66,7 @@
                                 <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
                                     @click="switchLanguage('en')">
                                     <div class="inline-flex items-center">
-                                        <img src="../../public/en.svg" class="h-3.5 w-3.5 rounded-full me-2">
+                                        <img src="/en.svg" class="h-3.5 w-3.5 rounded-full me-2">
                                         {{ $t('lang.english') }}
                                     </div>
                                 </a>
@@ -80,7 +75,7 @@
                                 <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
                                     @click="switchLanguage('ge')">
                                     <div class="inline-flex items-center">
-                                        <img src="../../public/ge.svg" class="h-3.5 w-3.5 rounded-full me-2">
+                                        <img src="/ge.svg" class="h-3.5 w-3.5 rounded-full me-2">
                                         {{ $t('lang.german') }}
                                     </div>
                                 </a>
@@ -99,7 +94,7 @@
                                 <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
                                     @click="switchLanguage('it')">
                                     <div class="inline-flex items-center">
-                                        <img src="../../public/it.svg" class="h-3.5 w-3.5 rounded-full me-2">
+                                        <img src="/it.svg" class="h-3.5 w-3.5 rounded-full me-2">
                                         {{ $t('lang.italian') }}
                                     </div>
                                 </a>
@@ -220,14 +215,6 @@ watchEffect(userToken, () => {
     isUserLoggedIn.value = userToken.value !== null && userToken.value !== undefined;
 });
 
-// const switchLanguage = () => {
-//     const currentLang = $i18n.locale.value;
-//     const newLang = currentLang === "ar" ? "en" : "ar";
-//     sessionStorage.setItem("currentLang", newLang);
-//     $i18n.locale.value = newLang;
-//     updateLanguageClassInBody(newLang);
-//     config.locale = newLang
-// };
 const switchLanguage = (newLang) => {
     sessionStorage.setItem('currentLang', newLang);
     $i18n.locale.value = newLang;

@@ -140,6 +140,7 @@
     "order_tracking": "Order Tracking",
     "personal_information": "Personal Information",
     "first_name": "First name",
+    "your_first_name": "your first name",
     "last_name": "Last name",
     "your_last_name": "your last name",
     "change_password": "Change Password",
@@ -207,5 +208,16 @@
     "successMessage": "Reset Password sent. check your inbox",
     "please_login_into_your_account_first": "Please Login into your account First",
     "hey": "Hey"
+  },
+  "validation": {
+    "email_address_is_required": "Email address is required",
+    "password_is_required": "Password is required",
+    "username_is_required": "Username is required",
+    "firstname_is_required": "First Name is required",
+    "lastname_is_required": "Last Name is required",
+    "company_is_required": "Company is required",
+    "phone_is_required": "Phone is required",
+    "title_is_required": "Title is required",
+    "message_is_required": "Message is required"
   }
 }

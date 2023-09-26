@@ -12,110 +12,135 @@
                 $t('contact.we_are_always_here_to_help') }}
             </p>
         </div>
-        <form action="#" method="POST" class="mx-auto mt-16 max-w-xl sm:mt-20" @submit.prevent="submitForm">
-            <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-                <div>
-                    <label for="first-name" class="block text-sm font-semibold leading-6 text-gray-900 dark:text-white">{{
-                        $t('profile.first_name') }}</label>
-                    <div class="mt-2.5">
-                        <input type="text" name="first-name" id="first-name" autocomplete="given-name" v-model="firstName"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                    </div>
-                </div>
-                <div>
-                    <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900 dark:text-white">{{
-                        $t('profile.last_name') }}</label>
-                    <div class="mt-2.5">
-                        <input type="text" name="last-name" id="last-name" autocomplete="family-name" v-model="lastName"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                    </div>
-                </div>
-                <div class="sm:col-span-2">
-                    <label for="company" class="block text-sm font-semibold leading-6 text-gray-900 dark:text-white">{{
-                        $t('contact.company') }}</label>
-                    <div class="mt-2.5">
-                        <input type="text" name="company" id="company" autocomplete="organization" v-model="company"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                    </div>
-                </div>
-                <div class="sm:col-span-2">
-                    <label for="email" class="block text-sm font-semibold leading-6 text-gray-900 dark:text-white">{{
-                        $t('footer.email')
-                    }}</label>
-                    <div class="mt-2.5">
-                        <input type="email" name="email" id="email" autocomplete="email" v-model="email"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                    </div>
-                </div>
-                <div class="sm:col-span-2">
-                    <label for="phone-number" class="block text-sm font-semibold leading-6 text-gray-900 dark:text-white">{{
-                        $t('footer.phone') }}</label>
-                    <div class="relative mt-2.5">
-                        <div class="flex flex-col sm:flex-row gap-2">
-                            <div class="relative flex-shrink-0 w-1/2">
-                                <select id="country" name="select-country" v-model="selectedCountry"
-                                    class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500">
-                                    <option v-for="country in countriesData" :key="country.code" :value="country.code">{{
-                                        country.name }}</option>
-                                </select>
-                            </div>
-
-                            <div class="relative sm:w-5/12 mt-4 sm:mt-0">
-                                <input type="text" :value="selectedCountryDialCode" readonly
-                                    class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500  cursor-pointer" />
-                            </div>
-
-                            <input type="text" :value="selectedCountryCode" readonly
-                                class="flex-shrink-0 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none sm:w-1/6 focus:z-10 focus:border-blue-500 focus:ring-blue-500  cursor-pointer" />
-
-                            <input type="text" name="billing-zip" v-model="zip"
-                                class="flex-shrink-0 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none sm:w-1/6 focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-                                placeholder="ZIP" />
+        <div class="mx-auto mt-16 max-w-3xl sm:mt-20">
+            <FormKit type="form" id="my-form" :actions="false" @submit="submitForm">
+                <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                    <div>
+                        <div class="mt-2.5">
+                            <FormKit id="first-name" name="first-name" type="text" validation="required|first-name"
+                                :label="$t('profile.first_name')" v-model.trim="firstName"
+                                :validation-messages="{ required: $t('validation.firstname_is_required') }"
+                                :placeholder="$t('profile.your_first_name')" message-class="text-red-600" outer-class="mb-5"
+                                label-class="block text-sm font-medium leading-6 text-gray-700 dark:text-zinc-400 mb-1"
+                                inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
+                                input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600" />
                         </div>
+                    </div>
+                    <div>
+                        <div class="mt-2.5">
+                            <FormKit id="last-name" name="last-name" type="text" validation="required|last-name"
+                                :label="$t('profile.last_name')" v-model.trim="lastName"
+                                :validation-messages="{ required: $t('validation.lastname_is_required') }"
+                                :placeholder="$t('profile.your_last_name')" message-class="text-red-600" outer-class="mb-5"
+                                label-class="block text-sm font-medium leading-6 text-gray-700 dark:text-zinc-400 mb-1"
+                                inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
+                                input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600" />
+                        </div>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <div class="mt-2.5">
+                            <FormKit id="company" name="company" type="text" validation="required|company"
+                                :label="$t('contact.company')" v-model.trim="company"
+                                :validation-messages="{ required: $t('validation.company_is_required') }"
+                                :placeholder="$t('contact.company')" message-class="text-red-600" outer-class="mb-5"
+                                label-class="block text-sm font-medium leading-6 text-gray-700 dark:text-zinc-400 mb-1"
+                                inner-class="border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
+                                input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600" />
 
-                        <input type="tel" name="phone-number" id="phone-number" autocomplete="tel" v-model="phoneNumber"
-                            placeholder="Your phone number"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 mt-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                        </div>
                     </div>
+                    <div class="sm:col-span-2">
+                        <div class="mt-2.5">
+                            <FormKit id="email" name="email" type="email" validation="required|email"
+                                :label="$t('footer.email')" v-model.trim="email"
+                                :validation-messages="{ required: $t('validation.email_address_is_required') }"
+                                :placeholder="$t('footer.email')" message-class="text-red-600" outer-class="mb-5"
+                                label-class="block text-sm font-medium leading-6 text-gray-700 dark:text-zinc-400 mb-1"
+                                inner-class="border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
+                                input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600" />
+                        </div>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="phone-number"
+                            class="block text-sm font-semibold leading-6 text-gray-900 dark:text-white">{{
+                                $t('footer.phone') }}</label>
+                        <div class="relative mt-2.5">
+                            <div class="flex flex-col sm:flex-row gap-2">
+                                <div class="relative flex-shrink-0 w-1/2">
+                                    <select id="country" name="select-country" v-model="selectedCountry"
+                                        class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500">
+                                        <option v-for="country in countriesData" :key="country.code" :value="country.code">
+                                            {{
+                                                country.name }}</option>
+                                    </select>
+                                </div>
+
+                                <div class="relative sm:w-5/12 mt-4 sm:mt-0">
+                                    <input type="text" :value="selectedCountryDialCode" readonly
+                                        class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500  cursor-pointer" />
+                                </div>
+
+                                <input type="text" :value="selectedCountryCode" readonly
+                                    class="flex-shrink-0 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none sm:w-1/6 focus:z-10 focus:border-blue-500 focus:ring-blue-500  cursor-pointer" />
+
+                                <input type="text" name="billing-zip" v-model="zip"
+                                    class="flex-shrink-0 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none sm:w-1/6 focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                                    placeholder="ZIP" />
+                            </div>
+
+                            <FormKit id="phone-number" name="phone-number" type="tel" validation="required|phone-number"
+                                v-model.trim="phoneNumber"
+                                :validation-messages="{ required: $t('validation.phone_is_required') }"
+                                :placeholder="$t('footer.phone')" message-class="text-red-600" outer-class="mb-5"
+                                inner-class="mt-4 border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
+                                input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600" />
+                        </div>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <div class="mt-2.5">
+                            <FormKit id="title" name="title" type="text" validation="required|title"
+                                :label="$t('contact.title')" v-model.trim="title"
+                                :validation-messages="{ required: $t('validation.title_is_required') }"
+                                :placeholder="$t('contact.title')" message-class="text-red-600" outer-class="mb-5"
+                                label-class="block text-sm font-medium leading-6 text-gray-700 dark:text-zinc-400 mb-1"
+                                inner-class="border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
+                                input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600" />
+                        </div>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <div class="mt-2.5">
+                            <FormKit id="message" name="message" type="textarea" rows="4" validation="required|message"
+                                :label="$t('contact.message')" v-model.trim="message"
+                                :validation-messages="{ required: $t('validation.message_is_required') }"
+                                :placeholder="$t('contact.message')" message-class="text-red-600" outer-class="mb-5"
+                                label-class="block text-sm font-medium leading-6 text-gray-700 dark:text-zinc-400 mb-1"
+                                inner-class="border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
+                                input-class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                        </div>
+                    </div>
+                    <SwitchGroup as="div" class="flex gap-x-4 sm:col-span-2">
+                        <div class="flex h-6 items-center">
+                            <Switch v-model="agreed"
+                                :class="[agreed ? 'bg-indigo-600' : 'bg-gray-200', 'flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600']">
+                                <span aria-hidden="true"
+                                    :class="[agreed ? 'translate-x-3.5' : 'translate-x-0', 'h-4 w-4 transform rounded-full bg-white shadow-sm ring-1 ring-gray-900/5 transition duration-200 ease-in-out']" />
+                            </Switch>
+                        </div>
+                        <SwitchLabel class="text-sm leading-6 text-gray-600">
+                            {{ $t('contact.by_selecting_this_you_agree_to_our') }}
+                            {{ ' ' }}
+                            <router-link to="/privacy-policy" class="font-semibold text-indigo-600">{{
+                                $t('footer.privacy_policy') }}</router-link>.
+                        </SwitchLabel>
+                    </SwitchGroup>
                 </div>
-                <div class="sm:col-span-2">
-                    <label for="title" class="block text-sm font-semibold leading-6 text-gray-900 dark:text-white">{{
-                        $t('contact.title') }}</label>
-                    <div class="mt-2.5">
-                        <input name="title" id="title" v-model="title"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                    </div>
+                <div class="mt-10">
+                    <button
+                        class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{
+                            $t('btn.lets_talk') }}</button>
                 </div>
-                <div class="sm:col-span-2">
-                    <label for="message" class="block text-sm font-semibold leading-6 text-gray-900 dark:text-white">{{
-                        $t('contact.message') }}</label>
-                    <div class="mt-2.5">
-                        <textarea name="message" id="message" rows="4" v-model="message"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                    </div>
-                </div>
-                <SwitchGroup as="div" class="flex gap-x-4 sm:col-span-2">
-                    <div class="flex h-6 items-center">
-                        <Switch v-model="agreed"
-                            :class="[agreed ? 'bg-indigo-600' : 'bg-gray-200', 'flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600']">
-                            <span aria-hidden="true"
-                                :class="[agreed ? 'translate-x-3.5' : 'translate-x-0', 'h-4 w-4 transform rounded-full bg-white shadow-sm ring-1 ring-gray-900/5 transition duration-200 ease-in-out']" />
-                        </Switch>
-                    </div>
-                    <SwitchLabel class="text-sm leading-6 text-gray-600">
-                        {{ $t('contact.by_selecting_this_you_agree_to_our') }}
-                        {{ ' ' }}
-                        <router-link to="/privacy-policy" class="font-semibold text-indigo-600">{{
-                            $t('footer.privacy_policy') }}</router-link>.
-                    </SwitchLabel>
-                </SwitchGroup>
-            </div>
-            <div class="mt-10">
-                <button type="submit"
-                    class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{
-                        $t('btn.lets_talk') }}</button>
-            </div>
-        </form>
+            </FormKit>
+        </div>
     </div>
     <section class="relative isolate overflow-hidden px-6 py-24 sm:py-32 lg:px-8">
         <div
