@@ -142,7 +142,8 @@
                     <div v-if="!isUserLoggedIn">
                         <router-link to="/login">
                             <button type="submit"
-                                class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Login</button>
+                                class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{
+                                    $t('btn.login') }}</button>
                         </router-link>
                     </div>
 
@@ -169,12 +170,7 @@
 import { onMounted, watchEffect, ref, computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n'
 import { useStore } from 'vuex';
-import {
-    Disclosure,
-    DisclosureButton,
-    DisclosurePanel,
-    Menu, MenuButton, MenuItem, MenuItems
-} from '@headlessui/vue';
+import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 import WishlistDialog from '../reusable/dialogs/WishlistDialog.vue';
 import CartDialog from '../reusable/dialogs/CartDialog.vue';
 

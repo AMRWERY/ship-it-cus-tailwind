@@ -70,8 +70,7 @@
                                     <select id="country" name="select-country" v-model="selectedCountry"
                                         class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500">
                                         <option v-for="country in countriesData" :key="country.code" :value="country.code">
-                                            {{
-                                                country.name }}</option>
+                                            {{ country.name }}</option>
                                     </select>
                                 </div>
 
