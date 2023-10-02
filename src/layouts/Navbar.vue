@@ -57,7 +57,7 @@
                                 <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
                                     @click="switchLanguage('ar')">
                                     <div class="inline-flex items-center">
-                                        <img src="palestine-flag-circular.svg" class="h-3.5 w-3.5 rounded-full me-2">
+                                        <img src="/palestine-flag-circular.svg" class="h-3.5 w-3.5 rounded-full me-2">
                                         {{ $t('lang.arabic') }}
                                     </div>
                                 </a>
