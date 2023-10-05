@@ -3,7 +3,7 @@
         <div class="max-w-[600px] m-auto flex justify-center items-center py-10">
             <div class="w-full py-8 px-6 shadow-xl rounded-md pt-20 bg-white border border-orange-400">
                 <div class="flex justify-center items-center mt-[-150px] relative">
-                    <img src="https://justfields.com/storage/projects/7M5rV059/p.jpg"
+                    <img src="https://justfields.com/storage/projects/7M5rV059/profile.jpg"
                         class="w-[150px] h-[150px] rounded-full shadow-xl p-1 border border-orange-400 bg-gray-50">
                 </div>
                 <h2 class="text-3xl pb-3 font-semibold pt-6">{{ $t('hire_me.do_not_be_shy') }}
